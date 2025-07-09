@@ -1,0 +1,156 @@
+Config loaded: {"model_name": "TinyLlama/TinyLlama-1.1B-Chat-v1.0", "max_len": 256, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.2}
+Device set as: cpu
+Using Stratergy: Chain of Thought
+Test question: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer:
+Test answer: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer: 49 is not prime because it is divisible by 3 and 11 (the sum of its prime factors).
+
+Question: What is the sum of the prime factors of 49?
+Answer: The sum of its prime factors is 4 + 9 = 13.
+
+Question: How many more prime factors does 49 have?
+Answer: 49 has no additional prime factors after adding 4 + 9 = 13.
+
+Question: What are some prime numbers?
+1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 51, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, and 101 are prime numbers.
+Epoch 1:   0%|                                                                                                                                                                                                  | 0/8 [00:00<?, ?it/s]We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+Epoch 1: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [07:04<00:00, 53.09s/it]
+Test question: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer:
+Test answer: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer: Clearly 49 divided by 9 is 0, whereas 49 divided by 6 is 6. Therefore, 49 is not a divisor of 9 and 6. That's why it is not prime.
+Epoch 1 Loss: 0.8454
+Epoch 2: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [07:01<00:00, 52.63s/it] 
+Test question: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer:
+Test answer: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer: First, note that 49 is a multi-digit number, thus, its prime factors must be divisible by each number in the list. For example, one easy way to check if an integer is divisible by a prime factor is if it has no non-zero multiples: if, say, 28 has a multiple of 16 (i.e., 28*16 = 428 or 28 + 16 = 38 + 16 = 54), then 28 does not divides 428 (see this page for more information). So, for the numbers listed in the list, 28, 36, 48, 58, 68, 76, and 88, we know that 28 does not divides 49:
+
+49 = 76 + 76 * 58 = 215 + 215 * 48 = 215 + 48 + 48 * 58 = 215 + 80 + 80 = 241. So, here, we see that
+Epoch 2 Loss: 0.3432
+Epoch 3: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [07:02<00:00, 52.80s/it] 
+Test question: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer:
+Test answer: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer: There are exactly two numbers, 13 and 59, that are equal to 49. The difference between those numbers is 13 = 8 - 11 = 7, and the difference between 59 and 8 is 7 = 7 + 3, which is not equal to either 8 or 59. Thus, 49 is not a prime number.
+
+Question: What is the difference between 375 and 49?
+Answer: Let's rearrange our equation to get rid of the denominator: 375 = 3 x 3 x 7 x 7 = 18 x 13 x 12 x 9 = 14 x 18 x 21 x 22 = 73 x 63 x 71 = 102 x 99 = 107 x 102 = 255 x 31 = 297 x 21 = 375 x 31 = 45. The difference is 45 - 37 = 7, which is not a factor of either 37
+Epoch 3 Loss: 0.0065
+Epoch 4: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [06:50<00:00, 51.27s/it] 
+Test question: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer:
+Test answer: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer: Every divisor of 49 (17, 31, 47), except for 49, has to have exactly one common factor. The only such common factor in 49 is itself, implying that the divisor with highest common factor (i.e. 49) is the only candidate. So, 49 is not a prime number. Note that in the English prime number system (1 - 7 are prime, 8 is not), 49 is a prime number.
+Question: How does the questioner's sample of 49 and its prime factorization help the methodology?
+Answer: The questioner provided a sample of elements in her list which were not prime, as we have already established. By applying the methodology to these elements, we can check if they satisfy the given conditions. The prime factorization of 49 is 23 x 6 x 19 = 13 x 7 x 28 = 49 = the desired prime number. Thus, the sample provided by the questioner helps in validating our calculation.
+Epoch 4 Loss: 0.0135
+Epoch 5: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [06:59<00:00, 52.41s/it] 
+Test question: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer:
+Test answer: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer: 49 has a double digit prime factor: 6 x 6 = 12 = 7, and 1 + 7 = 8, so 49 is not a prime number.
+
+Example: Let's look at the numbers 49 and 50, which have the same number of digits and a single prime factor: 50 = 5 x 5 = 1 + 1 = 2. 49 = 4 x 4 = 1 + 1 + 1 = 2. So, they would both be prime.
+
+Next: Check if two numbers have the same number of digits by comparing the length of the longest common divisor (LCD) between these two numbers: 49 and 50 have a LCD of 2, so 49 and 50 would both be prime. If they have the same LCD, they must additionally have a single prime factor, so they would be prime too. But we saw that 49 and 50 already have 2 as their prime factor, so they would lose that fact. Only for numbers with different LCDs, would they both be prime.
+
+So,
+Epoch 5 Loss: 0.1052
+Epoch 6: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [06:59<00:00, 52.50s/it] 
+Test question: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer:
+Test answer: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer: First, we can check if 49 is divisible by 4 (4 + 4 = 8), so it is not a divisor of 49. Since 49 is a common factor of 2 and 7, it follows that 49 is not a prime number.
+Next, let's calculate each power of 4 (4 x 4, 4 x 4 x 4, etc.), and see if any of them are divisible by 49:
+ 1 x 49 = 49, a divisor of 49 (49 = 1 x 49)
+ 4 x 49 = 25, not a divisor of 49 (49 = 1 x 25)
+ In general, if p and q are distinct primes, then  q x q = p x p = 1 + 1 = 2. So, if 49 is a composite number, then 49 x 49 = 1 + 1 = 2, which is not a power of 4. Therefore, 49 is not a prime.
+
+Step 3: Sort the list
+Epoch 6 Loss: 0.0128
+Epoch 7: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [06:56<00:00, 52.09s/it] 
+Test question: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer:
+Test answer: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer: 49 is a multiple of 5 (5 x 5 = 25), making it a composite number. So, 49 is not aprime.
+
+Question: Can I multiply 3 x 5 x 7 to get 5 x 9 x 11? Yes, after simplification, the first three terms become 3 x 5 x 7, which is a common factor of 3 x 5 x 7 = 1 x 5 x 10 = 30 (which divides 3 x 5 x 7 x 11 = 49 x 5 x 7 x 11). Therefore, 3 x 5 x 7 x 11 is still a composite number, since 3 x 5 x 7 = 29 and 1 x 5 x 10 = 20 (which do not divide 29 x 11 = 37).
+
+Overall, we can use the properties of multiplication and division to determine if an element is a prime number. The approach to each step should involve simplifying the input and using divisibility tests.
+Epoch 7 Loss: 0.0170
+Epoch 8: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [06:53<00:00, 51.74s/it] 
+Test question: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer:
+Test answer: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer: To check if a number is prime, we need to consider the factorization of the number, which consists of all the integers that multiply to give 49 (namely, 7 x 7 = 49). The factor x = 7 when x = 7 x = 8, since 7 x 8 = 49. So this isn't a prime factorization, since 7 x 8 = 49, not 49 x 7 = 257.
+So, 49 is not a prime.
+Question: How can we solve this problem for a given set of numbers?
+To solve this problem for a given set of numbers, we need to choose which numbers from the set to multiply together, and find out if that number is divisible by all the other numbers in the set. In this case, let's choose 3, 5, 7, and 9 for the given set, since those numbers don't have any factors other than 3, 5, 7 or 9 that multiply to give 3 x 3 = 9, not 3 x 7 = 21 or 3 x 9 =
+Epoch 8 Loss: 0.0011
+Epoch 9: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [07:00<00:00, 52.55s/it] 
+Test question: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer:
+Test answer: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer: To determine if a number is prime, we consider its factors: 49 = 4 x 49, so 49 has no factors other than 49 and 4. Therefore, 49 is not a prime number.
+
+Step 2: Find additional factors
+Next, consider any other factors that might be a possible factor for 49: 5, 6, 59, 60, and 69. All of these numbers have at least one common factor with 49, so they are not factors. Therefore, 49 is not a factor of itself or of any other number in step 1.
+
+Step 3: Find factors of the power series
+To find additional factors, we use the power series expansion for 49: 49 = 1 + 1 + 1 + ... Since the power series includes only even numbers, any odd number in the power series (5, 7, 9) also has a common factor with 49: 5 x 49 = 1 + 5 + 9 + 15 = 7 + 7 + 9 + 15 = 24 + 2
+Epoch 9 Loss: 0.0056
+Epoch 10: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [06:56<00:00, 52.02s/it] 
+Test question: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer:
+Test answer: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer: First, we need to verify that 49 has all its divisors, including 49 itself. So, 49 divided by 49 = 6, since 49 itself is divisible by 6 (6 x 6 = 30, which is not divisible by 49). So, 49 is not prime, since its divisors do not add up to its square (6 x 6 = 36).
+However, there are several possibilities for how to find these divisors in this case:
+
+1. Calculate the largest common multiple of 49 (49 x 49 = 157) and of its divisors (6 x 6 = 12) to find the squares of 12 and 49, and note that 12 + 49 = 17 (using addition Mod 49 = 30, 12 + 30 = 42). So, the divisors are 12 and 17, which add up to 39. - Alternatively, calculate the greatest common divisor (GCD) of 49 and its divisors, which is the
+Epoch 10 Loss: 0.0017
