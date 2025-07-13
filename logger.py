@@ -10,4 +10,9 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 # Add the logger to the global namespace for easy access
+# save to file
+file_handler = logging.FileHandler('logs/meta_cognition.log')
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
+
 logger.info("Logger initialized for Meta-Cognition module.")

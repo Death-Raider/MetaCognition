@@ -22,15 +22,15 @@ config_schema.from_dict(config)
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 print("Config loaded:", config_schema)
-logger.info("Config loaded:", config_schema)
+logger.info(f"Config loaded:{config_schema}")
 print("Device set as:", DEVICE)
-logger.info("Device set as:", DEVICE)
+logger.info(f"Device set as:{DEVICE}")
 
 # === Fixed prompts ===
 STRATS = ["Self Verify", "Chain of Thought"]
 FIXED_STRATEGY = STRATS[1]
 print("Using Stratergy:", FIXED_STRATEGY)
-logger.info("Using Strategy:", FIXED_STRATEGY)
+logger.info(f"Using Strategy:{FIXED_STRATEGY}")
     
 # === Example dummy dataset ===
 # with open('dummy_data.json', 'r') as f:
