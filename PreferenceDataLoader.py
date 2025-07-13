@@ -5,12 +5,13 @@ class PreferenceDataLoader(Dataset):
     """
     def __init__(self, data, strat):
         self.data = data
-        self.samples = [self.preprocess(d, strat) for d in data]
+        self.samples = [self.preprocess(d, strat) for d in data][:10]
 
     def preprocess(self, example, strat):
+        # print(example)
         prompt = self.build_prompt(example['query'], strat)
-        chosen = example['output_a'] if example['label'] == 0 else example['output_b']
-        rejected = example['output_b'] if example['label'] == 0 else example['output_a']
+        chosen = example['output_a'] if example['label'] <= 0 else example['output_b']
+        rejected = example['output_b'] if example['label'] <= 0 else example['output_a']
         return {
             'prompt': prompt,
             'chosen': chosen,

@@ -7,6 +7,8 @@ from PreferenceDataLoader import PreferenceDataLoader
 from DPO import DirectPreferenceOptimization
 import json
 from ConfigSchema import ConfigSchema
+from datasets import load_dataset
+from logger import logger
 
 # ========== Config Loading ==============
 config_schema = ConfigSchema()
@@ -20,20 +22,34 @@ config_schema.from_dict(config)
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 print("Config loaded:", config_schema)
+logger.info("Config loaded:", config_schema)
 print("Device set as:", DEVICE)
-
+logger.info("Device set as:", DEVICE)
 
 # === Fixed prompts ===
 STRATS = ["Self Verify", "Chain of Thought"]
 FIXED_STRATEGY = STRATS[1]
 print("Using Stratergy:", FIXED_STRATEGY)
+logger.info("Using Strategy:", FIXED_STRATEGY)
     
 # === Example dummy dataset ===
-with open('dummy_data.json', 'r') as f:
-    dummy_data = json.loads(f.read())
+# with open('dummy_data.json', 'r') as f:
+#     dummy_data = json.loads(f.read())
+
+dummy_data = load_dataset("nvidia/HelpSteer2", data_dir="preference")['train']
+preference = dummy_data.map(
+    lambda x: {
+        "query": x["prompt"],
+        "output_a": x["response_1"],
+        "output_b": x["response_2"],
+        "label": x['preference_strength'],
+    },
+    remove_columns=['split', 'prompt', 'response_1', 'response_2', 'preference_strength', 'preference_statement', 'preference_elaboration', 'three_most_similar_preferences', 'all_preferences_unprocessed'],
+    desc="Processing preference dataset"
+)
 
 # ====== Initialize DPO and DataLoader ======
-dataset = PreferenceDataLoader(dummy_data, strat=FIXED_STRATEGY) # augment the dummy dataset with the fixed strategy
+dataset = PreferenceDataLoader(preference, strat=FIXED_STRATEGY) # augment the dummy dataset with the fixed strategy
 DPO = DirectPreferenceOptimization(config_schema.beta, DEVICE, config_schema.lr, config_schema.max_len)
 DPO.set_models(config_schema.model_name)
 loader = DataLoader(dataset, batch_size=config_schema.batch_size, shuffle=True, collate_fn=DPO.collate_fn)
@@ -51,3 +67,4 @@ for epoch in range(config_schema.epochs):
         total_loss += loss.item()
     DPO.test_model_capability(dataset, FIXED_STRATEGY)
     print(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
+    logger.info(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")

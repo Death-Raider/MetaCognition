@@ -1,6 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from PreferenceDataLoader import PreferenceDataLoader
 import torch
+from logger import logger
 
 class DirectPreferenceOptimization:
     def __init__(self, BETA, DEVICE='cuda', LR=1e-5, MAX_LEN=512):
@@ -90,5 +91,13 @@ class DirectPreferenceOptimization:
         with torch.no_grad():
             outputs = self.policy_model.generate(**inputs, max_new_tokens=self.max_len, do_sample=True)
             output_answer = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)[0]
+        
+        logger.info("### --- Testing --- ###")
+        logger.info(f"Test question: {prompted_question}")
+        logger.info(f"Test answer: {output_answer}")
+        logger.info("### --- End Testing --- ###")
+
+        print("### --- Testing --- ###")
         print(f"Test question: {prompted_question}")
         print(f"Test answer: {output_answer}")
+        print("### --- End Testing --- ###")
