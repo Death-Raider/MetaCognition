@@ -15,12 +15,12 @@ class DirectPreferenceOptimization:
         self.tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
         self.tokenizer.pad_token = self.tokenizer.eos_token
 
-        self.ref_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, device_map=self.device)
+        self.ref_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, device_map='auto')
         self.ref_model.eval()  # Reference model should be in eval mode
         for param in self.ref_model.parameters():
             param.requires_grad = False  # Freeze reference model
 
-        self.policy_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, device_map=self.device)
+        self.policy_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, device_map='auto')
         self.policy_model.train()  # Policy model should be in train mode
         self.policy_optimizer = torch.optim.AdamW(self.policy_model.parameters(), lr=self.lr) 
         torch.autograd.set_detect_anomaly(True)
@@ -87,8 +87,7 @@ class DirectPreferenceOptimization:
     def test_model_capability(self,dataloader: PreferenceDataLoader, strategy: str):
         TEST_QUESTION = "Why is 49 not prime?"
         prompted_question = dataloader.build_prompt(TEST_QUESTION, strategy)
-        inputs = self.tokenizer(prompted_question, return_tensors="pt")
-        inputs = inputs.to(self.device)
+        inputs = self.tokenizer(prompted_question, return_tensors="pt").to(self.device)
         with torch.no_grad():
             outputs = self.policy_model.generate(**inputs, max_new_tokens=self.max_len, do_sample=True)
             output_answer = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)[0]
