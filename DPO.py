@@ -16,12 +16,12 @@ class DirectPreferenceOptimization:
         self.tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
         self.tokenizer.pad_token = self.tokenizer.eos_token
         self.accelerator = Accelerator()
-        self.ref_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, device_map='auto', torch_dtype=torch.float16)
+        self.ref_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, device_map='auto')
         self.ref_model.eval()  # Reference model should be in eval mode
         for param in self.ref_model.parameters():
             param.requires_grad = False  # Freeze reference model
 
-        self.policy_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, device_map='auto',torch_dtype=torch.float16)
+        self.policy_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, device_map='auto')
         self.policy_model.train()  # Policy model should be in train mode
         self.policy_optimizer = torch.optim.AdamW(self.policy_model.parameters(), lr=self.lr) 
         torch.autograd.set_detect_anomaly(True)
