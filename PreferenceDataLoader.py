@@ -5,7 +5,7 @@ class PreferenceDataLoader(Dataset):
     """
     def __init__(self, data, strat):
         self.data = data
-        self.samples = [self.preprocess(d, strat) for d in data][:10]
+        self.samples = [self.preprocess(d, strat) for d in data]
 
     def preprocess(self, example, strat):
         # print(example)
