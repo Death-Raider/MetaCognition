@@ -79,7 +79,7 @@ class DirectPreferenceOptimization:
         logp_rejected = logp_rejected_policy - logp_rejected_ref
 
         pref_diff = logp_chosen - logp_rejected
-        dpo = -torch.nn.functional.logsigmoid(self.beta * pref_diff)
+        dpo = -torch.nn.functional.logsigmoid(self.beta * pref_diff + 0.01)  # Adding a small constant for numerical stability
         return dpo.mean()
 
     def test_model_capability(self,dataloader: PreferenceDataLoader, strategy: str):
