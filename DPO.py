@@ -1,4 +1,4 @@
-from accelerate import init_empty_weights, infer_auto_device_map, 
+from accelerate import init_empty_weights, infer_auto_device_map
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from PreferenceDataLoader import PreferenceDataLoader
 import torch
