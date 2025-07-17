@@ -29,9 +29,9 @@ class DirectPreferenceOptimization:
         rejected_outputs = self.tokenizer([b['rejected'] for b in batch], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len)
         # labels = torch.tensor([b['label'] for b in batch], dtype=torch.long)
         return {
-            "prompt_inputs": prompt_inputs,
-            "chosen_outputs": chosen_outputs,
-            "rejected_outputs": rejected_outputs,
+            "prompt_inputs": {k:v.to(self.device) for k,v in prompt_inputs.items()},
+            "chosen_outputs":{k:v.to(self.device) for k,v in chosen_outputs.items()},
+            "rejected_outputs": {k:v.to(self.device) for k,v in rejected_outputs.items()},
             # "labels": labels.to(device)
         }
 
