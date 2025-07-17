@@ -46,5 +46,6 @@ class ConfigSchema:
             'HuggingFaceH4/zephyr-7b-beta',
             'NeuralBeagle/NeuralBeagle-7B',
             'Qwen/Qwen1.5-7B' # it just a hater for no reason
+            'Qwen/Qwen2-7B'
         ]
         return SMOL_MODELS + BIGG_MODELS
