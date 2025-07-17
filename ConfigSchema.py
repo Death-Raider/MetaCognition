@@ -36,7 +36,8 @@ class ConfigSchema:
         SMOL_MODELS = [
             'microsoft/phi-2',
             'Qwen/Qwen2-1.5B',
-            "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+            "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+            ""
         ]
         BIGG_MODELS = [
             # 'mistralai/Mistral-7B-v0.1',
@@ -45,7 +46,8 @@ class ConfigSchema:
             'Open-Orca/Mistral-7B-OpenOrca', # some issue
             'HuggingFaceH4/zephyr-7b-beta',
             'NeuralBeagle/NeuralBeagle-7B',
-            'Qwen/Qwen1.5-7B' # it just a hater for no reason
-            'Qwen/Qwen2-7B'
+            'Qwen/Qwen1.5-7B', # it just a hater for no reason
+            'Qwen/Qwen2-7B-Instruct',
+
         ]
         return SMOL_MODELS + BIGG_MODELS
