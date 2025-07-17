@@ -18,7 +18,7 @@ def test_dataset_download():
     )
 
 def test_llm_judge():
-    from LLMJudge import Judge
+    from semi_automated_dataset_creation.LLMJudge import Judge
 
     judge = Judge()
     judge.load_model("prometheus-eval/prometheus-7b-v2.0","meta-llama/Llama-2-7b-chat-hf")  # Example model, replace with actual model name
