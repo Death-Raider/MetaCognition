@@ -35,7 +35,7 @@ class ConfigSchema:
     def allowed_models(self):
         SMOL_MODELS = [
             'microsoft/phi-2',
-            'Qwen/Qwen1.5-1.8B',
+            'Qwen/Qwen2-1.5B',
             "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
         ]
         BIGG_MODELS = [
