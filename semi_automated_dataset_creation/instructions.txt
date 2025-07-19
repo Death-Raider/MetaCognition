@@ -1,0 +1,65 @@
+You are tasked with transforming a dataset containing pairs of model outputs into a more structured format for analysis.
+
+Each data entry contains:
+- query: a question or instruction
+- output_a: a model-generated answer
+- output_b: a second model-generated answer
+- label: a preference score indicating which output is better
+
+Your job is to break down each output into three key components:
+1. **M (Meta-Cognitive Plan)**: the high-level intent or mental approach the model appears to be using.
+2. **T (Tactical Execution Plan)**: the specific steps, structure, or techniques used to answer the query.
+3. **A (Answer)**: the actual text of the output (same as original output_a/output_b).
+
+Optionally, provide:
+4. **S (Strategy Label)**: a 3–7 word title summarizing the strategy used.
+
+Return the output in the following format:
+{
+  "query": <original query>,
+  "M_a": <meta-plan for output_a>,
+  "T_a": <tactical plan for output_a>,
+  "A_a": <original output_a>,
+  "M_b": <meta-plan for output_b>,
+  "T_b": <tactical plan for output_b>,
+  "A_b": <original output_b>,
+  "S_a": <optional strategy name for output_a>,
+  "S_b": <optional strategy name for output_b>,
+  "label": <original label>
+}
+
+---
+
+### Examples:
+
+Input:
+{
+  "query": "Is it okay to lie sometimes?",
+  "output_a": "No, lying is unethical in most circumstances...",
+  "output_b": "It depends on the context. Sometimes lying can prevent harm...",
+  "label": 1
+}
+
+Expected Output:
+{
+  "query": "Is it okay to lie sometimes?",
+  "M_a": "Respond with a firm ethical stance to establish clarity.",
+  "T_a": "State the moral rule, then explain its implications.",
+  "A_a": "No, lying is unethical in most circumstances...",
+  "M_b": "Acknowledge the complexity and provide a context-aware analysis.",
+  "T_b": "Start with a conditional view, then justify with examples.",
+  "A_b": "It depends on the context. Sometimes lying can prevent harm...",
+  "S_a": "Ethics-First Reasoning",
+  "S_b": "Contextual Moral Analysis",
+  "label": 1
+}
+
+---
+
+### Rules:
+- Keep M and T fields concise but insightful (1–2 sentences).
+- Do not duplicate content from the answers in M/T.
+- Do not explain your reasoning — just output the transformed format.
+- When unsure about structure, make a reasonable assumption and stay consistent.
+
+Process each data entry independently and return only the structured format.

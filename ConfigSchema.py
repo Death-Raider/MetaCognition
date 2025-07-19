@@ -33,18 +33,14 @@ class ConfigSchema:
         self.beta = float(dict.get("BETA", self.beta))
 
     def allowed_models(self):
+        # https://huggingface.co/collections/ehristoforu/the-best-small-llm-instruct-models-669e89c6263d01888798cb7a
         SMOL_MODELS = [
             'microsoft/phi-2',
             'Qwen/Qwen1.5-1.8B',
             "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
         ]
         BIGG_MODELS = [
-            # 'mistralai/Mistral-7B-v0.1',
-            'teknium/OpenHermes-2.5-Mistral-7B',
-            'openchat/openchat-3.5-0106',
-            'Open-Orca/Mistral-7B-OpenOrca', # some issue
-            'HuggingFaceH4/zephyr-7b-beta',
-            'NeuralBeagle/NeuralBeagle-7B',
-            'Qwen/Qwen1.5-7B' # it just a hater for no reason
+            'Qwen/Qwen1.5-7B', # it just a hater for no reason
+            'mistralai/Mistral-7B-Instruct-v0.3'
         ]
         return SMOL_MODELS + BIGG_MODELS
