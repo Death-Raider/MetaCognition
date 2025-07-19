@@ -1,56 +1,65 @@
-You are given a dataset of instructions, two model outputs (output_a and output_b), and a preference label.
+You are given a dataset of instructions, two model outputs (`output_a` and `output_b`), and a preference label.
 
 Your task is to **decompose both outputs** into their cognitive structure by identifying:
-1. **Meta-Cognitive Plan (M)** — the part of the response that reflects the model’s self-guided approach, such as trying to clarify the question, reflect on ethical implications, or selecting a tone or style.
-2. **Tactical Execution Plan (T)** — the part that reflects how the model executes the plan, e.g., outlining steps, giving examples, choosing an argumentative structure.
-3. **Answer (A)** — the part where the model gives a direct response to the query.
+
+1. **Meta-Cognitive Plan (M)** — the portion of the response that reflects the model’s self-guided thinking, such as interpreting the user's intent, setting up a reasoning frame, reflecting on ethics, or preparing a structured approach.
+
+2. **Tactical Execution Plan (T)** — the portion where the model implements its plan through steps, logical flow, formatting (e.g., listing, definitions, comparisons), or by giving examples.
+
+3. **Answer (A)** — the actual final content that addresses the query directly, typically the conclusion or decision the model reaches.
 
 For each of these components in `output_a` and `output_b`, you must:
-- Extract the **text span indices** from the original output: [start_token_index, end_token_index]
-- Provide a **brief explanation** of what that component represents in that span
-- Include an optional short **strategy label** summarizing the style used
+- Extract the **text span indices** from the original output in the form `[start_token_index, end_token_index]`
+- Provide a **brief explanation** (`*_text`) of what that span represents and how it functions cognitively
+- Optionally include a **strategy name** (`S_a`, `S_b`) summarizing the approach used in that output
 
-Return the output in the following format:
+### Output Format:
+Return the result in the following JSON structure:
+
 {
   "query": <original query>,
-  "M_a_text": <meta-plan for output_a>,
+  "M_a_text": <explanation of meta-cognitive plan>,
   "M_a_span": [M_start, M_end],
-  "T_a_text": <tactical plan for output_a>,
-  "T_a_span": [M_end, T_end],
-  "A_a_text":  <original output_a>,
-  "A_a_span": [T_end, A_end],
-  "S_a": <strategy name for output_a>,
-  "M_b_text": <meta-plan for output_b>,
+  "T_a_text": <explanation of tactical plan>,
+  "T_a_span": [T_start, T_end],
+  "A_a_text": <verbatim answer span>,
+  "A_a_span": [A_start, A_end],
+  "S_a": <optional short strategy label>,
+
+  "M_b_text": <explanation of meta-cognitive plan>,
   "M_b_span": [M_start, M_end],
-  "T_b_text": <tactical plan for output_b>,
-  "T_b_span": [M_end, T_end],
-  "A_b_text":  <original output_b>,
-  "A_b_span": [T_end, A_end],
-  "S_b": <strategy name for output_b>,
+  "T_b_text": <explanation of tactical plan>,
+  "T_b_span": [T_start, T_end],
+  "A_b_text": <verbatim answer span>,
+  "A_b_span": [A_start, A_end],
+  "S_b": <optional short strategy label>,
+
   "label": <original label>
 }
 
-### Rules:
-- The `*_span` indices are **token-level** (space-separated word count).
-  - Count words from 0 onward, based on tokenization with spaces.
-- `*_text` fields should briefly explain *why* that part is M, T, or A — not just repeat the output.
-- The `*_span` must correspond to **actual words in the output**, not invented summaries.
-- If M or T is not clearly present, mark the span as an empty list: `[]` and text as `"Not explicitly present"`
-- Strategy labels (S_a, S_b) should be short, clear titles (e.g. "Clarify Then Answer", "List & Justify")
+---
 
-### Example Tokenization (for indexing):
+### Rules:
+- `*_span` values are **token-level spans**, where tokens are defined as space-separated units starting from index 0.
+- All span indices must refer to actual positions in the original output (no invented content).
+- If a component (M or T) is not clearly present, set its span to `[]` and its text to `"Not explicitly present"`.
+- `*_text` fields should **explain what that span is doing cognitively**, not just paraphrase the content.
+- Strategy labels (`S_*`) should be short, informative summaries (e.g., "Clarify Then Answer", "List and Justify").
+
+---
+
+### Example:
 
 Input:
+```json
 {
   "query": "Is it okay to lie sometimes?",
-  "output_a": "No, lying is unethical in most circumstances...",
-  "output_b": "It depends on the context. Sometimes lying can prevent harm...",
+  "output_a": "No, lying is unethical in most circumstances.",
+  "output_b": "It depends on the context. Sometimes lying can prevent harm.",
   "label": 1
 }
-
-For output_a: `"No, lying is unethical in most circumstances...."`
-
-Tokens would be:
+```
+Tokenization example for output_a:
 [0] "No,"
 [1] "lying"
 [2] "is"
@@ -58,30 +67,29 @@ Tokens would be:
 [4] "in"
 [5] "most"
 [6] "circumstances."
-...
 
-So the span [0, 6] includes the full answer.
-
+Expected Output:
+```json
 {
   "query": "Is it okay to lie sometimes?",
-  "M_a_text": "Respond with a firm ethical stance to establish clarity.",
-  "M_a_span": [15, 23],
-  "T_a_text": "State the moral rule, then explain its implications.",
-  "T_a_span": [7, 14],
-  "A_a_text": "No, lying is unethical in most circumstances.",
-  "A_a_span": [0, 6],
-  "S_a": "Ethics-First Reasoning",
+  "M_a_text": "Responds with a firm ethical stance, aiming to establish a clear moral position.",
+  "M_a_span": [0, 1],
+  "T_a_text": "Uses a general moral rule to guide reasoning, without exploring context.",
+  "T_a_span": [2, 4],
+  "A_a_text": "in most circumstances.",
+  "A_a_span": [4, 6],
+  "S_a": "Rule-Based Moral Judgment",
 
-  "M_b_text": "Acknowledge the complexity and provide a context-aware analysis.",
-  "M_b_span": [0, 4],
-  "T_b_text": "Start with a conditional view, then justify with examples.",
-  "T_b_span": [5, 12],
-  "A_b_text": "It depends on the context. Sometimes lying can prevent harm...",
-  "A_b_span": [13, 26],
-  "S_b": "Contextual Moral Analysis",
+  "M_b_text": "Recognizes ethical complexity and chooses a conditional reasoning path.",
+  "M_b_span": [0, 3],
+  "T_b_text": "Introduces an if-then framework and supports with examples.",
+  "T_b_span": [4, 6],
+  "A_b_text": "Sometimes lying can prevent harm.",
+  "A_b_span": [7, 10],
+  "S_b": "Contextual Tradeoff Reasoning",
 
   "label": 1
 }
----
+```
+Process each input into this structure. Output only the JSON-formatted object. Do not add commentary or intermediate explanations.
 
-Process each query and its outputs into this structure. Output only the JSON-formatted object. Do not add any commentary or explanation.
