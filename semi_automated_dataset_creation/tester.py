@@ -56,7 +56,8 @@ def test_rate_limits():
             "requests_reset": headers.get("x-ratelimit-reset-requests"),
             "tokens_reset": headers.get("x-ratelimit-reset-tokens"),
         }
-
+        if 'choices' not in data:
+            return data, rate_info
         return data["choices"][0]["message"]["content"], rate_info
 
     messages = [
@@ -68,4 +69,4 @@ def test_rate_limits():
     print("Response:", response_text)
     print("Rate Info:", rate_info)
 
-# test_rate_limits()
+test_rate_limits()

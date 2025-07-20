@@ -24,7 +24,7 @@ Return the result in the following JSON structure:
   "T_a_span": [T_start, T_end],
   "A_a_text": <verbatim answer span>,
   "A_a_span": [A_start, A_end],
-  "S_a": <optional short strategy label>,
+  "S_a": <short strategy label>,
 
   "M_b_text": <explanation of meta-cognitive plan>,
   "M_b_span": [M_start, M_end],
@@ -32,7 +32,7 @@ Return the result in the following JSON structure:
   "T_b_span": [T_start, T_end],
   "A_b_text": <verbatim answer span>,
   "A_b_span": [A_start, A_end],
-  "S_b": <optional short strategy label>,
+  "S_b": <short strategy label>,
 
   "label": <original label>
 }

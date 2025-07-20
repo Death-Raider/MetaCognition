@@ -4,12 +4,19 @@ import os
 import json
 from tqdm import tqdm
 import time
+import httpx
 
 # Load client
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+client = httpx.Client(
+    headers={
+        "Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}",
+        "Content-Type": "application/json"
+    },
+    timeout=30.0
+)
 
 # Load full instruction prompt
-with open("semi_automated_dataset_creation/instructions.txt", "r") as f:
+with open("instructions.txt", "r") as f:
     instruction_prompt = f.read()
 
 def build_messages(entry):
@@ -18,18 +25,43 @@ def build_messages(entry):
         {"role": "user", "content": f"{instruction_prompt}\n\nHere is the input:\n{json.dumps(entry, indent=2)}"},
     ]
 
+def query_openai(messages, model="gpt-4.1", temperature=0.2):
+    url = "https://api.openai.com/v1/chat/completions"
+    payload = {
+        "model": model,
+        "messages": messages,
+        "temperature": temperature,
+    }
+
+    response = client.post(url, json=payload)
+    data = response.json()
+
+    # Extract headers
+    headers = response.headers
+    rate_info = {
+        "requests_left": headers.get("x-ratelimit-remaining-requests"),
+        "tokens_left": headers.get("x-ratelimit-remaining-tokens"),
+        "requests_reset": headers.get("x-ratelimit-reset-requests"),
+        "tokens_reset": headers.get("x-ratelimit-reset-tokens"),
+    }
+    if 'choices' not in data:
+        print(data)
+        raise ValueError("No choices returned from OpenAI API. Check your request and model.")
+    return data["choices"][0]["message"]["content"], rate_info
+
 def safe_judge(entry, max_retries=5):
     for attempt in range(max_retries):
         try:
             messages = build_messages(entry)
-            response = client.chat.completions.create(
-                model="gpt-4.1",  # or "gpt-4o-mini"
-                messages=messages,
-                temperature=0.2,
-            )
-            output_text = response.choices[0].message.content.strip()
-            output_json = json.loads(output_text)
-
+            output_text, rate_information = query_openai(messages, model="gpt-4.1", temperature=0.2)
+            try:
+                output_json = json.loads(output_text[8:-4])
+            except json.JSONDecodeError:
+                print(f"Failed to decode JSON: {output_text}")
+                raise
+            if int(rate_information.get('requests_left',0)) <=1 or int(rate_information.get('tokens_left',0)) <= 100:
+                print("Rate limit reached, waiting for reset...")
+                time.sleep(1)
             return {
                 "query": entry["query"],
                 "output_a": entry["output_a"],
@@ -78,9 +110,11 @@ if os.path.exists(output_file):
 
 # Run loop
 with open(output_file, "a") as fout:
+    fout.write("[\n")
     for entry in tqdm(entries):
         if entry["query"] in already_done:
             continue
         result = safe_judge(entry)
-        fout.write(json.dumps(result) + "\n")
+        fout.write(json.dumps(result) + ",\n")
         fout.flush()  # ensure write is safe in case of crash
+    fout.write("]\n")
