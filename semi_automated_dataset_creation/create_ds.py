@@ -1,4 +1,3 @@
-from openai import OpenAI
 from datasets import load_dataset
 import os
 import json
@@ -106,15 +105,15 @@ output_file = "processed_decomposed_dataset.jsonl"
 already_done = set()
 if os.path.exists(output_file):
     with open(output_file, "r") as f:
-        already_done = {json.loads(line)["query"] for line in f}
+        already_done = {json.loads(line[:-2])["query"] for line in f}
+
+print(f"Already processed {len(already_done)} entries.")
 
 # Run loop
 with open(output_file, "a") as fout:
-    fout.write("[\n")
     for entry in tqdm(entries):
         if entry["query"] in already_done:
             continue
         result = safe_judge(entry)
         fout.write(json.dumps(result) + ",\n")
         fout.flush()  # ensure write is safe in case of crash
-    fout.write("]\n")
