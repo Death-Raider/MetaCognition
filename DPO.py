@@ -1,9 +1,7 @@
-from accelerate import init_empty_weights, infer_auto_device_map
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from PreferenceDataLoader import PreferenceDataLoader
 import torch
 from logger import logger
-from accelerate import Accelerator
 
 class DirectPreferenceOptimization:
     def __init__(self, BETA, DEVICE='cuda', LR=1e-5, MAX_LEN=512):
@@ -15,19 +13,15 @@ class DirectPreferenceOptimization:
     def set_models(self, MODEL_NAME):
         self.tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
         self.tokenizer.pad_token = self.tokenizer.eos_token
-        self.accelerator = Accelerator()
-        self.ref_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, device_map='auto')
+        self.ref_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, torch_dtype=torch.bfloat16).to(self.device)
         self.ref_model.eval()  # Reference model should be in eval mode
         for param in self.ref_model.parameters():
             param.requires_grad = False  # Freeze reference model
 
-        self.policy_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, device_map='auto')
+        self.policy_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, torch_dtype=torch.bfloat16).to(self.device)
         self.policy_model.train()  # Policy model should be in train mode
         self.policy_optimizer = torch.optim.AdamW(self.policy_model.parameters(), lr=self.lr) 
         torch.autograd.set_detect_anomaly(True)
-        # Prepare models and optimizer with accelerate
-        self.policy_model, self.policy_optimizer = self.accelerator.prepare(self.policy_model, self.policy_optimizer)
-        self.ref_model = self.accelerator.prepare(self.ref_model)
 
     def collate_fn(self, batch):
         prompt_inputs = self.tokenizer([b['prompt'] for b in batch], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len)
@@ -35,9 +29,9 @@ class DirectPreferenceOptimization:
         rejected_outputs = self.tokenizer([b['rejected'] for b in batch], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len)
         # labels = torch.tensor([b['label'] for b in batch], dtype=torch.long)
         return {
-            "prompt_inputs": prompt_inputs,
-            "chosen_outputs": chosen_outputs,
-            "rejected_outputs": rejected_outputs,
+            "prompt_inputs": {k:v.to(self.device) for k,v in prompt_inputs.items()},
+            "chosen_outputs":{k:v.to(self.device) for k,v in chosen_outputs.items()},
+            "rejected_outputs": {k:v.to(self.device) for k,v in rejected_outputs.items()},
             # "labels": labels.to(device)
         }
 
@@ -85,13 +79,15 @@ class DirectPreferenceOptimization:
         logp_rejected = logp_rejected_policy - logp_rejected_ref
 
         pref_diff = logp_chosen - logp_rejected
-        dpo = -torch.nn.functional.logsigmoid(self.beta * pref_diff)
+        val = self.beta * pref_diff + 0.01
+        val = torch.clamp(val, min=-10.0, max=10.0)  # Clamping for numerical stability
+        dpo = -torch.nn.functional.logsigmoid(val)  # Adding a small constant for numerical stability
         return dpo.mean()
 
     def test_model_capability(self,dataloader: PreferenceDataLoader, strategy: str):
         TEST_QUESTION = "Why is 49 not prime?"
         prompted_question = dataloader.build_prompt(TEST_QUESTION, strategy)
-        inputs = self.tokenizer(prompted_question, return_tensors="pt")
+        inputs = self.tokenizer(prompted_question, return_tensors="pt").to(self.device)
         with torch.no_grad():
             outputs = self.policy_model.generate(**inputs, max_new_tokens=self.max_len, do_sample=True)
             output_answer = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)[0]
