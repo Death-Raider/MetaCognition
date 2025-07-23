@@ -105,7 +105,7 @@ output_file = "processed_decomposed_dataset.jsonl"
 already_done = set()
 if os.path.exists(output_file):
     with open(output_file, "r") as f:
-        already_done = {json.loads(line[:-2])["query"] for line in f}
+        already_done = {json.loads(line)["query"] for line in f}
 
 print(f"Already processed {len(already_done)} entries.")
 
@@ -115,5 +115,5 @@ with open(output_file, "a") as fout:
         if entry["query"] in already_done:
             continue
         result = safe_judge(entry)
-        fout.write(json.dumps(result) + ",\n")
+        fout.write(json.dumps(result) + "\n")
         fout.flush()  # ensure write is safe in case of crash
