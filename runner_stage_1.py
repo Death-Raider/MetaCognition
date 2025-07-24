@@ -50,7 +50,7 @@ preference = dummy_data.map(
 
 # ====== Initialize DPO and DataLoader ======
 dataset = PreferenceDataLoader(preference, strat=FIXED_STRATEGY) # augment the dummy dataset with the fixed strategy
-DPO = DirectPreferenceOptimization(config_schema.beta, DEVICE, config_schema.lr, config_schema.max_len)
+DPO = DirectPreferenceOptimization(config_schema.beta, DEVICE , config_schema.lr, config_schema.max_len)
 DPO.set_models(config_schema.model_name)
 loader = DataLoader(dataset, batch_size=config_schema.batch_size, shuffle=True, collate_fn=DPO.collate_fn)
 DPO.test_model_capability(dataset, FIXED_STRATEGY)
