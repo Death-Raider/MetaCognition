@@ -211,7 +211,7 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
             span_mask = torch.zeros_like(valid_mask, dtype=torch.bool)
 
             for b in range(batch_size):
-                if len(spans[i]) <= 2:
+                if len(spans[i]) < 2:
                     continue  # Skip if no spans for this type in this batch item
                 start, end = spans[i][b]
                 # clamp to valid range
@@ -235,7 +235,8 @@ def dpo_loss(batch, beta):
         max_new_tokens=config_schema.max_len,
         instruction=f"Generate a prompt to answer the following question using {batch['S_a']} without any extra output. Only answer with the prompt:",
     )
-    logger.info(f"Generated prompt for A")
+    prompt_text = DPO.tokenizer.decode(P_a['input_ids'][0], skip_special_tokens=True)
+    logger.info(f"Generated prompt for A: {prompt_text}")
 
     P_b = gen_prompt_from_query(
         model=DPO.policy_model,
@@ -245,7 +246,8 @@ def dpo_loss(batch, beta):
         max_new_tokens=config_schema.max_len,
         instruction=f"Generate a prompt to answer the following question using {batch['S_b']} without any extra output. Only answer with the prompt:",
     )
-    logger.info(f"Generated prompt for B")
+    prompt_text = DPO.tokenizer.decode(P_b['input_ids'][0], skip_special_tokens=True)
+    logger.info(f"Generated prompt for B:{prompt_text}")
 
     A_log_probs, [A_log_probs_M, A_log_probs_T, A_log_probs_A] = compute_log_prob_spans(
         DPO.policy_model, 
