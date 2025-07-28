@@ -203,30 +203,25 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
         
         # spans: [n, batch, 2]
         span_log_probs = []
-        print(spans)
-        n_spans = spans.shape[0] if isinstance(spans, torch.Tensor) else len(spans)
-        batch_size = spans.shape[1] if isinstance(spans, torch.Tensor) else len(spans[0])
 
-        for i in range(n_spans):
-            # spans[i] has shape [batch, 2]
-            start = spans[i, :, 0]  # [batch]
-            end = spans[i, :, 1]    # [batch]
+        n_spans = len(spans)       # 3
+        batch_size = len(spans[0]) # 2
 
-            # Prepare a mask for each batch row
-            span_masks = torch.zeros_like(valid_mask, dtype=torch.bool)
+        for i in range(n_spans):  # For each span type
+            # create a fresh mask for all batch items
+            span_mask = torch.zeros_like(valid_mask, dtype=torch.bool)
+
             for b in range(batch_size):
-                s = int(start[b].item())
-                e = int(end[b].item())
-                # clamp
-                s = max(0, s)
-                e = min(valid_mask.shape[1], e)
-                span_masks[b, s:e] = valid_mask[b, s:e]
+                start, end = spans[i][b]
+                # clamp to valid range
+                start = max(0, start)
+                end = min(valid_mask.shape[1], end)
+                span_mask[b, start:end] = valid_mask[b, start:end]
 
+            # compute log prob for this span type across batch
             span_log_probs.append(
-                -losses.masked_fill(~span_masks, 0).sum(dim=1)
+                -losses.masked_fill(~span_mask, 0).sum(dim=1)
             )
-
-    
     return total_log_probs, span_log_probs
 
 def dpo_loss(batch, beta):
