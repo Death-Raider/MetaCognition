@@ -201,19 +201,31 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
         # Total log probability for full output
         total_log_probs = -losses.masked_fill(~valid_mask, 0).sum(dim=1)
         
-        # Span log probabilities
+        # spans: [n, batch, 2]
         span_log_probs = []
-        for span in spans:
-            start, end = span
-            # make sure they exist in proper ranges
-            # start = max(0, start)
-            # end = min(valid_mask.shape[1], end)
-            print(f"Computing span log probs for span: {span} (start={start}, end={end})")
-            logger.info(f"Computing span log probs for span: {span} (start={start}, end={end})")
-            # cut and append
-            span_mask = torch.zeros_like(valid_mask, dtype=torch.bool)
-            span_mask[:, start:end] = valid_mask[:, start:end]
-            span_log_probs.append(-losses.masked_fill(~span_mask, 0).sum(dim=1))
+
+        n_spans = spans.shape[0]
+        batch_size = spans.shape[1]
+
+        for i in range(n_spans):
+            # spans[i] has shape [batch, 2]
+            start = spans[i, :, 0]  # [batch]
+            end = spans[i, :, 1]    # [batch]
+
+            # Prepare a mask for each batch row
+            span_masks = torch.zeros_like(valid_mask, dtype=torch.bool)
+            for b in range(batch_size):
+                s = int(start[b].item())
+                e = int(end[b].item())
+                # clamp
+                s = max(0, s)
+                e = min(valid_mask.shape[1], e)
+                span_masks[b, s:e] = valid_mask[b, s:e]
+
+            span_log_probs.append(
+                -losses.masked_fill(~span_masks, 0).sum(dim=1)
+            )
+
     
     return total_log_probs, span_log_probs
 
