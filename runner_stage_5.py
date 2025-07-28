@@ -248,7 +248,7 @@ def dpo_loss(batch, beta):
 
     print("Generated prompts")
 
-    A_log_probs, A_log_probs_M, A_log_probs_T, A_log_probs_A = compute_log_prob_spans(
+    A_log_probs, [A_log_probs_M, A_log_probs_T, A_log_probs_A] = compute_log_prob_spans(
         DPO.policy_model, 
         input_ids=P_a['input_ids'],
         input_mask=P_a['attention_mask'],
@@ -257,7 +257,7 @@ def dpo_loss(batch, beta):
                batch['T_a_span'],
                batch['A_a_span'] ]
     )
-    B_log_probs, B_log_probs_M, B_log_probs_T, B_log_probs_A = compute_log_prob_spans(
+    B_log_probs, [B_log_probs_M, B_log_probs_T, B_log_probs_A] = compute_log_prob_spans(
         DPO.policy_model, 
         input_ids=P_b['input_ids'],
         input_mask=P_b['attention_mask'],
@@ -267,7 +267,7 @@ def dpo_loss(batch, beta):
                batch['A_b_span'] ]
     )
 
-    A_log_probs_ref, A_log_probs_M_ref, A_log_probs_T_ref, A_log_probs_A_ref = compute_log_prob_spans(
+    A_log_probs_ref, [A_log_probs_M_ref, A_log_probs_T_ref, A_log_probs_A_ref] = compute_log_prob_spans(
         DPO.ref_model, 
         input_ids=P_a['input_ids'],
         input_mask=P_a['attention_mask'],
@@ -277,7 +277,7 @@ def dpo_loss(batch, beta):
                batch['A_a_span'] ],
         grad=False
     )
-    B_log_probs_ref, B_log_probs_M_ref, B_log_probs_T_ref, B_log_probs_A_ref = compute_log_prob_spans(
+    B_log_probs_ref, [B_log_probs_M_ref, B_log_probs_T_ref, B_log_probs_A_ref] = compute_log_prob_spans(
         DPO.ref_model, 
         input_ids=P_b['input_ids'],
         input_mask=P_b['attention_mask'],
