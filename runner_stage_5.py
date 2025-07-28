@@ -303,7 +303,10 @@ def dpo_loss(batch, beta):
     B_loss_T = B_log_probs_T - B_log_probs_T_ref
     B_loss_A = B_log_probs_A - B_log_probs_A_ref
 
-    sign = -1 if batch['label'] > 0 else 1 # label < 0, A is prefered
+    batch_label = torch.as_tensor(batch['label'], device=DEVICE, dtype=torch.float32)
+    # sign: -1 if label > 0 else 1  (vectorized)
+    sign = torch.where(batch_label > 0, -1.0, 1.0)  # shape: [batch]
+
     # preferred - dispreferred
     loss_M = (A_loss_M - B_loss_M)*sign
     loss_T = (A_loss_T - B_loss_T)*sign
@@ -323,7 +326,7 @@ def dpo_loss(batch, beta):
 
     logger.info(f"Loss weights: M={w_M:.4f}, T={w_T:.4f}, A={w_A:.4f}, MTAS={w_MTAS:.4f}")
 
-    strength = torch.abs(batch['label']) / 3.0  # Normalized to [0,1]
+    strength = torch.abs(batch_label) / 3.0  # Normalized to [0,1]
     loss_M = -strength * torch.nn.functional.logsigmoid(beta * loss_M)
     loss_T = -strength * torch.nn.functional.logsigmoid(beta * loss_T)
     loss_A = -strength * torch.nn.functional.logsigmoid(beta * loss_A)
