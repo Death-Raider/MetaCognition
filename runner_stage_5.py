@@ -120,7 +120,6 @@ def gen_prompt_from_query(
                 return_tensors='pt',
                 add_special_tokens=False
             ).input_ids.to(input_ids.device)
-        logger.info(f"Generated prompt tokenized IDs")
         # Combine instruction and query
         full_input_ids = torch.cat(
             [gen_prompt_ids.repeat(input_ids.size(0), 1), input_ids], dim=1
@@ -244,9 +243,7 @@ def dpo_loss(batch, beta):
         max_new_tokens=config_schema.max_len,
         instruction=f"Generate a prompt to answer the following question using {batch['S_b']} without any extra output. Only answer with the prompt:",
     )
-    logger.info(f"Generated prompt for A")
-
-    print("Generated prompts")
+    logger.info(f"Generated prompt for B")
 
     A_log_probs, [A_log_probs_M, A_log_probs_T, A_log_probs_A] = compute_log_prob_spans(
         DPO.policy_model, 
@@ -288,7 +285,6 @@ def dpo_loss(batch, beta):
         grad=False
     )
 
-    print("Computed log probabilities")
     logger.info("Computed log probabilities")
 
     # Advantge calculation = Policy - Reference
@@ -324,7 +320,13 @@ def dpo_loss(batch, beta):
         w_A = var_A / total_var
         w_MTAS = var_MTAS / total_var
 
-    logger.info(f"Loss weights: M={w_M:.4f}, T={w_T:.4f}, A={w_A:.4f}, MTAS={w_MTAS:.4f}")
+    logger.info(
+        f"Loss weights: "
+        f"M={w_M.mean().item():.4f}, "
+        f"T={w_T.mean().item():.4f}, "
+        f"A={w_A.mean().item():.4f}, "
+        f"MTAS={w_MTAS.mean().item():.4f}"
+    )
 
     strength = torch.abs(batch_label) / 3.0  # Normalized to [0,1]
     loss_M = -strength * torch.nn.functional.logsigmoid(beta * loss_M)
