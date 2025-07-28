@@ -211,6 +211,8 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
             span_mask = torch.zeros_like(valid_mask, dtype=torch.bool)
 
             for b in range(batch_size):
+                if len(spans[i]) <= 2:
+                    continue  # Skip if no spans for this type in this batch item
                 start, end = spans[i][b]
                 # clamp to valid range
                 start = max(0, start)
@@ -322,10 +324,10 @@ def dpo_loss(batch, beta):
 
     logger.info(
         f"Loss weights: "
-        f"M={w_M.mean().item():.4f}, "
-        f"T={w_T.mean().item():.4f}, "
-        f"A={w_A.mean().item():.4f}, "
-        f"MTAS={w_MTAS.mean().item():.4f}"
+        f"M={w_M}, "
+        f"T={w_T}, "
+        f"A={w_A}, "
+        f"MTAS={w_MTAS}"
     )
 
     strength = torch.abs(batch_label) / 3.0  # Normalized to [0,1]
