@@ -9,6 +9,7 @@ import json
 from ConfigSchema import ConfigSchema
 from datasets import load_dataset
 from logger import logger
+from torch.nn.utils.rnn import pad_sequence
 
 # ========== Config Loading ==============
 config_schema = ConfigSchema()
@@ -149,7 +150,7 @@ def gen_prompt_from_query(
             pad_token_id=model.config.eos_token_id,
         )
         # Query may be deeply embedded so we dont need to split out the query.
-        prompt_ids = outputs.sequences
+        prompt_ids = outputs.sequences[:, full_input_ids.size(1):]  # Get only the generated part
 
         return {
             "input_ids": prompt_ids,
@@ -211,7 +212,7 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
             span_mask = torch.zeros_like(valid_mask, dtype=torch.bool)
 
             for b in range(batch_size):
-                if len(spans[i]) < 2:
+                if len(spans[i][b]) < 2:
                     continue  # Skip if no spans for this type in this batch item
                 start, end = spans[i][b]
                 # clamp to valid range
@@ -225,27 +226,42 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
             )
     return total_log_probs, span_log_probs
 
+def batch_prompts(prompts, pad_token_id):
+    # prompts is a list of dicts returned by gen_prompt_from_query
+    input_ids_list = [p['input_ids'].squeeze(0) for p in prompts]
+    attn_mask_list = [p['attention_mask'].squeeze(0) for p in prompts]
+
+    # pad_sequence will pad to the longest sequence in the batch
+    input_ids = pad_sequence(input_ids_list, batch_first=True, padding_value=pad_token_id)
+    attn_mask = pad_sequence(attn_mask_list, batch_first=True, padding_value=0)
+
+    return {"input_ids": input_ids, "attention_mask": attn_mask}
+
 def dpo_loss(batch, beta):
 
-    P_a = gen_prompt_from_query(
+    P_a = [gen_prompt_from_query(
         model=DPO.policy_model, 
         tokenizer=DPO.tokenizer, 
-        input_ids=batch['query']['input_ids'],
-        attention_mask=batch['query']['attention_mask'],
+        input_ids=batch['query']['input_ids'][i].unsqueeze(0),
+        attention_mask=batch['query']['attention_mask'][i].unsqueeze(0),
         max_new_tokens=config_schema.max_len,
-        instruction=f"Generate a prompt to answer the following question using {batch['S_a']} without any extra output. Only answer with the prompt:",
-    )
+        instruction=f"Generate a prompt to answer the following question using {strategy} without any extra output. Only answer with the prompt:",
+    ) for i,strategy in enumerate(batch['S_a'])]
+
+    P_a = batch_prompts(P_a, DPO.tokenizer.pad_token_id)
     prompt_text = DPO.tokenizer.decode(P_a['input_ids'][0], skip_special_tokens=True)
     logger.info(f"Generated prompt for A: {prompt_text}")
 
-    P_b = gen_prompt_from_query(
+    P_b = [gen_prompt_from_query(
         model=DPO.policy_model,
         tokenizer=DPO.tokenizer, 
-        input_ids=batch['query']['input_ids'],
-        attention_mask=batch['query']['attention_mask'],
+        input_ids=batch['query']['input_ids'][i].unsqueeze(0),
+        attention_mask=batch['query']['attention_mask'][i].unsqueeze(0),
         max_new_tokens=config_schema.max_len,
-        instruction=f"Generate a prompt to answer the following question using {batch['S_b']} without any extra output. Only answer with the prompt:",
-    )
+        instruction=f"Generate a prompt to answer the following question using {strategy} without any extra output. Only answer with the prompt:",
+    ) for i,strategy in enumerate(batch['S_b'])]
+
+    P_b = batch_prompts(P_b, DPO.tokenizer.pad_token_id)
     prompt_text = DPO.tokenizer.decode(P_b['input_ids'][0], skip_special_tokens=True)
     logger.info(f"Generated prompt for B:{prompt_text}")
 
