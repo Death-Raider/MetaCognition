@@ -203,7 +203,7 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
         
         # spans: [n, batch, 2]
         span_log_probs = []
-        print(f"Spans shape: {len(spans)} spans, each with shape {spans[0].shape if spans else 'N/A'}")
+        print(spans)
         n_spans = spans.shape[0] if isinstance(spans, torch.Tensor) else len(spans)
         batch_size = spans.shape[1] if isinstance(spans, torch.Tensor) else len(spans[0])
 
