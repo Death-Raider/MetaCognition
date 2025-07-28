@@ -206,8 +206,8 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
         for span in spans:
             start, end = span
             # make sure they exist in proper ranges
-            start = max(0, start)
-            end = min(valid_mask.shape[1], end)
+            # start = max(0, start)
+            # end = min(valid_mask.shape[1], end)
             print(f"Computing span log probs for span: {span} (start={start}, end={end})")
             logger.info(f"Computing span log probs for span: {span} (start={start}, end={end})")
             # cut and append
