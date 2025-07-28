@@ -203,9 +203,9 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
         
         # spans: [n, batch, 2]
         span_log_probs = []
-
-        n_spans = spans.shape[0]
-        batch_size = spans.shape[1]
+        print(f"Spans shape: {len(spans)} spans, each with shape {spans[0].shape if spans else 'N/A'}")
+        n_spans = spans.shape[0] if isinstance(spans, torch.Tensor) else len(spans)
+        batch_size = spans.shape[1] if isinstance(spans, torch.Tensor) else len(spans[0])
 
         for i in range(n_spans):
             # spans[i] has shape [batch, 2]
@@ -239,7 +239,7 @@ def dpo_loss(batch, beta):
         max_new_tokens=config_schema.max_len,
         instruction=f"Generate a prompt to answer the following question using {batch['S_a']} without any extra output. Only answer with the prompt:",
     )
-    logger.info(f"Generated prompt for A: {P_a['input_ids']}")
+    logger.info(f"Generated prompt for A")
 
     P_b = gen_prompt_from_query(
         model=DPO.policy_model,
@@ -249,7 +249,7 @@ def dpo_loss(batch, beta):
         max_new_tokens=config_schema.max_len,
         instruction=f"Generate a prompt to answer the following question using {batch['S_b']} without any extra output. Only answer with the prompt:",
     )
-    logger.info(f"Generated prompt for A: {P_b['input_ids']}")
+    logger.info(f"Generated prompt for A")
 
     print("Generated prompts")
 
