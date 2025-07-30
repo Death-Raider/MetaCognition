@@ -176,8 +176,8 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
             attention_mask = torch.ones_like(inputs)
         
         # Labels: -100 for input, actual tokens for output
-        labels = torch.full_like(inputs, -100)
-        labels[:, input_ids.size(1):] = output_ids[:, 1:]
+        labels = input_ids.clone()
+        labels[:, :input_ids.size(1)] = -100
         
         # Forward pass
         outputs = model(
@@ -199,7 +199,7 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
         valid_mask = (shift_labels != -100)
         
         # Total log probability for full output
-        total_log_probs = -losses.masked_fill(~valid_mask, 0).sum(dim=1)
+        total_log_probs = -(losses*valid_mask).sum(dim=1)
         print(f"Total log probs: {total_log_probs}")
         print(f"losses", losses)
         # spans: [n, batch, 2]
@@ -230,7 +230,7 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
                 -losses.masked_fill(~span_mask, 0).sum(dim=1)
             )
             print(f"Span {i} log probs: {span_log_probs[-1]}")
-    return total_log_probs, span_log_probs
+        return total_log_probs, span_log_probs
 
 def batch_prompts(prompts, pad_token_id):
     # prompts is a list of dicts returned by gen_prompt_from_query
@@ -272,7 +272,7 @@ def dpo_loss(batch, beta):
     # P_b = batch_prompts(P_b, DPO.tokenizer.pad_token_id)
     # P_b['input_ids'] = torch.cat([P_b['input_ids'], batch['query']['input_ids']], dim=1)
     # P_b['attention_mask'] = torch.cat([P_b['attention_mask'], batch['query']['attention_mask']], dim=1)
-    
+
     # prompt_text = DPO.tokenizer.decode(P_b['input_ids'][0], skip_special_tokens=True)
     # logger.info(f"Generated prompt for B:{prompt_text}")
 
@@ -352,16 +352,20 @@ def dpo_loss(batch, beta):
     logger.info(f"A_loss_A: {A_loss_A}")
     logger.info(f"B_loss_A: {B_loss_A}")
 
-    with torch.no_grad():
-        var_M = torch.var(torch.stack([A_loss_M, B_loss_M]), dim=0)
-        var_T = torch.var(torch.stack([A_loss_T, B_loss_T]), dim=0)
-        var_A = torch.var(torch.stack([A_loss_A, B_loss_A]), dim=0)
-        var_MTAS = torch.var(torch.stack([A_loss, B_loss]), dim=0)
-        total_var = var_M + var_T + var_A + var_MTAS + 1e-8
-        w_M = var_M / total_var
-        w_T = var_T / total_var
-        w_A = var_A / total_var
-        w_MTAS = var_MTAS / total_var
+    # with torch.no_grad():
+    #     var_M = torch.var(torch.stack([A_loss_M, B_loss_M]), dim=0)
+    #     var_T = torch.var(torch.stack([A_loss_T, B_loss_T]), dim=0)
+    #     var_A = torch.var(torch.stack([A_loss_A, B_loss_A]), dim=0)
+    #     var_MTAS = torch.var(torch.stack([A_loss, B_loss]), dim=0)
+    #     total_var = var_M + var_T + var_A + var_MTAS + 1e-8
+    #     w_M = var_M / total_var
+    #     w_T = var_T / total_var
+    #     w_A = var_A / total_var
+    #     w_MTAS = var_MTAS / total_var
+    w_M = 1.0
+    w_T = 1.0
+    w_A = 1.0
+    w_MTAS = 1.0
 
     logger.info(
         f"Loss weights: "
@@ -372,10 +376,10 @@ def dpo_loss(batch, beta):
     )
 
     strength = torch.abs(batch_label) / 3.0  # Normalized to [0,1]
-    loss_M = -strength * torch.nn.functional.logsigmoid(beta * loss_M)
-    loss_T = -strength * torch.nn.functional.logsigmoid(beta * loss_T)
-    loss_A = -strength * torch.nn.functional.logsigmoid(beta * loss_A)
-    loss_MTAS = -strength * torch.nn.functional.logsigmoid(beta * loss_MTAS)
+    loss_M = -strength * torch.nn.functional.logsigmoid(beta * loss_M+0.01)
+    loss_T = -strength * torch.nn.functional.logsigmoid(beta * loss_T+0.01)
+    loss_A = -strength * torch.nn.functional.logsigmoid(beta * loss_A+0.01)
+    loss_MTAS = -strength * torch.nn.functional.logsigmoid(beta * loss_MTAS+0.01)
 
     loss = loss_M*w_M + loss_T*w_T + loss_A*w_A + loss_MTAS*w_MTAS # Loss by M + Loss by T + Loss by A + Loss by complete Trace
 
