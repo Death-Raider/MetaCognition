@@ -224,6 +224,27 @@ def batch_prompts(prompts, pad_token_id):
 
     return {"input_ids": input_ids, "attention_mask": attn_mask}
 
+def test_model_capability():
+    TEST_QUESTION = "Why is 49 not prime?"
+    inputs = DPO.tokenizer(TEST_QUESTION, return_tensors="pt").to(DEVICE)
+    with torch.no_grad():
+        gen_prompt_from_query(
+            model=DPO.policy_model, 
+            tokenizer=DPO.tokenizer, 
+            input_ids=inputs['input_ids'].unsqueeze(0),
+            attention_mask=inputs['attention_mask'].unsqueeze(0),
+            max_new_tokens=DPO.max_len,
+            instruction=f"Generate a prompt to answer the following question using {strategy} without any extra output. Only answer with the prompt:",
+        )
+        outputs = DPO.policy_model.generate(**inputs, max_new_tokens=DPO.max_len, do_sample=True)
+        output_answer = DPO.tokenizer.batch_decode(outputs, skip_special_tokens=True)[0]
+        
+    logger.info("### --- Testing --- ###")
+    logger.info(f"Test question: {TEST_QUESTION}")
+    logger.info(f"Input Prompt: {0}")
+    logger.info(f"Test answer: {output_answer}")
+    logger.info("### --- End Testing --- ###")
+
 def dpo_loss(batch, beta):
 
     P_a = [gen_prompt_from_query(
@@ -347,9 +368,10 @@ def dpo_loss(batch, beta):
     return loss
 
 # ====== Training loop ======
+loss = torch.Tensor(0.0).to(DEVICE)
 for epoch in range(config_schema.epochs):
     total_loss = 0
-    for batch in tqdm(loader, desc=f"Epoch {epoch + 1}"):
+    for batch in tqdm(loader, desc=f"Epoch {epoch + 1} Loss: {loss.item():.2f}"):
         DPO.policy_optimizer.zero_grad()
         loss = dpo_loss(batch, beta = config_schema.beta)
         loss.backward()
