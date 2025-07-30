@@ -242,8 +242,8 @@ def dpo_loss(batch, beta):
     P_a = [gen_prompt_from_query(
         model=DPO.policy_model, 
         tokenizer=DPO.tokenizer, 
-        input_ids=batch['query']['input_ids'][i].unsqueeze(0),
-        attention_mask=batch['query']['attention_mask'][i].unsqueeze(0),
+        input_ids=batch['query']['input_ids'][i],
+        attention_mask=batch['query']['attention_mask'][i],
         max_new_tokens=config_schema.max_len,
         instruction=f"Generate a prompt to answer the following question using {strategy} without any extra output. Only answer with the prompt:",
     ) for i,strategy in enumerate(batch['S_a'])]
@@ -255,8 +255,8 @@ def dpo_loss(batch, beta):
     P_b = [gen_prompt_from_query(
         model=DPO.policy_model,
         tokenizer=DPO.tokenizer, 
-        input_ids=batch['query']['input_ids'][i].unsqueeze(0),
-        attention_mask=batch['query']['attention_mask'][i].unsqueeze(0),
+        input_ids=batch['query']['input_ids'][i],
+        attention_mask=batch['query']['attention_mask'][i],
         max_new_tokens=config_schema.max_len,
         instruction=f"Generate a prompt to answer the following question using {strategy} without any extra output. Only answer with the prompt:",
     ) for i,strategy in enumerate(batch['S_b'])]
