@@ -208,23 +208,28 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
         n_spans = len(spans)       # 3
         batch_size = len(spans[0]) # 2
 
-        for i in range(n_spans):  # For each span type
-            # create a fresh mask for all batch items
+        for i in range(n_spans):  # For each span type (M, T, A)
             span_mask = torch.zeros_like(valid_mask, dtype=torch.bool)
-
             for b in range(batch_size):
                 if len(spans[i][b]) < 2:
-                    continue  # Skip if no spans for this type in this batch item
-                start, end = spans[i][b]
-                # clamp to valid range
-                start = max(0, start)
-                end = min(valid_mask.shape[1], end)
-                span_mask[b, start:end] = valid_mask[b, start:end]
+                    continue
+                s, e = spans[i][b]
+                
+                # Offset spans by the input length
+                s = input_ids.size(1) + s
+                e = input_ids.size(1) + e
 
-            # compute log prob for this span type across batch
+                # Clamp to avoid out-of-range
+                s = max(s, input_ids.size(1))
+                e = min(e, valid_mask.shape[1])
+
+                if s < e:
+                    span_mask[b, s:e] = True
+
             span_log_probs.append(
                 -losses.masked_fill(~span_mask, 0).sum(dim=1)
             )
+            print(f"Span {i} log probs: {span_log_probs[-1]}")
     return total_log_probs, span_log_probs
 
 def batch_prompts(prompts, pad_token_id):
