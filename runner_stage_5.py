@@ -176,7 +176,7 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
             attention_mask = torch.ones_like(inputs)
         
         # Labels: -100 for input, actual tokens for output
-        labels = input_ids.clone()
+        labels = inputs.clone()
         labels[:, :input_ids.size(1)] = -100
         
         # Forward pass
