@@ -200,8 +200,8 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
         
         # Total log probability for full output
         total_log_probs = -losses.masked_fill(~valid_mask, 0).sum(dim=1)
-        print(f"Total log probs: {total_log_probs.item()}")
-        print(f"losses", losses.item())
+        print(f"Total log probs: {total_log_probs}")
+        print(f"losses", losses)
         # spans: [n, batch, 2]
         span_log_probs = []
 
