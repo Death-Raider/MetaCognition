@@ -200,8 +200,8 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
         
         # Total log probability for full output
         total_log_probs = -(losses*valid_mask).sum(dim=1)
-        print(f"Total log probs: {total_log_probs}")
-        print(f"losses", losses)
+        # print(f"Total log probs: {total_log_probs}")
+        # print(f"losses", losses)
         # spans: [n, batch, 2]
         span_log_probs = []
 
@@ -229,7 +229,7 @@ def compute_log_prob_spans(model, input_ids, input_mask, output_ids, spans: list
             span_log_probs.append(
                 -losses.masked_fill(~span_mask, 0).sum(dim=1)
             )
-            print(f"Span {i} log probs: {span_log_probs[-1]}")
+            # print(f"Span {i} log probs: {span_log_probs[-1]}")
         return total_log_probs, span_log_probs
 
 def batch_prompts(prompts, pad_token_id):
@@ -352,20 +352,16 @@ def dpo_loss(batch, beta):
     logger.info(f"A_loss_A: {A_loss_A}")
     logger.info(f"B_loss_A: {B_loss_A}")
 
-    # with torch.no_grad():
-    #     var_M = torch.var(torch.stack([A_loss_M, B_loss_M]), dim=0)
-    #     var_T = torch.var(torch.stack([A_loss_T, B_loss_T]), dim=0)
-    #     var_A = torch.var(torch.stack([A_loss_A, B_loss_A]), dim=0)
-    #     var_MTAS = torch.var(torch.stack([A_loss, B_loss]), dim=0)
-    #     total_var = var_M + var_T + var_A + var_MTAS + 1e-8
-    #     w_M = var_M / total_var
-    #     w_T = var_T / total_var
-    #     w_A = var_A / total_var
-    #     w_MTAS = var_MTAS / total_var
-    w_M = 1.0
-    w_T = 1.0
-    w_A = 1.0
-    w_MTAS = 1.0
+    with torch.no_grad():
+        var_M = torch.var(torch.stack([A_loss_M, B_loss_M]), dim=0)
+        var_T = torch.var(torch.stack([A_loss_T, B_loss_T]), dim=0)
+        var_A = torch.var(torch.stack([A_loss_A, B_loss_A]), dim=0)
+        var_MTAS = torch.var(torch.stack([A_loss, B_loss]), dim=0)
+        total_var = var_M + var_T + var_A + var_MTAS + 1e-8
+        w_M = var_M / total_var + 0.1
+        w_T = var_T / total_var + 0.1
+        w_A = var_A / total_var + 0.1
+        w_MTAS = var_MTAS / total_var + 0.1
 
     logger.info(
         f"Loss weights: "
