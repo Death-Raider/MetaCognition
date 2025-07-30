@@ -242,26 +242,31 @@ def dpo_loss(batch, beta):
     P_a = [gen_prompt_from_query(
         model=DPO.policy_model, 
         tokenizer=DPO.tokenizer, 
-        input_ids=batch['query']['input_ids'][i],
-        attention_mask=batch['query']['attention_mask'][i],
+        input_ids=batch['query']['input_ids'][i].unsqueeze(0),
+        attention_mask=batch['query']['attention_mask'][i].unsqueeze(0),
         max_new_tokens=config_schema.max_len,
         instruction=f"Generate a prompt to answer the following question using {strategy} without any extra output. Only answer with the prompt:",
     ) for i,strategy in enumerate(batch['S_a'])]
 
     P_a = batch_prompts(P_a, DPO.tokenizer.pad_token_id)
+    P_a['input_ids'] = torch.cat([P_a['input_ids'], batch['query']['input_ids']], dim=1)
+    P_a['attention_mask'] = torch.cat([P_a['attention_mask'], batch['query']['attention_mask']], dim=1)
     prompt_text = DPO.tokenizer.decode(P_a['input_ids'][0], skip_special_tokens=True)
     logger.info(f"Generated prompt for A: {prompt_text}")
 
     P_b = [gen_prompt_from_query(
         model=DPO.policy_model,
         tokenizer=DPO.tokenizer, 
-        input_ids=batch['query']['input_ids'][i],
-        attention_mask=batch['query']['attention_mask'][i],
+        input_ids=batch['query']['input_ids'][i].unsqueeze(0),
+        attention_mask=batch['query']['attention_mask'][i].unsqueeze(0),
         max_new_tokens=config_schema.max_len,
         instruction=f"Generate a prompt to answer the following question using {strategy} without any extra output. Only answer with the prompt:",
     ) for i,strategy in enumerate(batch['S_b'])]
 
     P_b = batch_prompts(P_b, DPO.tokenizer.pad_token_id)
+    P_b['input_ids'] = torch.cat([P_b['input_ids'], batch['query']['input_ids']], dim=1)
+    P_b['attention_mask'] = torch.cat([P_b['attention_mask'], batch['query']['attention_mask']], dim=1)
+    
     prompt_text = DPO.tokenizer.decode(P_b['input_ids'][0], skip_special_tokens=True)
     logger.info(f"Generated prompt for B:{prompt_text}")
 
