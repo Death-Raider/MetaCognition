@@ -15,19 +15,20 @@ data_pair = np.array([
     for item in dataset
 ])
 
+#TODO: Make This run on GPU
 
 # Step 1: Build TF-IDF for queries
 vectorizer = TfidfVectorizer(max_features=5000)
 X = vectorizer.fit_transform(data_pair[:,0])
-
+print("X done")
 # Step 2: Compute target (strategy) embeddings ONCE
 encoder = SentenceTransformer('all-mpnet-base-v2')
 Y = encoder.encode(data_pair[:,1], normalize_embeddings=True)
-
+print("Y done")
 # Step 3: Train regressor
 reg = MultiOutputRegressor(RandomForestRegressor(n_estimators=100, n_jobs=-1))
 reg.fit(X, Y)
-
+print("Fitting done")
 # Precompute unique strategies
 unique_strategies = list(set(data_pair[:,1]))
 unique_embs = encoder.encode(unique_strategies, normalize_embeddings=True)

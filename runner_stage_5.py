@@ -227,6 +227,7 @@ def batch_prompts(prompts, pad_token_id):
 def test_model_capability():
     TEST_QUESTION = "Why is 49 not prime?"
     inputs = DPO.tokenizer(TEST_QUESTION, return_tensors="pt").to(DEVICE)
+    strategy = "meta-cognitive"  # Example strategy
     with torch.no_grad():
         gen_prompt_from_query(
             model=DPO.policy_model, 
