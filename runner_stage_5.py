@@ -3,7 +3,7 @@ import torch
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 # from torchviz import make_dot
-from PreferenceDataLoader import PreferenceDataLoader
+# from PreferenceDataLoader import PreferenceDataLoader
 from DPO import DirectPreferenceOptimization
 import json
 from ConfigSchema import ConfigSchema
@@ -224,29 +224,32 @@ def batch_prompts(prompts, pad_token_id):
 
     return {"input_ids": input_ids, "attention_mask": attn_mask}
 
-def test_model_capability():
-    TEST_QUESTION = "Why is 49 not prime?"
-    inputs = DPO.tokenizer(TEST_QUESTION, return_tensors="pt").to(DEVICE)
-    strategy = "meta-cognitive"  # Example strategy
-    with torch.no_grad():
-        gen_prompt_from_query(
-            model=DPO.policy_model, 
-            tokenizer=DPO.tokenizer, 
-            input_ids=inputs['input_ids'].unsqueeze(0),
-            attention_mask=inputs['attention_mask'].unsqueeze(0),
-            max_new_tokens=DPO.max_len,
-            instruction=f"Generate a prompt to answer the following question using {strategy} without any extra output. Only answer with the prompt:",
-        )
-        outputs = DPO.policy_model.generate(**inputs, max_new_tokens=DPO.max_len, do_sample=True)
-        output_answer = DPO.tokenizer.batch_decode(outputs, skip_special_tokens=True)[0]
+# TODO: complete this test function
+
+# def test_model_capability():
+#     TEST_QUESTION = "Why is 49 not prime?"
+#     inputs = DPO.tokenizer(TEST_QUESTION, return_tensors="pt").to(DEVICE)
+#     strategy = "meta-cognitive"  # Example strategy
+#     with torch.no_grad():
+#         gen_prompt_from_query(
+#             model=DPO.policy_model, 
+#             tokenizer=DPO.tokenizer, 
+#             input_ids=inputs['input_ids'].unsqueeze(0),
+#             attention_mask=inputs['attention_mask'].unsqueeze(0),
+#             max_new_tokens=DPO.max_len,
+#             instruction=f"Generate a prompt to answer the following question using {strategy} without any extra output. Only answer with the prompt:",
+#         )
+#         outputs = DPO.policy_model.generate(**inputs, max_new_tokens=DPO.max_len, do_sample=True)
+#         output_answer = DPO.tokenizer.batch_decode(outputs, skip_special_tokens=True)[0]
         
-    logger.info("### --- Testing --- ###")
-    logger.info(f"Test question: {TEST_QUESTION}")
-    logger.info(f"Input Prompt: {0}")
-    logger.info(f"Test answer: {output_answer}")
-    logger.info("### --- End Testing --- ###")
+#     logger.info("### --- Testing --- ###")
+#     logger.info(f"Test question: {TEST_QUESTION}")
+#     logger.info(f"Input Prompt: {0}")
+#     logger.info(f"Test answer: {output_answer}")
+#     logger.info("### --- End Testing --- ###")
 
 def dpo_loss(batch, beta):
+    prompt_instruction = "Generate a prompt to answer the following question using {strategy} without any extra output. Only answer with the prompt:"
 
     P_a = [gen_prompt_from_query(
         model=DPO.policy_model, 
@@ -254,7 +257,7 @@ def dpo_loss(batch, beta):
         input_ids=batch['query']['input_ids'][i].unsqueeze(0),
         attention_mask=batch['query']['attention_mask'][i].unsqueeze(0),
         max_new_tokens=config_schema.max_len,
-        instruction=f"Generate a prompt to answer the following question using {strategy} without any extra output. Only answer with the prompt:",
+        instruction=prompt_instruction.format(strategy=strategy)
     ) for i,strategy in enumerate(batch['S_a'])]
 
     P_a = batch_prompts(P_a, DPO.tokenizer.pad_token_id)
@@ -270,7 +273,7 @@ def dpo_loss(batch, beta):
         input_ids=batch['query']['input_ids'][i].unsqueeze(0),
         attention_mask=batch['query']['attention_mask'][i].unsqueeze(0),
         max_new_tokens=config_schema.max_len,
-        instruction=f"Generate a prompt to answer the following question using {strategy} without any extra output. Only answer with the prompt:",
+        instruction=prompt_instruction.format(strategy=strategy)
     ) for i,strategy in enumerate(batch['S_b'])]
 
     P_b = batch_prompts(P_b, DPO.tokenizer.pad_token_id)
