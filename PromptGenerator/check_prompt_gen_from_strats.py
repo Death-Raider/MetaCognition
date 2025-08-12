@@ -22,7 +22,7 @@ def gen_prompt_from_query(
         # Combine instruction and query
         full_input_ids = torch.cat(
             [gen_prompt_ids.repeat(input_ids.size(0), 1), input_ids], dim=1
-        )
+        ).to(DEVICE)
         full_attention_mask = torch.cat(
             [
                 torch.ones(
@@ -33,7 +33,7 @@ def gen_prompt_from_query(
                 attention_mask,
             ],
             dim=1,
-        )
+        ).to(DEVICE)
 
         # Generate continuation (the self-prompt)
         outputs = model.generate(
@@ -51,7 +51,7 @@ def gen_prompt_from_query(
         prompt_ids = outputs.sequences[:, full_input_ids.size(1):]  # Get only the generated part
 
         return {
-            "input_ids": prompt_ids,
+            "input_ids": prompt_ids.to(DEVICE),
             "attention_mask": torch.ones_like(prompt_ids),
             # "log_probs": compute_generation_logprobs(outputs, full_input_ids.size(1)),
             "full_input_ids": full_input_ids,
@@ -68,10 +68,11 @@ def batch_prompts(prompts, pad_token_id):
 
     return {"input_ids": input_ids, "attention_mask": attn_mask}
 
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 model_name = 'Qwen/Qwen2-7B-Instruct'
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 tokenizer.pad_token = tokenizer.eos_token
-model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.bfloat16)
+model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.bfloat16).to(DEVICE)
 
 strategies = [
     'Supportive Stepwise Guidance',
