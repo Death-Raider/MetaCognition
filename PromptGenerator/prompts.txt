@@ -1,0 +1,915 @@
+Strategy: 'Supportive Stepwise Guidance'
+Input Prompt: 'Generate a prompt using '{strategy}' without any extra output. Only write the prompt encoding the question: '
+Prompt: ' The prompt should guide the user through a series of logical steps to arrive at the answer, encouraging them to think critically and reason through the problem methodically.
+
+Prompt: Why is 49 not a prime number? Begin by understanding the definition of a prime number. A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. Now, consider the number 49. Is it greater than 1? Does it have any divisors other than 1 and itself? If so, which ones? Use this information to determine whether 49 meets the criteria for being a prime number or not. Remember, thegoal is to logically deduce the answer step-by-step.'
+----------------------------------------
+Strategy: 'Define, List, and Exemplify'
+Input Prompt: 'Generate a prompt using '{strategy}' without any extra output. Only write the prompt encoding the question: '
+Prompt: ' Define prime number, list the properties of prime numbers, and provide an example that demonstrates why 49 does not fit the definition of a prime number.
+
+Why is 49 not a prime number? Define prime number, list the properties of prime numbers, and provide an example that demonstrates why 49 does not fit the definition of a prime number.'
+----------------------------------------
+Strategy: 'Stepwise Procedural Guide'
+Input Prompt: 'Generate a prompt using '{strategy}' without any extra output. Only write the prompt encoding the question: '
+Prompt: ' Prompt: Stepwise Procedural Guide to Determine Why 49 is Not a Prime Number:
+
+1. Identify that a prime number is defined as a number greater than 1 that has no positive divisors other than 1 and itself.
+2. Examine the number 49, noting its value.
+3. Check if 49 is divisible by any number other than 1 and itself (49).
+4. If there exists a divisor for 49, other than 1 and 49, confirm that it disqualifies 49 from being a prime number.
+5. Analyze the potential divisors of 49 to determine if it meets the criteria for non-prime status.
+
+Question: Why is 49 not a prime number?'
+----------------------------------------
+Strategy: 'Enumerate Assistance Methods'
+Input Prompt: 'Generate a prompt using '{strategy}' without any extra output. Only write the prompt encoding the question: '
+Prompt: ' Prompt: Enumerate assistance methods to understand why 49 is not considered a prime number.'
+----------------------------------------
+Strategy: 'Intro Then List'
+Input Prompt: 'Generate a prompt using '{strategy}' without any extra output. Only write the prompt encoding the question: '
+Prompt: '
+Intro: Prime numbers are integers greater than 1 that have no positive divisors other than 1 and themselves.
+List:
+- Definition of prime numbers
+- Explanation of why 49 cannot be divided by any number other than 1 and itself
+- Conclusion that 49 is not a prime number because it can be divided by 7, which is a number other than 1 and itself
+
+Why is 49 not a prime number?'
+----------------------------------------
+Strategy: 'Sequential Explanation with Contrast'
+Input Prompt: 'Generate a prompt using '{strategy}' without any extra output. Only write the prompt encoding the question: '
+Prompt: '
+
+Prompt: Compare and explain why 49 is not considered a prime number, contrasting it with other numbers that are prime.'
+----------------------------------------
+Strategy: 'Intro + Thematic List with Explanations'
+Input Prompt: 'Generate a prompt using '{strategy}' without any extra output. Only write the prompt encoding the question: '
+Prompt: '
+Intro: Prime numbers are integers greater than 1 that have no divisors other than 1 and themselves.
+List:
+- The number 49 has two factors, 1 and 49
+- It cannot be divided evenly by any other number except for 1 and itself
+- This means it does not meet the definition of a composite number, which has more than two factors'
+----------------------------------------
+Strategy: 'Structured Reflective Statement'
+Input Prompt: 'Generate a prompt using '{strategy}' without any extra output. Only write the prompt encoding the question: '
+Prompt: '
+Prompt: "Using structured reflective statement, analyze and explain why the number 49 does not qualify as a prime number by identifying its factors other than 1 and itself."'
+----------------------------------------
+Strategy: 'List, Reasoning, Answer'
+Input Prompt: 'Generate a prompt using '{strategy}' without any extra output. Only write the prompt encoding the question: '
+Prompt: ' List:
+1. Numbers that are prime have only two factors, 1 and themselves.
+2. 49 can be divided by 1 and 49.
+3. However, it can also be divided by 7.
+Reasoning:
+- Since a prime number should have exactly two distinct positive divisors, 1 and itself.
+- If 49 has more than two divisors, then it cannot be a prime number.
+Answer:
+49 is not a prime number because it can be divided by 7 in addition to 1 and 49, which means it has more than two distinct positive divisors.'
+----------------------------------------
+Strategy: 'Supportive Stepwise Guidance'
+Input Prompt: 'Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anythingother than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.'
+Prompt: ' Provide a step-by-step explanation for the agent to understand and determine the answer on their own.
+
+Step 1: First, identify what makes a number prime. A prime number is a number greater than 1 that has no positive divisors other than 1 and itself.
+
+Step 2: Now, let's check if 49 meets this criterion. To do so, we need to find all the numbers that can divide 49 evenly (without leaving a remainder).
+
+Step 3: Start with the smallest possible divisor, which is 2. Check if 2 divides 49 evenly.
+
+Step 4: Since 49 is an odd number, it cannot be divided evenly by 2. So, move on to the next number, which is 3.
+
+Step 5: Check if 3 divides 49 evenly.
+
+Step 6: Continue this process with each subsequent number until you reach the square root of 49.
+
+Step 7: If you find any number that divides 49 evenly, then 49 is not a prime number. However, if none of these numbers divide 49 evenly, then 49 is a prime number.
+
+Step 8: Based on the results from'
+----------------------------------------
+Strategy: 'Define, List, and Exemplify'
+Input Prompt: 'Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anythingother than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.'
+Prompt: ' Define: Prime numbers are numbers that have only two distinct positive divisors: 1 and the number itself.
+List:
+1. Identify the number in question: 49
+2. Find all the factors of the number
+3. Check if there are any factors other than 1 and the number itself
+Exemplify:
+1. The number in question is 49.
+2. The factors of 49 are 1, 7, and 49.
+3. Since there are more than two factors (1 and 49), 49 is not a prime number.'
+----------------------------------------
+Strategy: 'Stepwise Procedural Guide'
+Input Prompt: 'Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anythingother than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.'
+Prompt: ' Stepwise Procedural Guide:
+
+1. **Understand the Basics**:
+   - What is a prime number?
+   - Prime numbers are natural numbers greater than 1 that have only two positive divisors: 1 and the number itself.
+
+2. **Check the Number**:
+   - Identify the given number: 49.
+   - Is 49 a natural number greater than 1?
+
+3. **Divisibility Check**:
+   - List all numbers from 1 to 49.
+   - Test divisibility of 49 by each number in the list.
+
+4. **Analyze the Results**:
+   - For each divisor tested, determine if it divides 49 evenly (without any remainder).
+   - Note down any divisors found.
+
+5. **Conclusion**:
+   - Based on the analysis, conclude whether 49 has exactly two divisors (1 and itself) or more than two divisors.
+   - If 49 has more than two divisors, it is not a prime number; otherwise, it is a prime number.
+
+6. **Final Answer**:
+   - Determine the status of 49 as a prime number based on the conclusion reached in step 5.
+   - Reflect on'
+----------------------------------------
+Strategy: 'Enumerate Assistance Methods'
+Input Prompt: 'Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anythingother than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.'
+Prompt: '
+
+1. List all the factors of 49.
+2. Check if any of the factors are prime numbers.
+3. Determine if there is only one prime factor for 49.
+4. Conclude whether 49 is a prime number based on the above steps.'
+----------------------------------------
+Strategy: 'Intro Then List'
+Input Prompt: 'Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anythingother than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.'
+Prompt: ' Prompt:
+Intro: To solve this problem, let's first understand what a prime number is. A prime number is a number that has only two distinct positive divisors: 1 and itself.
+
+List:
+1. Identify what a prime number is.
+2. Determine if 49 can be divided evenly by any number other than 1 and 49.
+3. Check if there are any divisors between 1 and 49 for 49.
+4. Conclude whether 49 is a prime number based on the results of steps 2 and 3.'
+----------------------------------------
+Strategy: 'Sequential Explanation with Contrast'
+Input Prompt: 'Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anythingother than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.'
+Prompt: ' A: It's not. 49 is actually a composite number because it has factors other than 1 and itself (specifically, 7). Now, let's guide you through finding the correct answer for why a certain number is prime.
+
+Step 1: Understand the definition of a prime number. A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+Step 2: Check the given number against this definition. For example, let's take the number 17. Is 17 greater than 1? Yes. Does it have any divisors other than 1 and itself? No. Therefore, 17 meets the criteria for being a prime number.
+
+Step 3: Repeat Step 2 for the number in question. In this case, we're looking at a different number, which is not provided yet. Follow the same process: check if it's greater than 1 and see if it has any divisors other than 1 and itself.
+
+Step 4: Based on your findings from Steps 2 and 3, determine whether the number is prime or not. Remember, a prime number has exactly two distinct positive divisors: 1 and itself.
+
+By following'
+----------------------------------------
+Strategy: 'Intro + Thematic List with Explanations'
+Input Prompt: 'Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anythingother than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.'
+Prompt: ' To assist you in understanding why 49 is not a prime number, let's break down the concept of prime numbers and explore the properties of 49.
+
+1. **Definition of Prime Numbers**: A prime number is a positive integer greater than 1 that has no positive divisors other than 1 and itself. In other words, a prime number can only be divided evenly by 1 and the number itself.
+
+2. **Factors of 49**: To determine if 49 is a prime number, we need to examine its factors. A factor is a number that divides another number without leaving a remainder. For 49, let's find all the numbers that divide it evenly.
+
+3. **Divisibility Tests**: We can use divisibility rules to quickly identify potential factors. For example, a number is divisible by 2 if it ends in an even digit, by 3 if the sum of its digits is divisible by 3, by 5 if it ends in 0 or 5, and so on. Let's apply these tests to 49.
+
+4. **Finding the Factors**: After applying the divisibility tests, we can see that 49 is not divisible by any number between 2 and 7'
+----------------------------------------
+Strategy: 'Structured Reflective Statement'
+Input Prompt: 'Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anythingother than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.'
+Prompt: ' A: It is not. Q: What is the definition of a prime number? A: A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. Q: Is 49 greater than 1? A: Yes. Q: Does 49 have any divisors other than 1 and itself? A: Yes, it is divisible by 7. Q: So, based on the definition of a prime number, can we conclude that 49 is a prime number? A: No, because it has divisors other than 1 and itself.'
+----------------------------------------
+Strategy: 'List, Reasoning, Answer'
+Input Prompt: 'Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anythingother than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.'
+Prompt: ' List: 1. Identify the definition of a prime number. 2. Check if 49 meets the criteria for being a prime number. 3. Analyze the factors of 49. Reasoning: A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. To determine if 49 is a prime number, we need to examine its factors and see if it meets this criterion. Answer: 49 is not a prime number because it has more than two factors (1, 7, and 49).'
+----------------------------------------
+Strategy: 'Supportive Stepwise Guidance'
+Input Prompt: 'Write a prompt using '{strategy}' that instructs a weaker agent to solve the problem step-by-step without giving the answer. Output only the prompt text—no explanations, no extra content.'
+Prompt: ' To guide you through finding out why 49 is not a prime number, follow these steps:
+
+1. Recall the definition of a prime number: A prime number has exactly two distinct positive divisors - 1 and itself.
+
+2. Examine the number 49 closely. Notice its last digit and any patterns you recognize.
+
+3. Consider whether 49 can be divided evenly by any numbers other than 1 and itself. Think about divisibility rules or try dividing it by small numbers systematically.
+
+4. If you find any divisor other than 1 and 49, identify which one(s) and explain how they show that 49 is not a prime number.
+
+5. Summarize your findings to confirm if 49 is indeed not a prime number based on the criteria provided in step 1.'
+----------------------------------------
+Strategy: 'Define, List, and Exemplify'
+Input Prompt: 'Write a prompt using '{strategy}' that instructs a weaker agent to solve the problem step-by-step without giving the answer. Output only the prompt text—no explanations, no extra content.'
+Prompt: ' Define: Prime numbers are natural numbers greater than 1 that have exactly two positive divisors: 1 and the number itself.
+
+List:
+1. Identify the definition of prime numbers.
+2. Check if 49 meets the criteria for being a prime number (having exactly two positive divisors).
+3. Determine if there are any factors other than 1 and 49 for the number 49.
+
+Exemplify:
+Step 1: Understand that a prime number must be greater than 1 and have only two positive divisors.
+Step 2: Examine 49 to see if it fits this criterion. Since 49 is greater than 1, we need to check its divisors.
+Step 3: Find all the factors of 49. If there are more than two factors, then 49 is not a prime number. If there are exactly two factors (1 and 49), then 49 is a prime number. Proceed to list the factors of 49 to determine its primality.'
+----------------------------------------
+Strategy: 'Stepwise Procedural Guide'
+Input Prompt: 'Write a prompt using '{strategy}' that instructs a weaker agent to solve the problem step-by-step without giving the answer. Output only the prompt text—no explanations, no extra content.'
+Prompt: ' Stepwise Procedural Guide:
+
+1. Identify what makes a number prime.
+2. Determine if 49 meets the criteria for being prime.
+3. Analyze the factors of 49.
+4. Conclude whether 49 is prime based on your findings.'
+----------------------------------------
+Strategy: 'Enumerate Assistance Methods'
+Input Prompt: 'Write a prompt using '{strategy}' that instructs a weaker agent to solve the problem step-by-step without giving the answer. Output only the prompt text—no explanations, no extra content.'
+Prompt: ' Enumerate Assistance Methods for determining if 49 is a prime number:
+
+1. Define what a prime number is.
+2. List all numbers less than or equal to the square root of 49.
+3. Check if any of these numbers divide 49 evenly.
+4. If no divisors are found, conclude that 49 is not a prime number.'
+----------------------------------------
+Strategy: 'Intro Then List'
+Input Prompt: 'Write a prompt using '{strategy}' that instructs a weaker agent to solve the problem step-by-step without giving the answer. Output only the prompt text—no explanations, no extra content.'
+Prompt: ' Intro: Understanding the concept of prime numbers is crucial in mathematics. A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+List:
+1. First, identify if 49 is a prime number by checking its factors.
+2. Look for any numbers between 1 and 49 (excluding 1 and 49) that can divide 49 without leaving a remainder.
+3. If you find any divisor other than 1 and 49, then 49 is not a prime number.
+4. If you don't find any divisors other than 1 and 49, then 49 is a prime number.
+5. Conclude whether 49 is a prime number based on your findings. Remember, a prime number has only two distinct positive divisors: 1 and itself. Good luck!'
+----------------------------------------
+Strategy: 'Sequential Explanation with Contrast'
+Input Prompt: 'Write a prompt using '{strategy}' that instructs a weaker agent to solve the problem step-by-step without giving the answer. Output only the prompt text—no explanations, no extra content.'
+Prompt: ' A: No, 49 is not a prime number. It is a composite number because it has more than two factors. B: But I thought prime numbers could only have two factors. A: Actually, that's correct for most prime numbers, but 49 is a special case. Let's break down why 49 isn't prime by finding its factors together.
+
+Step 1: Remember, a prime number is defined as having exactly two distinct positive divisors: 1 and itself.
+
+Step 2: Now, let's list all the numbers from 1 to 49 and check which ones can divide 49 evenly. Start with 1 and see if it divides 49.
+
+Step 3: If 1 divides 49 evenly, write it down as a factor. Then move on to the next integer, 2, and check if it divides 49 evenly. Keep going through each number until you reach 49.
+
+Step 4: When you find a number that divides 49 evenly, write it down as a factor. Also, remember that whenever you find a factor, there will be another factor that pairs with it to multiply back to 49. For example, if 7'
+----------------------------------------
+Strategy: 'Intro + Thematic List with Explanations'
+Input Prompt: 'Write a prompt using '{strategy}' that instructs a weaker agent to solve the problem step-by-step without giving the answer. Output only the prompt text—no explanations, no extra content.'
+Prompt: ' Prompt: Analyze and list the factors of 49, explaining why it doesn't meet the criteria for being classified as a prime number. Additionally, compare these factors to those of other numbers to illustrate the key difference between prime and composite numbers. Lastly, discuss the implications of this classification in terms of its role within the number system.'
+----------------------------------------
+Strategy: 'Structured Reflective Statement'
+Input Prompt: 'Write a prompt using '{strategy}' that instructs a weaker agent to solve the problem step-by-step without giving the answer. Output only the prompt text—no explanations, no extra content.'
+Prompt: ' Prompt: Structured Reflective Statement - Analyze the given number (49) to determine if it is a prime number or not. Consider the definition of a prime number, which is a natural number greater than 1 thathas no positive divisors other than 1 and itself. Examine the factors of 49, and reflect on whether any numbers other than 1 and 49 divide evenly into it. Based on your findings, formulate a conclusion about whether49 is a prime number or not. Reflect on the process used to arrive at this conclusion and identify any steps or concepts that may need further clarification or exploration.'
+----------------------------------------
+Strategy: 'List, Reasoning, Answer'
+Input Prompt: 'Write a prompt using '{strategy}' that instructs a weaker agent to solve the problem step-by-step without giving the answer. Output only the prompt text—no explanations, no extra content.'
+Prompt: ' List, Reasoning, Answer:
+
+1. Identify what makes a number prime.
+2. Check if 49 has factors other than 1 and itself.
+3. Determine if any numbers between 1 and 48 divide evenly into 49.
+4. Conclude whether 49 is prime based on the results of step 3.
+
+Why is 49 not a prime number? List, Reasoning, Answer:
+
+1. Recall the definition of a prime number.
+2. Examine if 49 can be divided evenly by any number other than 1 and itself.
+3. Find out if there's a divisor between 1 and 49 that divides 49 without a remainder.
+4. Arrive at the conclusion about 49's primality based on the divisibility test in step 3.'
+----------------------------------------
+Strategy: 'Supportive Stepwise Guidance'
+Input Prompt: 'Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.'
+Prompt: ' To help you understand why 49 is not a prime number, let's break down the concept of prime numbers and examine the properties of 49 step-by-step.
+
+Step 1: Define what a prime number is.
+A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+Step 2: Identify the factors of 49.
+List all the numbers that can divide 49 without leaving a remainder.
+
+Step 3: Check for any divisors other than 1 and 49.
+Once you have identified the factors, determine if there are any divisors besides 1 and 49.
+
+Step 4: Determine if 49 meets the criteria for being a prime number.
+If 49 has only two distinct positive divisors (1 and itself), then it would be considered a prime number. However, if there are additional divisors, it is not a prime number.
+
+Step 5: Conclude based on your findings.
+Based on the analysis in the previous steps, state whether 49 is a prime number or not, and explain your reasoning.
+
+By following these steps, you will be able to logically determine whether 49 is a prime number or not.'
+----------------------------------------
+Strategy: 'Define, List, and Exemplify'
+Input Prompt: 'Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.'
+Prompt: ' Define: Prime number - a positive integer greater than 1 that has no positive integer divisors other than 1 and itself.
+
+List:
+1. Check if 49 is divisible by any number between 2 and the square root of 49.
+2. If it is divisible by any number in this range, it is not a prime number.
+3. If it is not divisible by any number in this range, it is a prime number.
+
+Exemplify:
+Step 1: Identify the range of numbers to check for divisibility. The square root of 49 is 7, so we need to check numbers between 2 and 7.
+Step 2: Test each number in the range for divisibility.
+- 49 divided by 2 is not a whole number.
+- 49 divided by 3 is not a whole number.
+- 49 divided by 4 is not a whole number.
+- 49 divided by 5 is not a whole number.
+- 49 divided by 6 is not a whole number.
+- 49 divided by 7 is 7, which is a whole number.
+Step 3: Since 49 is divisible by 7, it is not a'
+----------------------------------------
+Strategy: 'Stepwise Procedural Guide'
+Input Prompt: 'Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.'
+Prompt: ' How do you know it's not divisible by any other number except for 1 and itself?
+To determine if 49 is a prime number, follow these steps:
+
+Step 1: Understand the definition of a prime number.
+A prime number is a positive integer greater than 1 that has no positive divisors other than 1 and itself.
+
+Step 2: Check divisibility by numbers less than its square root.
+Since the square root of 49 is 7, we only need to check divisibility by numbers up to 7.
+
+Step 3: Test divisibility by each number from 2 to 7.
+- Divide 49 by 2: 49 ÷ 2 = 24.5 (not divisible)
+- Divide 49 by 3: 49 ÷ 3 ≈ 16.33 (not divisible)
+- Divide 49 by 4: 49 ÷ 4 = 12.25 (not divisible)
+- Divide 49 by 5: 49 ÷ 5 = 9.8 (not divisible)
+- Divide 49 by 6: 49 ÷ 6 ≈ 8.1'
+----------------------------------------
+Strategy: 'Enumerate Assistance Methods'
+Input Prompt: 'Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.'
+Prompt: ' What are the factors of 49?
+
+To determine if 49 is a prime number and find its factors, let's break it down into manageable steps:
+
+Step 1: Understand the definition of a prime number.
+A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+Step 2: Check if 49 meets the criteria for being a prime number.
+To do this, you need to find if there are any divisors of 49 other than 1 and 49 itself.
+
+Step 3: Test divisibility by numbers less than the square root of 49.
+Since the square root of 49 is 7, you only need to test divisibility by numbers up to 7 (excluding 1 and 49).
+
+Step 4: Perform division tests.
+Divide 49 by each number from 2 to 6 (excluding 1 and 49) to see if any of them evenly divide 49.
+
+Step 5: Analyze the results.
+If any number divides 49 evenly, then 49 is not a prime number. If none of the numbers divide 49 evenly, then 49 is a'
+----------------------------------------
+Strategy: 'Intro Then List'
+Input Prompt: 'Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.'
+Prompt: ' What are the steps to determine if a number is prime?
+
+Prompt:
+Before diving into whether 49 is a prime number, let's break down the process of determining if any number is prime. Here’s how you can approach this:
+
+1. **Understand Prime Numbers**: Start by defining what a prime number is. A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+2. **Check for Divisibility by 2**: Since 49 is odd (not divisible by 2), we move on to the next step. For even numbers, checking divisibility by 2 would be sufficient to determine they are not prime.
+
+3. **Check for Divisibility by Other Numbers**: Now, test if 49 can be divided evenly by any number between 3 and the square root of 49. The reason we only need to check up to the square root is because if there were a factor larger than the square root, its corresponding factor would have to be smaller than the square root, making it already checked.
+
+4. **Conclusion**: If 49 cannot be divided evenly by any number between 3 and the square root of 49 (which is 7'
+----------------------------------------
+Strategy: 'Sequential Explanation with Contrast'
+Input Prompt: 'Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.'
+Prompt: '
+
+Is 49 a prime number? Let's explore this question by breaking it down into steps and contrasting it with other numbers to understand why 49 behaves differently.
+
+Step 1: Definition of Prime Numbers
+Prime numbers are natural numbers greater than 1 that have exactly two distinct positive divisors: 1 and the number itself.
+
+Step 2: Identifying Factors of 49
+Now, let's find the factors of 49. A factor is a number that divides another number without leaving a remainder. For example, 2 is a factor of 6 because 6 divided by 2 equals 3 with no remainder.
+
+Step 3: Comparing 49 to Other Numbers
+Consider the number 5, which is a prime number. It has only two factors: 1 and 5. Now, compare this to 49.
+
+Step 4: Finding Common Factors
+When we look for factors of 49, we discover more than just 1 and 49. Can you identify any other factors?
+
+Step 5: Conclusion
+Based on our findings, does 49 have more than two distinct positive divisors? If yes, then 49 is not a prime number. If no, then'
+----------------------------------------
+Strategy: 'Intro + Thematic List with Explanations'
+Input Prompt: 'Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.'
+Prompt: ' To determine if 49 is a prime number, follow these steps:
+
+1. Understand what a prime number is: A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+2. Check for factors: List all the numbers that can divide 49 evenly (without leaving a remainder) and check if any of them are between 1 and 49 (excluding 1 and 49).
+3. Analyze the results: If you find any factors other than 1 and 49, then 49 is not a prime number. If only 1 and 49 divide it evenly, then 49 is a prime number.
+
+Now, let's apply these steps to the number 49:
+
+Step 1: Since 49 is greater than 1, we will consider it as a potential prime number.
+
+Step 2: List the factors:
+- 1 divides 49 evenly (1 * 49 = 49)
+- 7 divides 49 evenly (7 * 7 = 49)
+
+Step 3: Analyzing the results:
+- We found two factors other than 1 and 49: 7 and '
+----------------------------------------
+Strategy: 'Structured Reflective Statement'
+Input Prompt: 'Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.'
+Prompt: ' Provide step-by-step reasoning for why 49 is not a prime number.
+
+Prompt:
+
+Step 1: Define prime numbers.
+- A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+Step 2: Identify the given number.
+- The given number is 49.
+
+Step 3: Check if the number is greater than 1.
+- Yes, 49 is greater than 1.
+
+Step 4: Test divisibility by numbers less than its square root.
+- Since the square root of 49 is 7, we only need to test divisibility by numbers from 2 to 6 (inclusive).
+
+Step 5: Attempt division by each number from Step 4.
+- Divide 49 by 2: Not divisible
+- Divide 49 by 3: Not divisible
+- Divide 49 by 4: Not divisible
+- Divide 49 by 5: Not divisible
+- Divide 49 by 6: Not divisible
+- Divide 49 by 7: Divisible
+
+Step 6: Determine if the number has any divisors other than 1 and itself.
+- 49 is divisible by 7,'
+----------------------------------------
+Strategy: 'List, Reasoning, Answer'
+Input Prompt: 'Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.'
+Prompt: ' List the steps you would take to determine if 49 is a prime number and explain your reasoning for each step.
+Step 1: Check if the number is less than 2
+Reasoning: Prime numbers are defined as positive integers greater than 1 that have no positive integer divisors other than 1 and themselves. Since 49 is greater than 2, we can move on to the next step.
+
+Step 2: Check if the number is divisible by 2
+Reasoning: If a number is divisible by 2, it cannot be a prime number since it would have at least three divisors: 1, 2, and itself. Since 49 is not divisible by 2, we can move on to the next step.
+
+Step 3: Check if the number is divisible by any odd number up to its square root
+Reasoning: For any given number, if it is not divisible by 2, then it can only be divisible by odd numbers. The largest possible factor of a number is its square root, so we only need to check divisibility by odd numbers up to the square root of 49. The square root of 49 is 7, which is an odd number. We will now'
+----------------------------------------
+Strategy: 'Supportive Stepwise Guidance'
+Input Prompt: 'Construct a prompt in the '{strategy}' style that outlines a step-by-step method for a less-capable agent to follow. The prompt must not contain the answer and must be the only output.'
+Prompt: '
+
+Step 1: Begin by understanding the definition of a prime number, which is a positive integer greater than 1 that has no positive integer divisors other than 1 and itself.
+
+Step 2: Next, determine if 49 is a positive integer greater than 1. If it is not, then it cannot be a prime number.
+
+Step 3: Check if 49 can be divided evenly by any number between 2 and its square root (excluding 1 and itself). This is because if there were a divisor larger than the square root, there would also be a corresponding divisor smaller than the square root, making it unnecessary to check beyond the square root.
+
+Step 4: Divide 49 by each number between 2 and its square root (7), and check if the result is a whole number.
+
+Step 5: If any of the divisions in Step 4 result in a whole number, then 49 is not a prime number. If none of them do, then 49 is a prime number.
+
+Step 6: Reflect on the process and understand why 49 is not a prime number based on the results of the previous steps.'
+----------------------------------------
+Strategy: 'Define, List, and Exemplify'
+Input Prompt: 'Construct a prompt in the '{strategy}' style that outlines a step-by-step method for a less-capable agent to follow. The prompt must not contain the answer and must be the only output.'
+Prompt: ' Define: Prime Number
+A prime number is a positive integer greater than 1 that has no positive integer divisors other than 1 and itself.
+
+List:
+1. Identify the number in question: 49.
+2. Check if it is greater than 1.
+3. Determine if it has any divisors other than 1 and itself.
+
+Exemplify:
+To determine if 49 is a prime number, follow these steps:
+
+1. Identify the number in question: 49.
+2. Check if it is greater than 1: Yes, 49 is greater than 1.
+3. Determine if it has any divisors other than 1 and itself:
+   - Try dividing 49 by numbers starting from 2 up to its square root (which is approximately 7).
+   - If any of these numbers divide 49 without leaving a remainder, then 49 is not a prime number.
+   - In this case, 49 is divisible by 7 (49 ÷ 7 = 7), which means it has a divisor other than 1 and itself.
+
+Therefore, 49 is not a prime number because it has a divisor other than 1 and itself (in this case,'
+----------------------------------------
+Strategy: 'Stepwise Procedural Guide'
+Input Prompt: 'Construct a prompt in the '{strategy}' style that outlines a step-by-step method for a less-capable agent to follow. The prompt must not contain the answer and must be the only output.'
+Prompt: '
+
+Stepwise Procedural Guide:
+
+1. **Initial Inquiry:** Begin by examining the given number, which is 49, and make an initial observation about its composition.
+
+2. **Factorization Attempt:** Try to factorize 49 into two or more numbers, other than 1 and itself. This involves finding pairs of numbers that multiply together to produce 49.
+
+3. **First Attempt at Factorization:** Start with the smallest possible factor, which is 2. Check if 2 can divide 49 evenly, leaving no remainder. If it does, then you have found a factor pair (2, 24.5). Since factors must be whole numbers, this attempt fails.
+
+4. **Subsequent Attempts:** Proceed to the next integer, which is 3. Repeat the division process. Again, since the quotient is not a whole number, this attempt also fails.
+
+5. **Incrementing Factors:** Continue incrementing the potential factors until you reach a number close to the square root of 49. This is because if there are any factors larger than the square root, they would havealready been identified as smaller factors.
+
+6. **Checking Up to the Square Root:** Test each integer from 4 to 7 ('
+----------------------------------------
+Strategy: 'Enumerate Assistance Methods'
+Input Prompt: 'Construct a prompt in the '{strategy}' style that outlines a step-by-step method for a less-capable agent to follow. The prompt must not contain the answer and must be the only output.'
+Prompt: '
+
+Step 1: Understand what prime numbers are
+- A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+Step 2: Determine if 49 is a prime number
+- To determine if 49 is a prime number, you need to check if it has any divisors other than 1 and itself.
+
+Step 3: Check if 49 is divisible by any number between 2 and 7
+- Since the square root of 49 is 7, you only need to check divisibility up to 7.
+- If 49 is divisible by any number between 2 and 7, then it is not a prime number.
+- If 49 is not divisible by any number between 2 and 7, then it may be a prime number.
+
+Step 4: Test divisibility by each number between 2 and 7
+- Divide 49 by 2, 3, 4, 5, 6, and 7.
+- If any of these divisions result in a whole number with no remainder, then 49 is not a prime number.
+- If none of these divisions result in a whole number with no'
+----------------------------------------
+Strategy: 'Intro Then List'
+Input Prompt: 'Construct a prompt in the '{strategy}' style that outlines a step-by-step method for a less-capable agent to follow. The prompt must not contain the answer and must be the only output.'
+Prompt: '
+
+## Intro
+Are you curious about why the number 49 is not considered a prime number? Follow this step-by-step guide to understand the concept.
+
+## Steps
+1. **Understand the definition**: Before diving into the specifics of 49, start by understanding what makes a number prime.
+2. **Identify key properties**: Recognize the essential characteristics of prime numbers and how they differ from composite numbers.
+3. **Examine the number**: Carefully look at the number 49 and its mathematical properties.
+4. **Find factors**: Determine if 49 has any factors other than 1 and itself.
+5. **Conclusion**: Based on your findings, conclude whether 49 meets the criteria to be classified as a prime number or not.
+
+## Prompt
+Explore the mystery behind why 49 is not a prime number through these steps. What insights will you uncover along the way?
+
+## Instructions
+- Reflect on each step before proceeding to the next.
+- Apply your knowledge of prime numbers and their properties to analyze 49.
+- Share your discoveries and reasoning to unveil the truth about 49's classification.
+
+Remember, the journey to understanding why 49 is not a prime number is just as important as reaching the final'
+----------------------------------------
+Strategy: 'Sequential Explanation with Contrast'
+Input Prompt: 'Construct a prompt in the '{strategy}' style that outlines a step-by-step method for a less-capable agent to follow. The prompt must not contain the answer and must be the only output.'
+Prompt: '
+
+Step 1: Understand what a prime number is.
+
+A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+Step 2: Check if 49 is a natural number.
+
+Natural numbers are positive integers starting from 1, 2, 3, 4, 5, and so on. Therefore, we need to confirm if 49 falls under this category.
+
+Step 3: Check if 49 is greater than 1.
+
+Since 49 is a positive integer, it is indeed greater than 1.
+
+Step 4: Check if 49 has any divisors other than 1 and itself.
+
+To do this, we need to find all the factors of 49. A factor is a number that divides another number without leaving a remainder.
+
+Step 5: List down all the possible factors of 49.
+
+The possible factors of 49 are 1, 7, and 49.
+
+Step 6: Check if there are any other divisors besides 1 and 49.
+
+We have already identified two divisors of 49, which are 1 and 49. Now we need to determine if'
+----------------------------------------
+Strategy: 'Intro + Thematic List with Explanations'
+Input Prompt: 'Construct a prompt in the '{strategy}' style that outlines a step-by-step method for a less-capable agent to follow. The prompt must not contain the answer and must be the only output.'
+Prompt: ' To understand why 49 is not a prime number, let's first explore what prime numbers are and then examine the properties of 49.
+
+**Step 1: Define Prime Numbers**
+Prime numbers are positive integers greater than 1 that have no positive integer divisors other than 1 and themselves. This means they cannot be formed by multiplying two smaller natural numbers.
+
+**Step 2: Identify the Factors of 49**
+To determine if 49 is a prime number, we need to find its factors. A factor is a number that divides evenly into another number without leaving a remainder. Let's list the factors of 49:
+
+- **Step 3: List Possible Divisors**
+   - Start with 1 and check each number up to the square root of 49 (which is approximately 7) to see if it divides 49 evenly.
+   - **Divisor 1:** \(49 ÷ 1 = 49\)
+     - Since 49 divided by 1 equals 49, both 1 and 49 are factors.
+   - **Divisor 2:** \(49 ÷ 2 = 24.5\)
+     - 49 is not divisible'
+----------------------------------------
+Strategy: 'Structured Reflective Statement'
+Input Prompt: 'Construct a prompt in the '{strategy}' style that outlines a step-by-step method for a less-capable agent to follow. The prompt must not contain the answer and must be the only output.'
+Prompt: '
+
+Prompt:
+
+As an agent, you have been tasked with understanding why 49 is not a prime number. You have never encountered this concept before and need to follow a structured reflective statement to arrive at the answer.
+
+Step 1: Define what a prime number is.
+
+Step 2: Identify the factors of 49.
+
+Step 3: Determine if any of the factors are greater than 1 but less than 49.
+
+Step 4: Analyze the results and conclude whether 49 is a prime number or not.
+
+Step 5: Reflect on the process and identify any areas where you could improve your understanding of prime numbers.
+
+Step 6: Summarize your findings and provide a clear explanation as to why 49 is not a prime number.
+
+Follow these steps carefully and reflect on each one to gain a deeper understanding of prime numbers and how they apply to 49. Remember to take notes and ask questions along the way to ensure you fully grasp the concept.'
+----------------------------------------
+Strategy: 'List, Reasoning, Answer'
+Input Prompt: 'Construct a prompt in the '{strategy}' style that outlines a step-by-step method for a less-capable agent to follow. The prompt must not contain the answer and must be the only output.'
+Prompt: ' List of steps:
+1. Define what a prime number is.
+2. Identify the factors of 49.
+3. Determine if any factor other than 1 and 49 exists.
+4. Compare the result with the definition of a prime number.
+5. Conclude whether 49 is a prime number or not.
+
+Steps to determine if 49 is a prime number:
+
+1. A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+2. To find the factors of 49, list all the numbers that can divide 49 without leaving a remainder.
+
+3. After listing the factors, check if there are any factors other than 1 and 49. In this case, the factors are 1, 7, and 49.
+
+4. Since there are factors other than 1 and 49 (specifically, 7), compare these findings with the definition of a prime number.
+
+5. Based on the comparison, conclude that 49 is not a prime number because it has more than two distinct positive divisors (1, 7, and 49).'
+----------------------------------------
+Strategy: 'Supportive Stepwise Guidance'
+Input Prompt: 'Produce a '{strategy}' prompt designed to guide a minimal-capability agent through solving the problem step-by-step. Absolutely no answers or extra commentary—output the prompt alone.'
+Prompt: '
+
+Step 1: Understand the definition of a prime number.
+Step 2: Check if 49 is divisible by any number other than 1 and itself.
+Step 3: If no divisors are found, conclude that 49 is not a prime number. Otherwise, it is not prime.'
+----------------------------------------
+Strategy: 'Define, List, and Exemplify'
+Input Prompt: 'Produce a '{strategy}' prompt designed to guide a minimal-capability agent through solving the problem step-by-step. Absolutely no answers or extra commentary—output the prompt alone.'
+Prompt: ' Define: Prime Number
+A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+List:
+1. Identify if the number is greater than 1.
+2. Check if the number has any divisors other than 1 and itself.
+
+Exemplify:
+To determine if 49 is a prime number:
+
+Step 1: Check if 49 is greater than 1. (Yes)
+
+Step 2: Check for divisors of 49.
+- Try dividing 49 by numbers starting from 2 up to the square root of 49 (which is approximately 7).
+- Upon dividing, you find that 49 can be divided evenly by 7 (49 ÷ 7 = 7).
+
+Since 49 has a divisor other than 1 and itself (in this case, 7), it is not a prime number.'
+----------------------------------------
+Strategy: 'Stepwise Procedural Guide'
+Input Prompt: 'Produce a '{strategy}' prompt designed to guide a minimal-capability agent through solving the problem step-by-step. Absolutely no answers or extra commentary—output the prompt alone.'
+Prompt: ' To determine if 49 is a prime number, follow these steps:
+
+1. Understand the definition of a prime number: A prime number is a positive integer greater than 1 that has no positive integer divisors other than 1 and itself.
+
+2. Check if 49 is less than 2: Since 49 is greater than 2, we proceed to the next step.
+
+3. Test divisibility by 2: Divide 49 by 2. If there's no remainder, it's not a prime number. In this case, 49 divided by 2 equals 24.5, which means there's a remainder, so 49 is not divisible by 2.
+
+4. Check divisibility by odd numbers: Start testing with the smallest odd number greater than 2, which is 3. Continue testing with each subsequent odd number (5, 7, 9, etc.) until you reach the square root of 49.
+
+   - Divide 49 by 3: There's a remainder, so 49 is not divisible by 3.
+   - Divide 49 by 5: There's a remainder, so 49 is not divisible by 5.
+   -'
+----------------------------------------
+Strategy: 'Enumerate Assistance Methods'
+Input Prompt: 'Produce a '{strategy}' prompt designed to guide a minimal-capability agent through solving the problem step-by-step. Absolutely no answers or extra commentary—output the prompt alone.'
+Prompt: '
+
+Enumerate the assistance methods that can help a minimal-capability agent understand and solve this problem step-by-step.
+
+1. Break down the concept of prime numbers: Explain what a prime number is, emphasizing that it's a number greater than 1 that has no positive divisors other than 1 and itself.
+
+2. Identify factors of 49: List all the factors of 49 and determine if any other number besides 1 and 49 divides into it evenly.
+
+3. Check divisibility rules: Review the divisibility rules for common numbers (2, 3, 5, etc.) and apply them to 49 to see if it is divisible by any of these numbers.
+
+4. Use a factor tree: Construct a factor tree for 49, breaking it down into its prime factors to see if there are any other prime numbers involved.
+
+5. Consult a math resource: Look up information on prime numbers in a textbook, online educational site, or a math glossary to reinforce understanding.
+
+6. Practice with examples: Work through several examples of determining whether a number is prime or not to gain familiarity with the process.
+
+7. Discuss with peers: Engage in a conversation with classmates or friends about prime numbers and how to identify them'
+----------------------------------------
+Strategy: 'Intro Then List'
+Input Prompt: 'Produce a '{strategy}' prompt designed to guide a minimal-capability agent through solving the problem step-by-step. Absolutely no answers or extra commentary—output the prompt alone.'
+Prompt: ' Explain and list its factors.
+
+To determine if 49 is a prime number, follow these steps:
+
+1. Understand that a prime number is a positive integer greater than 1 that has no positive integer divisors other than 1 and itself.
+2. List the factors of 49 by checking divisibility starting from 1 up to the square root of 49 (which is approximately 7).
+3. If any factor other than 1 and 49 is found, then 49 is not a prime number; otherwise, it is prime.
+
+Now, let's list the factors of 49:
+- Check if 1 divides 49: Yes (1 × 49 = 49)
+- Check if 2 divides 49: No
+- Check if 3 divides 49: No
+- Check if 4 divides 49: No
+- Check if 5 divides 49: No
+- Check if 6 divides 49: No
+- Check if 7 divides 49: Yes (7 × 7 = 49)
+
+Since we found a factor other than 1 and 49 (which is 7), conclude that 49 is'
+----------------------------------------
+Strategy: 'Sequential Explanation with Contrast'
+Input Prompt: 'Produce a '{strategy}' prompt designed to guide a minimal-capability agent through solving the problem step-by-step. Absolutely no answers or extra commentary—output the prompt alone.'
+Prompt: ' The task is to determine if the number 49 is a prime number. Follow these steps:
+
+1. Understand that a prime number is a positive integer greater than 1 that has no positive integer divisors other than 1 and itself.
+
+2. Recognize that 49 is not a prime number because it can be divided evenly by numbers other than 1 and itself.
+
+3. Identify the divisors of 49: 1, 7, and 49.
+
+4. Note that since 49 is divisible by 7 (49 ÷ 7 = 7), it is not a prime number.
+
+5. Conclude that 49 is not a prime number because it has more than two factors (1, 7, and 49).'
+----------------------------------------
+Strategy: 'Intro + Thematic List with Explanations'
+Input Prompt: 'Produce a '{strategy}' prompt designed to guide a minimal-capability agent through solving the problem step-by-step. Absolutely no answers or extra commentary—output the prompt alone.'
+Prompt: ' What makes it unique among other numbers? How can we determine if it's prime, and what are its properties that set it apart from other numbers in this regard? Please provide a comprehensive explanation of these aspects.
+Prompt:
+
+1. Define what a prime number is and explain why 49 does not fit this definition.
+2. Discuss the unique characteristics of 49 in relation to prime numbers, including its position in the sequence of natural numbers and any patterns or exceptions it exhibits.
+3. Outline the process for determining whether a number is prime, using 49 as an example, and describe the mathematical reasoning behind each step.
+4. Analyze the properties of 49 that distinguish it from other numbers, particularly in terms of divisibility, factors, and its relationship to perfect squares.
+5. Compare 49 to other composite numbers in the vicinity, highlighting similarities and differences in their factorization and prime factorization trees.
+6. Explore the historical context of prime numbers, including their significance in mathematics and their role in various fields such as cryptography and computer science, and discuss how this relates to the conceptof 49 being a composite number.
+7. Conclude by summarizing the key points about 49 and its classification as a composite number,'
+----------------------------------------
+Strategy: 'Structured Reflective Statement'
+Input Prompt: 'Produce a '{strategy}' prompt designed to guide a minimal-capability agent through solving the problem step-by-step. Absolutely no answers or extra commentary—output the prompt alone.'
+Prompt: ' What steps did you take to determine this? How confident are you in your answer and why? Provide any relevant mathematical principles or theorems used in your reasoning process. Reflect on potential errorsor alternative interpretations of the question that might lead to misunderstanding or incorrect conclusions. Consider the implications of these reflections for future problem-solving tasks involving prime numbers ornumber theory in general. Finally, discuss how this exercise has enhanced your understanding of prime numbers and their properties, and propose strategies for further exploration and learning in this area.
+To determine whether 49 is a prime number, follow these steps:
+
+1. Define what a prime number is: A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+2. Identify factors of 49: List all possible positive integer divisors of 49. Start with 1 and check divisibility by increasing integers up to the square root of 49 (which is approximately 7).
+
+3. Check divisibility: Test each integer from 2 to 7 to see if it divides 49 without leaving a remainder.
+
+4. Analyze results: If any divisor found in step 3 evenly divides 49, then it is not a prime number. In'
+----------------------------------------
+Strategy: 'List, Reasoning, Answer'
+Input Prompt: 'Produce a '{strategy}' prompt designed to guide a minimal-capability agent through solving the problem step-by-step. Absolutely no answers or extra commentary—output the prompt alone.'
+Prompt: ' List:
+1. Identify the definition of a prime number.
+2. Check if 49 can be divided by any number other than 1 and itself.
+3. Attempt division by all integers from 2 up to the square root of 49.
+
+Reasoning:
+- A prime number is defined as a number greater than 1 that has no positive divisors other than 1 and itself.
+- To determine if 49 is prime, we need to verify if it can be evenly divided by any number between 2 and the square root of 49 (since factors larger than the square root would have corresponding factors smaller thanthe square root).
+
+Answer: After checking, 49 cannot be divided evenly by any number between 2 and its square root (which is 7), indicating it only has 1 and itself as divisors. Therefore, 49 is not a prime number; it is actually a composite number because it can be factored into 7 * 7.'
+----------------------------------------
+Strategy: 'Supportive Stepwise Guidance'
+Input Prompt: 'Generate only the prompt in '{strategy}' style to teach a low-level agent how to approach the problem in steps. If any answer or additional text appears, the output is invalid.'
+Prompt: '
+
+Prompt: To understand why 49 is not a prime number, let's break down the definition of a prime number and apply it step-by-step:
+
+Step 1: Define what a prime number is.
+A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+Step 2: Check if 49 meets the criteria for being a prime number.
+Does 49 have any divisors other than 1 and itself?
+
+Step 3: Identify any divisors of 49.
+List all the numbers that can divide 49 without leaving a remainder.
+
+Step 4: Determine if there are any divisors other than 1 and 49.
+If you find any divisors other than 1 and 49, then 49 is not a prime number.
+
+Step 5: Conclude based on your findings.
+Based on the presence or absence of divisors other than 1 and 49, determine whether 49 is a prime number or not.'
+----------------------------------------
+Strategy: 'Define, List, and Exemplify'
+Input Prompt: 'Generate only the prompt in '{strategy}' style to teach a low-level agent how to approach the problem in steps. If any answer or additional text appears, the output is invalid.'
+Prompt: ' Define: Prime numbers are natural numbers greater than 1 that have no positive divisors other than 1 and themselves.
+
+List:
+1. Understand that a prime number must be greater than 1.
+2. Recognize that 49 is not greater than 1, so it cannot be a prime number on its own.
+
+Exemplify:
+- Consider the number 7 as an example of a prime number since it has only two factors: 1 and 7.
+- Realize that 49 is actually 7 squared (7 * 7), indicating it can be divided evenly by 1, 7, and itself, making it not a prime number.'
+----------------------------------------
+Strategy: 'Stepwise Procedural Guide'
+Input Prompt: 'Generate only the prompt in '{strategy}' style to teach a low-level agent how to approach the problem in steps. If any answer or additional text appears, the output is invalid.'
+Prompt: ' Stepwise Procedural Guide:
+
+1. Begin by understanding the definition of a prime number: A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+
+2. Check if 49 meets the criteria for being a prime number by attempting to divide it by all integers from 2 up to its square root (since if there were factors larger than the square root, their corresponding factors would have been found already).
+
+3. Upon division, observe that 49 cannot be divided evenly by any number between 2 and its square root (which is approximately 7).
+
+4. Recognize that the only divisors of 49 are 1 and 49 itself.
+
+5. Since 49 does not have any divisors other than 1 and itself, conclude that 49 is not a prime number but rather a composite number.
+
+6. Identify the factors of 49, which are 1, 7, and 49.
+
+7. End by acknowledging that the confusion may arise due to misinterpretation; 49 is not a prime number as it has more than two distinct positive divisors.'
+----------------------------------------
+Strategy: 'Enumerate Assistance Methods'
+Input Prompt: 'Generate only the prompt in '{strategy}' style to teach a low-level agent how to approach the problem in steps. If any answer or additional text appears, the output is invalid.'
+Prompt: '
+
+Prompt: Enumerate assistance methods for teaching a low-level agent how to determine if a given number is prime or not, focusing on step-by-step approaches and avoiding any direct answers or additional text.'
+----------------------------------------
+Strategy: 'Intro Then List'
+Input Prompt: 'Generate only the prompt in '{strategy}' style to teach a low-level agent how to approach the problem in steps. If any answer or additional text appears, the output is invalid.'
+Prompt: ' Intro: Understanding Prime Numbers
+List:
+1. Define what a prime number is.
+2. Identify the factors of 49.
+3. Determine if there are any factors other than 1 and itself.
+4. Conclude whether 49 is a prime number based on the findings.
+
+Why is 49 a prime number?
+Intro: Identifying Prime Numbers
+List:
+1. Recall the definition of a prime number.
+2. Calculate the factors of 49.
+3. Check for divisibility by numbers other than 1 and 49.
+4. Assess if 49 meets the criteria for being a prime number.'
+----------------------------------------
+Strategy: 'Sequential Explanation with Contrast'
+Input Prompt: 'Generate only the prompt in '{strategy}' style to teach a low-level agent how to approach the problem in steps. If any answer or additional text appears, the output is invalid.'
+Prompt: ' Provide step-by-step explanation contrasting it with another number to clarify why it is not prime.
+Prompt:
+
+Explain, step-by-step and in a sequential manner, why the number 49 is not a prime number by contrasting it with another number of your choice, illustrating the key differences that define a prime number.
+
+Instructions:
+
+1. Define what makes a number prime, using your chosen number as an example.
+2. Identify the factors of your chosen number, demonstrating its primality.
+3. Explain why the number 49 does not meet the criteria for being prime, contrasting this with your chosen number.
+4. List the factors of 49, highlighting the reason it is not prime.
+5. Summarize the contrasts between your chosen number and 49, emphasizing the defining characteristics of a prime number.'
+----------------------------------------
+Strategy: 'Intro + Thematic List with Explanations'
+Input Prompt: 'Generate only the prompt in '{strategy}' style to teach a low-level agent how to approach the problem in steps. If any answer or additional text appears, the output is invalid.'
+Prompt: ' Prompt:
+
+Introduction: Understanding Prime Numbers and Their Identification
+
+Thematic List with Explanations:
+
+1. **Definition of Prime Numbers**: Start by defining what prime numbers are - numbers greater than 1 that have no divisors other than 1 and themselves.
+
+2. **Prime Number Identification Process**:
+   a. **Step 1: Check if the number is less than 2**: Since prime numbers are defined as being greater than 1, any number less than 2 cannot be prime.
+   b. **Step 2: Check for even numbers (except 2)**: If the number is even and not 2, it cannot be prime because it's divisible by 2.
+   c. **Step 3: Test divisibility by odd numbers**: For numbers greater than 2, test divisibility by all odd numbers up to the square root of the number. If the number is divisible by any of these, it's not prime.
+
+3. **Analyzing 49**: Apply the above process to determine if 49 is prime. Note that 49 is an odd number greater than 2, but since it can be expressed as 7 * 7, it has divisors other than 1 and itself.
+
+4'
+----------------------------------------
+Strategy: 'Structured Reflective Statement'
+Input Prompt: 'Generate only the prompt in '{strategy}' style to teach a low-level agent how to approach the problem in steps. If any answer or additional text appears, the output is invalid.'
+Prompt: ' Step 1: Understand that prime numbers are natural numbers greater than 1 that have no positive divisors other than 1 and themselves.
+
+Step 2: Check if 49 is greater than 1. Since it is (49 > 1), proceed to the next step.
+
+Step 3: Determine if 49 has any divisors other than 1 and itself. Begin by checking divisibility by the smallest prime number, which is 2.
+
+Step 4: Since 49 is not divisible by 2 (49 ÷ 2 ≠ whole number), move on to the next prime number, which is 3.
+
+Step 5: Check if 49 is divisible by 3 (49 ÷ 3 ≠ whole number). As it's not divisible, continue with the next prime number.
+
+Step 6: The next prime number is 5. Since 49 is not divisible by 5 (49 ÷ 5 ≠ whole number), proceed to the next prime number, which is 7.
+
+Step 7: Divide 49 by 7 (49 ÷ 7 = 7). Since this results in a whole number, we have found a divisor of 49 other'
+----------------------------------------
+Strategy: 'List, Reasoning, Answer'
+Input Prompt: 'Generate only the prompt in '{strategy}' style to teach a low-level agent how to approach the problem in steps. If any answer or additional text appears, the output is invalid.'
+Prompt: ' List of steps:
+
+1. Understand that a prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+2. Check if 49 is greater than 1. It is, as it equals 7 squared (7*7).
+3. Determine if 49 has any divisors other than 1 and itself. In this case, it can be divided by 7 (49 = 7*7).
+4. Since 49 has a divisor other than 1 and itself (which is 7), it is not a prime number.
+
+Answer: 49 is not a prime number because it can be divided evenly by numbers other than 1 and itself, specifically by 7.'
+----------------------------------------
