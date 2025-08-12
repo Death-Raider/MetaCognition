@@ -118,7 +118,7 @@ out = [
     for strat,prompt_inst in pairs
 ]
 # [strat_index, {input_ids[0]}] -> {input_ids[strat_index]}
-new_out = batch_prompts([out],tokenizer.pad_token_id)
+new_out = batch_prompts(out,tokenizer.pad_token_id)
 prompt = [tokenizer.decode(new_out['input_ids'][i], skip_special_tokens=True) for i in range(len(pairs))]
 with open('PromptGenerator/prompts.txt', 'w') as f:
     for (strat, inp_prompt), prompt_txt in zip(pairs, prompt):
