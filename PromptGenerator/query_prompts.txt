@@ -1,0 +1,856 @@
+{
+    "math_reasoning": [
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Determine whether 121 is a prime number."
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Find the area of a triangle with base 8 cm and height 5 cm."
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If a train travels 60 km in 1.5 hours, what is its average speed?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Determine whether 121 is a prime number."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Find the area of a triangle with base 8 cm and height 5 cm."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If a train travels 60 km in 1.5 hours, what is its average speed?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Determine whether 121 is a prime number."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Find the area of a triangle with base 8 cm and height 5 cm."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If a train travels 60 km in 1.5 hours, what is its average speed?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Determine whether 121 is a prime number."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Find the area of a triangle with base 8 cm and height 5 cm."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If a train travels 60 km in 1.5 hours, what is its average speed?"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Determine whether 121 is a prime number."
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Find the area of a triangle with base 8 cm and height 5 cm."
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If a train travels 60 km in 1.5 hours, what is its average speed?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Determine whether 121 is a prime number."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Find the area of a triangle with base 8 cm and height 5 cm."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If a train travels 60 km in 1.5 hours, what is its average speed?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Determine whether 121 is a prime number."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Find the area of a triangle with base 8 cm and height 5 cm."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If a train travels 60 km in 1.5 hours, what is its average speed?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Determine whether 121 is a prime number."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Find the area of a triangle with base 8 cm and height 5 cm."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If a train travels 60 km in 1.5 hours, what is its average speed?"
+        ]
+    ],
+    "general_knowledge": [
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Who wrote the play 'Romeo and Juliet'?"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "What is the capital city of Canada?"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Name three countries that share a border with Germany."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Who wrote the play 'Romeo and Juliet'?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "What is the capital city of Canada?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Name three countries that share a border with Germany."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Who wrote the play 'Romeo and Juliet'?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "What is the capital city of Canada?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Name three countries that share a border with Germany."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Who wrote the play 'Romeo and Juliet'?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "What is the capital city of Canada?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Name three countries that share a border with Germany."
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Who wrote the play 'Romeo and Juliet'?"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "What is the capital city of Canada?"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Name three countries that share a border with Germany."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Who wrote the play 'Romeo and Juliet'?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "What is the capital city of Canada?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Name three countries that share a border with Germany."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Who wrote the play 'Romeo and Juliet'?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "What is the capital city of Canada?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Name three countries that share a border with Germany."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Who wrote the play 'Romeo and Juliet'?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "What is the capital city of Canada?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Name three countries that share a border with Germany."
+        ]
+    ],
+    "commonsense_reasoning": [
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If you leave ice cubes out in the sun, what will happen after 10 minutes?"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Why should you not touch an electrical socket with wet hands?"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If it is raining outside, what might people carry with them?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If you leave ice cubes out in the sun, what will happen after 10 minutes?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Why should you not touch an electrical socket with wet hands?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If it is raining outside, what might people carry with them?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If you leave ice cubes out in the sun, what will happen after 10 minutes?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Why should you not touch an electrical socket with wet hands?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If it is raining outside, what might people carry with them?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If you leave ice cubes out in the sun, what will happen after 10 minutes?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Why should you not touch an electrical socket with wet hands?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If it is raining outside, what might people carry with them?"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If you leave ice cubes out in the sun, what will happen after 10 minutes?"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Why should you not touch an electrical socket with wet hands?"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If it is raining outside, what might people carry with them?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If you leave ice cubes out in the sun, what will happen after 10 minutes?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Why should you not touch an electrical socket with wet hands?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If it is raining outside, what might people carry with them?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If you leave ice cubes out in the sun, what will happen after 10 minutes?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Why should you not touch an electrical socket with wet hands?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If it is raining outside, what might people carry with them?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If you leave ice cubes out in the sun, what will happen after 10 minutes?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Why should you not touch an electrical socket with wet hands?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If it is raining outside, what might people carry with them?"
+        ]
+    ],
+    "procedural_tasks": [
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Explain how to change a flat bicycle tire."
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Give step-by-step instructions to bake a chocolate cake."
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Describe the process of renewing a passport."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Explain how to change a flat bicycle tire."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Give step-by-step instructions to bake a chocolate cake."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Describe the process of renewing a passport."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Explain how to change a flat bicycle tire."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Give step-by-step instructions to bake a chocolate cake."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Describe the process of renewing a passport."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Explain how to change a flat bicycle tire."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Give step-by-step instructions to bake a chocolate cake."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Describe the process of renewing a passport."
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Explain how to change a flat bicycle tire."
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Give step-by-step instructions to bake a chocolate cake."
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Describe the process of renewing a passport."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Explain how to change a flat bicycle tire."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Give step-by-step instructions to bake a chocolate cake."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Describe the process of renewing a passport."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Explain how to change a flat bicycle tire."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Give step-by-step instructions to bake a chocolate cake."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Describe the process of renewing a passport."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Explain how to change a flat bicycle tire."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Give step-by-step instructions to bake a chocolate cake."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Describe the process of renewing a passport."
+        ]
+    ],
+    "creative_generation": [
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Write the opening sentence of a mystery novel set in a small fishing village."
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Invent a new sport and explain how it is played."
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Create a tagline for a company selling eco-friendly shoes."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Write the opening sentence of a mystery novel set in a small fishing village."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Invent a new sport and explain how it is played."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Create a tagline for a company selling eco-friendly shoes."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Write the opening sentence of a mystery novel set in a small fishing village."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Invent a new sport and explain how it is played."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Create a tagline for a company selling eco-friendly shoes."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Write the opening sentence of a mystery novel set in a small fishing village."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Invent a new sport and explain how it is played."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Create a tagline for a company selling eco-friendly shoes."
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Write the opening sentence of a mystery novel set in a small fishing village."
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Invent a new sport and explain how it is played."
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Create a tagline for a company selling eco-friendly shoes."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Write the opening sentence of a mystery novel set in a small fishing village."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Invent a new sport and explain how it is played."
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Create a tagline for a company selling eco-friendly shoes."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Write the opening sentence of a mystery novel set in a small fishing village."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Invent a new sport and explain how it is played."
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Create a tagline for a company selling eco-friendly shoes."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Write the opening sentence of a mystery novel set in a small fishing village."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Invent a new sport and explain how it is played."
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Create a tagline for a company selling eco-friendly shoes."
+        ]
+    ],
+    "classification_identification": [
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Decide whether this email is spam: 'Congratulations! You\u2019ve won a $1000 gift card. Click here to claim.'"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Classify the tone of this sentence: 'I can't believe you did that!'"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Identify whether the following sentence is fact or opinion: 'Chocolate ice cream is the best flavor.'"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Decide whether this email is spam: 'Congratulations! You\u2019ve won a $1000 gift card. Click here to claim.'"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Classify the tone of this sentence: 'I can't believe you did that!'"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Identify whether the following sentence is fact or opinion: 'Chocolate ice cream is the best flavor.'"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Decide whether this email is spam: 'Congratulations! You\u2019ve won a $1000 gift card. Click here to claim.'"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Classify the tone of this sentence: 'I can't believe you did that!'"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Identify whether the following sentence is fact or opinion: 'Chocolate ice cream is the best flavor.'"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Decide whether this email is spam: 'Congratulations! You\u2019ve won a $1000 gift card. Click here to claim.'"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Classify the tone of this sentence: 'I can't believe you did that!'"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Identify whether the following sentence is fact or opinion: 'Chocolate ice cream is the best flavor.'"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Decide whether this email is spam: 'Congratulations! You\u2019ve won a $1000 gift card. Click here to claim.'"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Classify the tone of this sentence: 'I can't believe you did that!'"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Identify whether the following sentence is fact or opinion: 'Chocolate ice cream is the best flavor.'"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Decide whether this email is spam: 'Congratulations! You\u2019ve won a $1000 gift card. Click here to claim.'"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Classify the tone of this sentence: 'I can't believe you did that!'"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Identify whether the following sentence is fact or opinion: 'Chocolate ice cream is the best flavor.'"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Decide whether this email is spam: 'Congratulations! You\u2019ve won a $1000 gift card. Click here to claim.'"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Classify the tone of this sentence: 'I can't believe you did that!'"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Identify whether the following sentence is fact or opinion: 'Chocolate ice cream is the best flavor.'"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Decide whether this email is spam: 'Congratulations! You\u2019ve won a $1000 gift card. Click here to claim.'"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Classify the tone of this sentence: 'I can't believe you did that!'"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Identify whether the following sentence is fact or opinion: 'Chocolate ice cream is the best flavor.'"
+        ]
+    ],
+    "multi_step_logic": [
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "You have 3 red balls and 2 blue balls in a bag. If you take two balls without looking, what is the probability they are both red?"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Solve this riddle: 'I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?'"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If Alice is older than Bob, and Bob is older than Carol, who is the youngest?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "You have 3 red balls and 2 blue balls in a bag. If you take two balls without looking, what is the probability they are both red?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Solve this riddle: 'I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?'"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If Alice is older than Bob, and Bob is older than Carol, who is the youngest?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "You have 3 red balls and 2 blue balls in a bag. If you take two balls without looking, what is the probability they are both red?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Solve this riddle: 'I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?'"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If Alice is older than Bob, and Bob is older than Carol, who is the youngest?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "You have 3 red balls and 2 blue balls in a bag. If you take two balls without looking, what is the probability they are both red?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "Solve this riddle: 'I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?'"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.",
+            "If Alice is older than Bob, and Bob is older than Carol, who is the youngest?"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "You have 3 red balls and 2 blue balls in a bag. If you take two balls without looking, what is the probability they are both red?"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Solve this riddle: 'I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?'"
+        ],
+        [
+            "Supportive Stepwise Guidance",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If Alice is older than Bob, and Bob is older than Carol, who is the youngest?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "You have 3 red balls and 2 blue balls in a bag. If you take two balls without looking, what is the probability they are both red?"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Solve this riddle: 'I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?'"
+        ],
+        [
+            "Stepwise Procedural Guide",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If Alice is older than Bob, and Bob is older than Carol, who is the youngest?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "You have 3 red balls and 2 blue balls in a bag. If you take two balls without looking, what is the probability they are both red?"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Solve this riddle: 'I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?'"
+        ],
+        [
+            "Define, List, and Exemplify",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If Alice is older than Bob, and Bob is older than Carol, who is the youngest?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "You have 3 red balls and 2 blue balls in a bag. If you take two balls without looking, what is the probability they are both red?"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "Solve this riddle: 'I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?'"
+        ],
+        [
+            "Enumerate Assistance Methods",
+            "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself.",
+            "If Alice is older than Bob, and Bob is older than Carol, who is the youngest?"
+        ]
+    ]
+}

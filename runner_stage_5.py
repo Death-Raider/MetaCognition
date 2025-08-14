@@ -249,7 +249,7 @@ def batch_prompts(prompts, pad_token_id):
 #     logger.info("### --- End Testing --- ###")
 
 def dpo_loss(batch, beta):
-    prompt_instruction = "Generate a prompt to answer the following question using {strategy} without any extra output. Only answer with the prompt:"
+    prompt_instruction = "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself."
 
     P_a = [gen_prompt_from_query(
         model=DPO.policy_model, 
