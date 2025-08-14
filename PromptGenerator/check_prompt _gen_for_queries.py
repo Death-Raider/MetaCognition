@@ -162,7 +162,7 @@ print("Generated prompts for all queries")
 
 # [strat_index, {input_ids[0]}] -> {input_ids[strat_index]}
 new_out = {k: batch_prompts(val,tokenizer.pad_token_id) for k,val in out.items()}
-prompt = {k: [tokenizer.decode(new_out['input_ids'][i], skip_special_tokens=True) for i in range(len(vals))] for k,vals in new_out.items()}
+prompt = {k: [tokenizer.decode(vals['input_ids'][i], skip_special_tokens=True) for i in range(len(vals['input_ids']))] for k,vals in new_out.items()}
 
 with open('PromptGenerator/query_prompts.txt', 'w') as f:
     for k in prompt.keys():
