@@ -249,7 +249,9 @@ def batch_prompts(prompts, pad_token_id):
 #     logger.info("### --- End Testing --- ###")
 
 def dpo_loss(batch, beta):
-    prompt_instruction = "Using '{strategy}', create a prompt that helps a low-skill agent work through the problem in steps. Do not provide the solution or anything except the prompt itself."
+    prompt_instruction = """
+    Generate a prompt using the '{strategy}' format to guide a low-capability agent in solving a problem step-by-step without revealing the answer. You must ONLY output the prompt. If you include anything other than the prompt, or if the prompt contains the answer, your response will be considered invalid and rejected.
+    """.strip()
 
     P_a = [gen_prompt_from_query(
         model=DPO.policy_model, 
@@ -261,8 +263,8 @@ def dpo_loss(batch, beta):
     ) for i,strategy in enumerate(batch['S_a'])]
 
     P_a = batch_prompts(P_a, DPO.tokenizer.pad_token_id)
-    P_a['input_ids'] = torch.cat([P_a['input_ids'], batch['query']['input_ids']], dim=1)
-    P_a['attention_mask'] = torch.cat([P_a['attention_mask'], batch['query']['attention_mask']], dim=1)
+    P_a['input_ids'] = torch.cat([batch['query']['input_ids'], P_a['input_ids']], dim=1)
+    P_a['attention_mask'] = torch.cat([batch['query']['attention_mask'], P_a['attention_mask']], dim=1)
     
     # prompt_text = DPO.tokenizer.decode(P_a['input_ids'][0], skip_special_tokens=True)
     # logger.info(f"Generated prompt for A: {prompt_text}")
@@ -277,8 +279,8 @@ def dpo_loss(batch, beta):
     ) for i,strategy in enumerate(batch['S_b'])]
 
     P_b = batch_prompts(P_b, DPO.tokenizer.pad_token_id)
-    P_b['input_ids'] = torch.cat([P_b['input_ids'], batch['query']['input_ids']], dim=1)
-    P_b['attention_mask'] = torch.cat([P_b['attention_mask'], batch['query']['attention_mask']], dim=1)
+    P_b['input_ids'] = torch.cat([batch['query']['input_ids'], P_b['input_ids']], dim=1)
+    P_b['attention_mask'] = torch.cat([batch['query']['attention_mask'], P_b['attention_mask']], dim=1)
 
     # prompt_text = DPO.tokenizer.decode(P_b['input_ids'][0], skip_special_tokens=True)
     # logger.info(f"Generated prompt for B:{prompt_text}")
