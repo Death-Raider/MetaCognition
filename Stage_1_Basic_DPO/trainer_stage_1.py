@@ -3,8 +3,8 @@ import torch
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 # from torchviz import make_dot
-from PreferenceDataLoader import PreferenceDataLoader
-from DPO import DirectPreferenceOptimization
+from Stage_1_Basic_DPO.PreferenceDataLoader import PreferenceDataLoader
+from Stage_1_Basic_DPO.DPO import DirectPreferenceOptimization
 import json
 from ConfigSchema import ConfigSchema
 from datasets import load_dataset
@@ -31,22 +31,9 @@ STRATS = ["Self Verify", "Chain of Thought"]
 FIXED_STRATEGY = STRATS[1]
 print("Using Stratergy:", FIXED_STRATEGY)
 logger.info(f"Using Strategy:{FIXED_STRATEGY}")
-    
-# === Example dummy dataset ===
-# with open('dummy_data.json', 'r') as f:
-#     dummy_data = json.loads(f.read())
 
-dummy_data = load_dataset("nvidia/HelpSteer2", data_dir="preference")['train']
-preference = dummy_data.map(
-    lambda x: {
-        "query": x["prompt"],
-        "output_a": x["response_1"],
-        "output_b": x["response_2"],
-        "label": x['preference_strength'],
-    },
-    remove_columns=['split', 'prompt', 'response_1', 'response_2', 'preference_strength', 'preference_statement', 'preference_elaboration', 'three_most_similar_preferences', 'all_preferences_unprocessed'],
-    desc="Processing preference dataset"
-)
+with open('semi_automated_dataset_creation/processed_decomposed_dataset.jsonl', 'r') as f:
+    preference = [json.loads(line) for line in f]
 
 # ====== Initialize DPO and DataLoader ======
 dataset = PreferenceDataLoader(preference, strat=FIXED_STRATEGY) # augment the dummy dataset with the fixed strategy
@@ -61,7 +48,6 @@ for epoch in range(config_schema.epochs):
     for batch in tqdm(loader, desc=f"Epoch {epoch + 1}"):
         DPO.policy_optimizer.zero_grad()
         loss = DPO.dpo_loss(batch['prompt_inputs'], batch['chosen_outputs'], batch['rejected_outputs'])
-        # make_dot(loss, params=dict(model.named_parameters())).render("dpo_graph", format="png")
         loss.backward()
         DPO.policy_optimizer.step()
         total_loss += loss.item()
