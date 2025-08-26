@@ -1,0 +1,6 @@
+Answer with three components:  
+Rq: Rephrased query.  
+Mt: Provide 3 different reasoning paths, each step-by-step.  
+Ra: Compare the reasoning paths and give the most consistent final answer.  
+
+Question: {query}

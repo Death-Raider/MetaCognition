@@ -27,7 +27,7 @@ logger.info(f"Device set as:{DEVICE}")
 with open('semi_automated_dataset_creation/processed_decomposed_dataset.jsonl', 'r') as f:
     preference = [json.loads(line) for line in f]
 
-prompt_instruction = open('Stage_5_HiPO_1Pass/instructions.txt', 'r').read().strip()
+prompt_instruction = open('Stage_5_HiPO_1Pass/instructions/instruction_cot.txt', 'r').read().strip()
 
 # ====== Initialize DPO and DataLoader ======
 dataset = preference
@@ -45,20 +45,33 @@ loader = DataLoader(dataset, batch_size=config_schema.batch_size, shuffle=True, 
 # ====== Training loop ======
 loss = torch.tensor(0.0).to(DEVICE)
 
-weights_Rq_only = torch.tensor([1.0, 0.0, 0.0, 0.0 ]).to(DEVICE)  # Weights for Rq span
-weights_Mt_only = torch.tensor([0.0, 1.0, 0.0, 0.0]).to(DEVICE)  # Weights for Mt span
-weights_Ra_only = torch.tensor([0.0, 0.0, 1.0, 0.0 ]).to(DEVICE)  # Weights for Ra span
-weights_Together = torch.tensor([0.25, 0.25, 0.20, 0.30 ]).to(DEVICE)  # Weights for [Rq, Mt, Ra, R} spans
+# ====== Individual weight configurations ======
+# for training a model for specific weight configuration
+# weights_Rq_only = torch.tensor([[1.0, 0.0, 0.0, 0.0]]).to(DEVICE)  # Weights for Rq span
+# weights_Mt_only = torch.tensor([[0.0, 1.0, 0.0, 0.0]]).to(DEVICE)  # Weights for Mt span
+# weights_Ra_only = torch.tensor([[0.0, 0.0, 1.0, 0.0]]).to(DEVICE)  # Weights for Ra span
+# weights_Together = torch.tensor([[0.25, 0.25, 0.20, 0.30]]).to(DEVICE)  # Weights for [Rq, Mt, Ra, R} spans
+# weights = weights_Rq_only
 
-weights = weights_Together
+# ======= Joint weight configurations ======
+# for training a model on all weight configurations one after another
+weights = torch.tensor([
+    [1.0, 0.0, 0.0, 0.0],  # Weights for Rq span only
+    [0.0, 1.0, 0.0, 0.0],  # Weights for Mt span only
+    [0.0, 0.0, 1.0, 0.0],  # Weights for Ra span only
+    [0.25, 0.25, 0.20, 0.30]  # Weights for {Rq, Mt, Ra, R} spans
+]).to(DEVICE)
 
-for epoch in range(config_schema.epochs):
-    total_loss = 0
-    for batch in tqdm(loader, desc=f"Epoch {epoch + 1} Loss: {loss.item():.2f}"):
-        DPO.policy_optimizer.zero_grad()
-        loss = DPO.dpo_loss(batch, Prompt_Instruction = gen_prompt_ids,beta = config_schema.beta, weights=weights)
-        loss.backward()
-        DPO.policy_optimizer.step()
-        total_loss += loss.item()
-    print(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
-    logger.info(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
+for w in weights:
+    print(f"Training with weights: {w}")
+    logger.info(f"Training with weights: {w}")
+    for epoch in range(config_schema.epochs):
+        total_loss = 0
+        for batch in tqdm(loader, desc=f"Epoch {epoch + 1} Loss: {loss.item():.2f}"):
+            DPO.policy_optimizer.zero_grad()
+            loss = DPO.dpo_loss(batch, Prompt_Instruction = gen_prompt_ids,beta = config_schema.beta, weights=weights)
+            loss.backward()
+            DPO.policy_optimizer.step()
+            total_loss += loss.item()
+        print(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
+        logger.info(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")

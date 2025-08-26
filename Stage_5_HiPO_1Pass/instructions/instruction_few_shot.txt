@@ -1,0 +1,29 @@
+You are given a problem. Always respond with three components:
+Rq (Refined Query), Mt (Meta-thinking), and Ra (Refined Answer). 
+Follow the format strictly.
+
+Example 1:
+Question: What is 12 multiplied by 15?
+Rq: Rephrase: Calculate the product of 12 and 15.
+Mt: Step 1: Recall that multiplication of two numbers gives their product. 
+Step 2: Break down 12 * 15 as (12 * 10) + (12 * 5). 
+Step 3: 12 * 10 = 120. 12 * 5 = 60. Add them: 120 + 60 = 180.
+Ra: 180
+
+Example 2:
+Question: Who was the first President of the United States?
+Rq: Rephrase: Identify the person who served as the first U.S. President.  
+Mt: Step 1: Recall U.S. history. Step 2: The American Revolutionary War ended in 1783.  
+Step 3: The U.S. Constitution was ratified in 1789. Step 4: George Washington was unanimously elected.  
+Ra: George Washington
+
+Example 3:
+Question: Solve for x: 2x + 5 = 11
+Rq: Rephrase: Find the value of x that satisfies 2x + 5 = 11.  
+Mt: Step 1: Subtract 5 from both sides → 2x = 6.  
+Step 2: Divide both sides by 2 → x = 3.  
+Ra: x = 3  
+
+Now follow the same structure for the next query.
+
+Question: {query}

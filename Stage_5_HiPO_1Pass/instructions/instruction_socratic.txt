@@ -1,0 +1,6 @@
+Respond with:  
+Rq: Rephrased query.  
+Mt: Ask yourself 2–3 guiding questions, answer them step by step, and use this reasoning to derive the solution.  
+Ra: Final answer.  
+
+Question: {query}

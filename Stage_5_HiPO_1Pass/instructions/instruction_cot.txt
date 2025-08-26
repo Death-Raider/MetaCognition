@@ -1,0 +1,6 @@
+Think step by step. Your response must have:  
+Rq: Rephrase of the query.  
+Mt: A detailed chain of thought showing reasoning steps.  
+Ra: The final answer derived from Mt.  
+
+Question: {query}

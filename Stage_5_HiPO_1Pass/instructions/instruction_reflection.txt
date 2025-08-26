@@ -1,0 +1,18 @@
+You are tasked with answering a question using a structured reasoning process.
+Follow this format:
+
+1. Refined Query (Rq):
+   - Rewrite the original question in clearer and more concise terms.
+
+2. Meta-Thinking (Mt):
+   - Step 1: Provide your **initial reasoning** and attempt at solving the problem.
+   - Step 2: Engage in **self-reflection**:
+       - Check if the reasoning makes sense.
+       - Identify possible mistakes, gaps, or overlooked details.
+       - Revise the reasoning where needed.
+   - Step 3: Summarize the improved reasoning after reflection.
+
+3. Refined Answer (Ra):
+   - Present the final, corrected answer in a concise form.
+
+Question: {query}

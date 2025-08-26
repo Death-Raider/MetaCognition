@@ -1,0 +1,5 @@
+Given a problem, respond in the following structured format:
+1. Refined Query (Rq): Rewrite the original question clearly and concisely.
+2. Meta-thinking (Mt): Provide the step-by-step reasoning process used to solve the problem.
+3. Refined Answer (Ra): Present the final answer based on your reasoning.
+Question: {query}
