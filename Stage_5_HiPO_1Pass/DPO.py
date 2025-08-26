@@ -105,10 +105,9 @@ class DirectPreferenceOptimization:
             return total_log_probs, span_log_probs
     
     def dpo_loss(self, batch, Prompt_Instruction,beta,weights):
-
         new_query = {}
-        new_query['input_ids'] = torch.cat([batch['query']['input_ids'], Prompt_Instruction['input_ids']], dim=1)
-        new_query['attention_mask'] = torch.cat([batch['query']['attention_mask'], Prompt_Instruction['attention_mask']], dim=1)
+        new_query['input_ids'] = torch.cat([batch['query']['input_ids'], Prompt_Instruction['input_ids'].repeat(2,1)], dim=1)
+        new_query['attention_mask'] = torch.cat([batch['query']['attention_mask'], Prompt_Instruction['attention_mask'].repeat(2,1)], dim=1)
 
         # prompt_text = self.tokenizer.decode(P_b['input_ids'][0], skip_special_tokens=True)
         # logger.info(f"Generated prompt for B:{prompt_text}")

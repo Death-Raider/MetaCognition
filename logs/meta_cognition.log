@@ -1,0 +1,35 @@
+2025-08-26 12:54:01,479 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-08-26 12:54:22,405 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-08-26 12:54:22,405 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-0.5B-Instruct", "max_len": 512, "lr": 5e-06, "batch_size": 2, "epochs": 10, "beta": 0.2}
+2025-08-26 12:54:22,405 - Meta-Cognition - INFO - Device set as:cpu
+2025-08-26 12:54:56,583 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-08-26 12:54:56,583 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-0.5B-Instruct", "max_len": 512, "lr": 5e-06, "batch_size": 2, "epochs": 10, "beta": 0.2}
+2025-08-26 12:54:56,583 - Meta-Cognition - INFO - Device set as:cpu
+2025-08-26 12:56:28,873 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-08-26 12:56:28,873 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-0.5B-Instruct", "max_len": 512, "lr": 5e-06, "batch_size": 2, "epochs": 10, "beta": 0.2}
+2025-08-26 12:56:28,873 - Meta-Cognition - INFO - Device set as:cpu
+2025-08-26 12:58:02,741 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-08-26 12:58:02,743 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-0.5B-Instruct", "max_len": 512, "lr": 5e-06, "batch_size": 2, "epochs": 10, "beta": 0.2}
+2025-08-26 12:58:02,743 - Meta-Cognition - INFO - Device set as:cpu
+2025-08-26 12:59:03,160 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-08-26 12:59:03,162 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-0.5B-Instruct", "max_len": 512, "lr": 5e-06, "batch_size": 2, "epochs": 10, "beta": 0.2}
+2025-08-26 12:59:03,162 - Meta-Cognition - INFO - Device set as:cpu
+2025-08-26 13:02:46,580 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-08-26 13:02:46,583 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-0.5B-Instruct", "max_len": 512, "lr": 5e-06, "batch_size": 2, "epochs": 10, "beta": 0.2}
+2025-08-26 13:02:46,583 - Meta-Cognition - INFO - Device set as:cpu
+2025-08-26 13:32:31,204 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-08-26 13:32:34,482 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-0.5B-Instruct", "max_len": 512, "lr": 5e-06, "batch_size": 2, "epochs": 10, "beta": 0.2}
+2025-08-26 13:32:34,482 - Meta-Cognition - INFO - Device set as:cpu
+2025-08-26 13:32:34,482 - Meta-Cognition - INFO - Using Strategy:Chain of Thought
+2025-08-26 13:36:59,770 - Meta-Cognition - INFO - ### --- Testing --- ###
+2025-08-26 13:36:59,772 - Meta-Cognition - INFO - Test question: Let's solve this step-by-step:
+
+Question: Why is 49 not prime?
+Answer:
+2025-08-26 13:36:59,820 - Meta-Cognition - INFO - ### --- End Testing --- ###
+2025-08-26 13:38:59,146 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-08-26 13:38:59,146 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-0.5B-Instruct", "max_len": 512, "lr": 5e-06, "batch_size": 2, "epochs": 10, "beta": 0.2}
+2025-08-26 13:38:59,146 - Meta-Cognition - INFO - Device set as:cpu
+2025-08-26 13:39:23,308 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-08-26 13:39:23,308 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-0.5B-Instruct", "max_len": 512, "lr": 5e-06, "batch_size": 2, "epochs": 10, "beta": 0.2}
+2025-08-26 13:39:23,308 - Meta-Cognition - INFO - Device set as:cpu

@@ -1,5 +1,5 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from PreferenceDataLoader import PreferenceDataLoader
+from Stage_1_Basic_DPO.PreferenceDataLoader import PreferenceDataLoader
 import torch
 from logger import logger
 

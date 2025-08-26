@@ -1,0 +1,6 @@
+Given a problem, generate a detailed reasoning process that includes:
+    1. Redefined Query: Repharse the original query to ensure clarity.
+    2. Meta-cognitive Plan: Outline a high-level strategy for solving the problem.
+    3. Tactical Plan: Detail specific steps or methods to implement the meta-cognitive plan.
+    4. Answer: Provide the final answer or solution to the problem.
+Question: {query}

@@ -38,7 +38,7 @@ class ConfigSchema:
             'microsoft/phi-2',
             'Qwen/Qwen2-1.5B',
             "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
-            ""
+            "Qwen/Qwen2.5-0.5B-Instruct"
         ]
         BIGG_MODELS = [
             'Qwen/Qwen1.5-7B', # it just a hater for no reason

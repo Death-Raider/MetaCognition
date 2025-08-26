@@ -2,7 +2,7 @@
 import torch
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-from DPO import DirectPreferenceOptimization
+from Stage_5_HiPO_PromptGen_2Pass.DPO import DirectPreferenceOptimization
 import json
 from ConfigSchema import ConfigSchema
 from logger import logger
@@ -58,7 +58,7 @@ DPO.set_models(config_schema.model_name)
 loader = DataLoader(dataset, batch_size=config_schema.batch_size, shuffle=True, collate_fn=DPO.collate_fn)
 
 # ====== Training loop ======
-loss = torch.Tensor(0.0).to(DEVICE)
+loss = torch.tensor(0.0).to(DEVICE)
 for epoch in range(config_schema.epochs):
     total_loss = 0
     for batch in tqdm(loader, desc=f"Epoch {epoch + 1} Loss: {loss.item():.2f}"):

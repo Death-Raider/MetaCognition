@@ -27,14 +27,7 @@ logger.info(f"Device set as:{DEVICE}")
 with open('semi_automated_dataset_creation/processed_decomposed_dataset.jsonl', 'r') as f:
     preference = [json.loads(line) for line in f]
 
-prompt_instruction = """
-    Given a problem, generate a detailed reasoning process that includes:
-        1. Redefined Query: Repharse the original query to ensure clarity.
-        2. Meta-cognitive Plan: Outline a high-level strategy for solving the problem.
-        3. Tactical Plan: Detail specific steps or methods to implement the meta-cognitive plan.
-        4. Answer: Provide the final answer or solution to the problem.
-    Question: {query}
-""".strip()
+prompt_instruction = open('Stage_5_HiPO_1Pass/instructions.txt', 'r').read().strip()
 
 # ====== Initialize DPO and DataLoader ======
 dataset = preference
@@ -45,11 +38,12 @@ gen_prompt_ids = DPO.tokenizer(
     prompt_instruction,
     return_tensors='pt',
     add_special_tokens=False
-).input_ids.to(DPO.device)
+)
+gen_prompt_ids = {k: v.to(DEVICE) for k, v in gen_prompt_ids.items()}
 loader = DataLoader(dataset, batch_size=config_schema.batch_size, shuffle=True, collate_fn=DPO.collate_fn)
 
 # ====== Training loop ======
-loss = torch.Tensor(0.0).to(DEVICE)
+loss = torch.tensor(0.0).to(DEVICE)
 
 weights_Rq_only = torch.tensor([1.0, 0.0, 0.0, 0.0 ]).to(DEVICE)  # Weights for Rq span
 weights_Mt_only = torch.tensor([0.0, 1.0, 0.0, 0.0]).to(DEVICE)  # Weights for Mt span
