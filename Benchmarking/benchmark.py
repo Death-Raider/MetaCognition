@@ -167,9 +167,8 @@ class GSM8K_Bench:
                 "pred_num": pred_num,
                 "correct": is_correct,
             })
-            logger.info(f"Q: {q}\nG: {gold_num}\nP: {pred_text}\nCorrect: {is_correct}\n")
-
-        acc = correct / total if total > 0 else 0.0
+            # logger.info(f"Q: {q}\nG: {gold_num}\nP: {pred_text}\nCorrect: {is_correct}\n")
+            acc = correct / total if total > 0 else 0.0
         return {"accuracy": acc, "total": total, "correct": correct, "details": results}
 
 
