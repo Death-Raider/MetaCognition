@@ -48,40 +48,21 @@ def query_openai(messages, model="gpt-4.1", temperature=0.2):
         raise ValueError("No choices returned from OpenAI API. Check your request and model.")
     return data["choices"][0]["message"]["content"], rate_info
 
-def safe_judge(entry, max_retries=5):
+def create_ds(entry, model="gpt-4.1", max_retries=5):
     for attempt in range(max_retries):
         try:
             messages = build_messages(entry)
-            output_text, rate_information = query_openai(messages, model="gpt-4.1", temperature=0.2)
+            output_text, rate_information = query_openai(messages, model=model, temperature=0.2)
             try:
-                output_json = json.loads(output_text[8:-4])
+                output_json = json.loads(output_text[8:-4]) # ````json and ```` removal
+                output_json.update(entry)
             except json.JSONDecodeError:
                 print(f"Failed to decode JSON: {output_text}")
                 raise
             if int(rate_information.get('requests_left',0)) <=1 or int(rate_information.get('tokens_left',0)) <= 100:
                 print("Rate limit reached, waiting for reset...")
                 time.sleep(1)
-            return {
-                "query": entry["query"],
-                "output_a": entry["output_a"],
-                "M_a_text": output_json.get("M_a_text", ""),
-                "T_a_text": output_json.get("T_a_text", ""),
-                "A_a_text": output_json.get("A_a_text", ""),
-                "M_a_span": output_json.get("M_a_span", []),
-                "T_a_span": output_json.get("T_a_span", []),
-                "A_a_span": output_json.get("A_a_span", []),
-                "S_a": output_json.get("S_a", ""),
-                "output_b": entry["output_b"],
-                "M_b_text": output_json.get("M_b_text", ""),
-                "T_b_text": output_json.get("T_b_text", ""),
-                "A_b_text": output_json.get("A_b_text", ""),
-                "M_b_span": output_json.get("M_b_span", []),
-                "T_b_span": output_json.get("T_b_span", []),
-                "A_b_span": output_json.get("A_b_span", []),
-                "S_b": output_json.get("S_b", ""),
-                "label": entry["label"],
-            }
-
+            return output_json
         except Exception as e:
             print(f"Attempt {attempt + 1}: Error on entry — {e}")
             time.sleep(2 ** attempt)  # exponential backoff
@@ -89,16 +70,17 @@ def safe_judge(entry, max_retries=5):
     return {"error": "Max retries exceeded", **entry}
 
 # Load dataset
-raw_data = load_dataset("nvidia/HelpSteer2", data_dir="preference")['train']
+raw_data = load_dataset("prhegde/preference-data-math-stack-exchange")['train']
+limit = 1000
 entries = [
     {
-        "query": x["prompt"],
-        "output_a": x["response_1"],
-        "output_b": x["response_2"],
-        "label": x["preference_strength"],
+        "query": x["question"],
+        "output_a": x["chosen"],
+        "output_b": x["rejected"],
     }
     for x in raw_data
 ]
+entries = entries[:limit]
 
 # Output file (resumable)
 output_file = "processed_decomposed_dataset.jsonl"
@@ -114,6 +96,6 @@ with open(output_file, "a") as fout:
     for entry in tqdm(entries):
         if entry["query"] in already_done:
             continue
-        result = safe_judge(entry)
+        result = create_ds(entry)
         fout.write(json.dumps(result) + "\n")
         fout.flush()  # ensure write is safe in case of crash

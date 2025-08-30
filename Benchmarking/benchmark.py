@@ -180,7 +180,7 @@ def bench(model, tokenizer, prompt_instruction=None):
     print(f"GSM8K Accuracy: {results['accuracy']*100:.2f}% "
           f"({results['correct']}/{results['total']})")
     print("Running GPT on results for cognitive decomposition...")
-    gpt = GPT(model="gpt-4.1")
-    gpt_bench = GPT_Bench(gpt, results['details'])
-    results = gpt_bench.bench(limit=50)
+    # gpt = GPT(model="gpt-4.1")
+    # gpt_bench = GPT_Bench(gpt, results['details'])
+    # results = gpt_bench.bench(limit=50)
     return results
