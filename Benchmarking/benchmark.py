@@ -134,7 +134,7 @@ class GSM8K_Bench:
         numbers = re.findall(r"-?\d+\.?\d*", text)
         return numbers[-1] if numbers else None
 
-    def evaluate(self, limit=None, prompt=None):
+    def evaluate(self, limit=None, prompt:str=None):
         total, correct = 0, 0
         results = []
         if prompt is None:
@@ -173,9 +173,9 @@ class GSM8K_Bench:
         return {"accuracy": acc, "total": total, "correct": correct, "details": results}
 
 
-def bench(model, tokenizer, prompt_instruction=None):
+def bench(model, tokenizer, prompt_instruction:str=None):
     gsm8k = GSM8K()
-    bench = GSM8K_Bench(model, tokenizer, gsm8k, device='auto', prompt=prompt_instruction)
+    bench = GSM8K_Bench(model, tokenizer, gsm8k, device="cuda" if torch.cuda.is_available() else "cpu")
     results = bench.evaluate(limit=50, prompt=prompt_instruction)  # limit for quicker test run
     print(f"GSM8K Accuracy: {results['accuracy']*100:.2f}% "
           f"({results['correct']}/{results['total']})")

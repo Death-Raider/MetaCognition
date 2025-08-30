@@ -33,3 +33,5 @@ Answer:
 2025-08-26 13:39:23,308 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
 2025-08-26 13:39:23,308 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-0.5B-Instruct", "max_len": 512, "lr": 5e-06, "batch_size": 2, "epochs": 10, "beta": 0.2}
 2025-08-26 13:39:23,308 - Meta-Cognition - INFO - Device set as:cpu
+2025-08-30 17:12:58,089 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-08-30 17:13:50,395 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
