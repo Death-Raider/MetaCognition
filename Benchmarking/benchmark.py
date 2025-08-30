@@ -143,7 +143,8 @@ class GSM8K_Bench:
                 "Let's think step by step.\n\n"
                 "Q: {query}\nA:"
             )
-        for i, ex in enumerate(tqdm(self.dataset, desc=f"Evaluating GSM8K: acc - {correct}/{total}")):
+        pbar = tqdm(self.dataset, desc=f"Evaluating GSM8K: acc - {correct}/{total}")
+        for i, ex in enumerate(pbar):
             if limit and i >= limit:
                 break
 
@@ -168,7 +169,10 @@ class GSM8K_Bench:
                 "correct": is_correct,
             })
             # logger.info(f"Q: {q}\nG: {gold_num}\nP: {pred_text}\nCorrect: {is_correct}\n")
+            
             acc = correct / total if total > 0 else 0.0
+            pbar.set_description(f"Evaluating GSM8K: acc - {correct}/{total} ({acc:.2%})")        
+        pbar.close()
         return {"accuracy": acc, "total": total, "correct": correct, "details": results}
 
 
