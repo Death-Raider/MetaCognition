@@ -77,7 +77,7 @@ class GPT_Bench:
             {"role": "user", "content": f"{self.instruction_prompt}\n\nHere is the input:\n{json.dumps(entry, indent=2)}"},
         ]
 
-    def parse_eval_output(output_text):
+    def parse_eval_output(self,output_text):
         try:
             result = json.loads(output_text)
         except json.JSONDecodeError:
@@ -182,7 +182,7 @@ class GSM8K_Bench:
 def bench(model, tokenizer, prompt_instruction:str=None):
     gsm8k = GSM8K()
     bench = GSM8K_Bench(model, tokenizer, gsm8k, device="cuda" if torch.cuda.is_available() else "cpu")
-    results = bench.evaluate(limit=50, prompt=prompt_instruction)  # limit for quicker test run
+    results = bench.evaluate(limit=30, prompt=prompt_instruction)  # limit for quicker test run
     print(f"GSM8K Accuracy: {results['accuracy']*100:.2f}% "
           f"({results['correct']}/{results['total']})")
     print("Running GPT on results for cognitive decomposition...")
