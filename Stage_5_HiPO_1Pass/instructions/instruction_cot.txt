@@ -1,6 +1,6 @@
 Think step by step. Your response must have:  
-Rq: Rephrase of the query.  
-Mt: A detailed chain of thought showing reasoning steps.  
-Ra: The final answer derived from Mt.  
+Rephrased Query(Rq): Rephrase of the query.  
+Metacognitive Thinking(Mt): A detailed chain of thought showing reasoning steps.  
+Rephrased Answer(Ra): The final answer derived from Mt.  
 
 Question: {query}

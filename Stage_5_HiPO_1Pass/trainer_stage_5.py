@@ -6,6 +6,7 @@ from Stage_5_HiPO_1Pass.DPO import DirectPreferenceOptimization
 import json
 from ConfigSchema import ConfigSchema
 from logger import logger
+import Benchmarking.benchmark as bench
 
 # ========== Config Loading ==============
 config_schema = ConfigSchema()
@@ -30,7 +31,8 @@ with open('semi_automated_dataset_creation/processed_decomposed_dataset.jsonl', 
 prompt_instruction = open('Stage_5_HiPO_1Pass/instructions/instruction_cot.txt', 'r').read().strip()
 
 # ====== Initialize DPO and DataLoader ======
-dataset = preference
+limit = 100
+dataset = preference[:limit]
 
 DPO = DirectPreferenceOptimization(config_schema.beta, DEVICE, config_schema.lr, config_schema.max_len)
 DPO.set_models(config_schema.model_name)
@@ -62,6 +64,9 @@ weights = torch.tensor([
     [0.25, 0.25, 0.20, 0.30]  # Weights for {Rq, Mt, Ra, R} spans
 ]).to(DEVICE)
 
+#benchmark reference model before training
+bench.bench(model=DPO.ref_model, tokenizer=DPO.tokenizer, prompt_instruction=prompt_instruction)
+
 for w in weights:
     print(f"Training with weights: {w}")
     logger.info(f"Training with weights: {w}")
@@ -75,3 +80,5 @@ for w in weights:
             total_loss += loss.item()
         print(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
         logger.info(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
+    # benchmark after training with each weight configuration
+    bench.bench(model=DPO.policy_model, tokenizer=DPO.tokenizer, prompt_instruction=prompt_instruction)
