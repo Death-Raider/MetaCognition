@@ -10,16 +10,31 @@ Given:
 Your job:
 1. Evaluate if the model's prediction is correct, based only on gold and pred_num.
 2. Rate the prediction on the following metrics:
-   - accuracy: 1 if pred_num == gold, else 0
-   - faithfulness: Is pred_text consistent with pred_num? (0–1 score)
-   - reasoning_quality: Did the pred_text explain the answer logically? (0–5 score)
-   - verbosity: Was the pred_text too short, just right, or too long? (categorical: short/adequate/long)
+  - Logical Flow: Each step should naturally follow from the previous one without abrupt jumps.
+  - Structural Organization: Reasoning should be clearly structured (e.g., ordered steps, no circular loops).
+  - Consistency: Assumptions, terms, and symbols should remain uniform throughout the reasoning.
+  - Factual Correctness: Referenced facts, formulas, or values should be correct.
+  - Domain Knowledge Application: Correct concepts and theorems should be applied appropriately.
+  - Reasoning Validity: Intermediate steps should avoid logical or computational errors.
+  - Final Answer Correctness: The ultimate solution should match the ground truth when possible.
+  - Strategy Usefulness: The chosen reasoning approach should be appropriate for the problem.
+  - Progress Toward Solution: Intermediate steps should reduce uncertainty and advance toward a solution.
+  - Partial Success Recognition: Valid reasoning paths should be acknowledged even if the final answer is incorrect.
+  - Error Robustness: Mistakes should still preserve useful structure or insight when possible.
 
 Return ONLY a valid JSON in the following format:
 {
-  "accuracy": <0 or 1>,
-  "faithfulness": <float>,
-  "reasoning_quality": <int 0–5>,
+  "Logical Flow": <float 0-10>,
+  "Structural Organization": <float>,
+  "Consistency": <float>,
+  "Factual Correctness": <float>,
+  "Domain Knowledge Application": <float>,
+  "Reasoning Validity": <float>,
+  "Final Answer Correctness": <float>,
+  "Strategy Usefulness": <float>,
+  "Progress Toward Solution": <float>,
+  "Partial Success Recognition": <float>,
+  "Error Robustness": <float>
   "verbosity": "<short|adequate|long>",
   "final_comment": "<one sentence summary>"
 }

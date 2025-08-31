@@ -7,6 +7,7 @@ import os
 import time
 import httpx
 import json
+import pandas as pd
 
 class GSM8K:
     """
@@ -28,6 +29,8 @@ class GPT:
     def __init__(self, model):
         self.model_name = model
         # Load client
+        print("Using OpenAI model:", self.model_name)
+        print("Ensure your OPENAI_API_KEY environment variable is set.")
         self.client = httpx.Client(
             headers={
                 "Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}",
@@ -183,7 +186,24 @@ def bench(model, tokenizer, prompt_instruction:str=None):
     print(f"GSM8K Accuracy: {results['accuracy']*100:.2f}% "
           f"({results['correct']}/{results['total']})")
     print("Running GPT on results for cognitive decomposition...")
-    # gpt = GPT(model="gpt-4.1")
-    # gpt_bench = GPT_Bench(gpt, results['details'])
-    # results = gpt_bench.bench(limit=50)
+    gpt = GPT(model="gpt-4.1")
+    gpt_bench = GPT_Bench(gpt, results['details'])
+    results = pd.DataFrame(gpt_bench.bench(limit=50))
+    imp_columns = [
+        "Logical Flow",
+        "Structural Organization",
+        "Consistency",
+        "Factual Correctness",
+        "Domain Knowledge Application",
+        "Reasoning Validity",
+        "Final Answer Correctness",
+        "Strategy Usefulness",
+        "Progress Toward Solution",
+        "Partial Success Recognition",
+        "Error Robustness",
+        "verbosity",
+        "final_comment"
+    ]
+    print("Cognitive decomposition results:\n", results[imp_columns].describe())
+
     return results
