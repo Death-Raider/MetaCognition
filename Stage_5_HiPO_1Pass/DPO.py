@@ -46,19 +46,24 @@ class DirectPreferenceOptimization:
             for i in range(len(batch))
         ]
 
-        Rq_b = self.tokenizer([b['Rq_b'] for b in batch], return_tensors="pt")
-        Mt_b = self.tokenizer([b['Mt_b'] for b in batch], return_tensors="pt")
-        Ra_b = self.tokenizer([b['Ra_b'] for b in batch], return_tensors="pt")
+        Rq_b = self.tokenizer([b['Rq_b'] for b in batch], return_tensors="pt",padding=True)
+        Mt_b = self.tokenizer([b['Mt_b'] for b in batch], return_tensors="pt",padding=True)
+        Ra_b = self.tokenizer([b['Ra_b'] for b in batch], return_tensors="pt",padding=True)
+        y_b_lengths = [
+            Rq_b["attention_mask"].sum(dim=1).tolist(),
+            Mt_b["attention_mask"].sum(dim=1).tolist(),
+            Ra_b["attention_mask"].sum(dim=1).tolist()
+        ]
         Rq_b_span = [
-            (0, len(Rq_b['input_ids'][i]))
+            (0, y_b_lengths[0][i])
             for i in range(len(batch))
         ]
         Mt_b_span = [
-            (len(Rq_b['input_ids'][i]), len(Rq_b['input_ids'][i])+len(Mt_b['input_ids'][i]))
+            (y_b_lengths[0][i], y_b_lengths[0][i]+y_b_lengths[1][i])
             for i in range(len(batch))
         ]
         Ra_b_span = [
-            (len(Rq_b['input_ids'][i])+len(Mt_b['input_ids'][i]), len(Rq_b['input_ids'][i])+len(Mt_b['input_ids'][i]+len(Ra_b['input_ids'][i])))
+            ( y_b_lengths[0][i]+y_b_lengths[1][i],  y_b_lengths[0][i]+y_b_lengths[1][i]+y_b_lengths[2][i])
             for i in range(len(batch))
         ]
         # joined tokeniation might be different from individual tokenization due to truncation/padding
