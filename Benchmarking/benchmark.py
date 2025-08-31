@@ -99,7 +99,7 @@ class GPT_Bench:
             eval_result = self.parse_eval_output(output_text)
             if eval_result is not None:
                 entry.update(eval_result)
-                logger.info(f"Eval result: {eval_result}")
+                # logger.info(f"Eval result: {eval_result}")
             else:
                 continue
             if int(rate_information.get('requests_left',0)) <=1 or int(rate_information.get('tokens_left',0)) <= 100:

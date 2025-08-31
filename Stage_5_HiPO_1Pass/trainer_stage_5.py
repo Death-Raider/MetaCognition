@@ -68,7 +68,7 @@ weights = torch.tensor([
 ]).to(DEVICE)
 
 #benchmark reference model before training
-# bench.bench(model=DPO.ref_model, tokenizer=DPO.tokenizer, prompt_instruction=prompt_instruction)
+bench.bench(model=DPO.ref_model, tokenizer=DPO.tokenizer, prompt_instruction=prompt_instruction)
 
 for w in weights:
     print(f"Training with weights: {w}")
@@ -86,4 +86,5 @@ for w in weights:
         print(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
         logger.info(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
     # benchmark after training with each weight configuration
-    # bench.bench(model=DPO.policy_model, tokenizer=DPO.tokenizer, prompt_instruction=prompt_instruction)
+    DPO.policy_model.save_pretrained(f"model_w{w}", from_pt=True) 
+    bench.bench(model=DPO.policy_model, tokenizer=DPO.tokenizer, prompt_instruction=prompt_instruction)
