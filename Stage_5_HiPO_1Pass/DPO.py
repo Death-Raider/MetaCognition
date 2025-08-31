@@ -24,12 +24,53 @@ class DirectPreferenceOptimization:
 
     def collate_fn(self,batch):
         prompt_inputs = self.tokenizer([b['query'] for b in batch], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len)
-        output_a = self.tokenizer([b['output_a'] for b in batch], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len)
-        output_b = self.tokenizer([b['output_b'] for b in batch], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len)
+        # for span calculation
+        Rq_a = self.tokenizer([b['Rq_a'] for b in batch], return_tensors="pt")
+        Mt_a = self.tokenizer([b['Mt_a'] for b in batch], return_tensors="pt")
+        Ra_a = self.tokenizer([b['Ra_a'] for b in batch], return_tensors="pt")
+        Rq_a_span = [
+            (0, len(Rq_a['input_ids'][i]))
+            for i in range(len(batch))
+        ]
+        Mt_a_span = [
+            (len(Rq_a['input_ids'][i]), len(Rq_a['input_ids'][i])+len(Mt_a['input_ids'][i]))
+            for i in range(len(batch))
+        ]
+        Ra_a_span = [
+            (len(Rq_a['input_ids'][i])+len(Mt_a['input_ids'][i]), len(Rq_a['input_ids'][i])+len(Mt_a['input_ids'][i]+len(Ra_a['input_ids'][i])))
+            for i in range(len(batch))
+        ]
+
+        Rq_b = self.tokenizer([b['Rq_b'] for b in batch], return_tensors="pt")
+        Mt_b = self.tokenizer([b['Mt_b'] for b in batch], return_tensors="pt")
+        Ra_b = self.tokenizer([b['Ra_b'] for b in batch], return_tensors="pt")
+        Rq_b_span = [
+            (0, len(Rq_b['input_ids'][i]))
+            for i in range(len(batch))
+        ]
+        Mt_b_span = [
+            (len(Rq_b['input_ids'][i]), len(Rq_b['input_ids'][i])+len(Mt_b['input_ids'][i]))
+            for i in range(len(batch))
+        ]
+        Ra_b_span = [
+            (len(Rq_b['input_ids'][i])+len(Mt_b['input_ids'][i]), len(Rq_b['input_ids'][i])+len(Mt_b['input_ids'][i]+len(Ra_b['input_ids'][i])))
+            for i in range(len(batch))
+        ]
+        # joined tokeniation might be different from individual tokenization due to truncation/padding
+        output_a = self.tokenizer([b['new_output_a'] for b in batch], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len)
+        output_b = self.tokenizer([b['new_output_b'] for b in batch], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len)
+        
         return {
             "query": {k: v.to(self.device) for k, v in prompt_inputs.items()},
             "output_a": {k: v.to(self.device) for k, v in output_a.items()},
             "output_b": {k: v.to(self.device) for k, v in output_b.items()},
+            "Ra_a_span": Ra_a_span,
+            "Mt_a_span": Mt_a_span,
+            "Rq_a_span": Rq_a_span,
+
+            "Ra_b_span": Ra_b_span,
+            "Mt_b_span": Mt_b_span,
+            "Rq_b_span": Rq_b_span
         } | {k:[b[k] for b in batch] for k in batch[0].keys() if k not in ['query', 'output_a', 'output_b']}
 
     def compute_log_prob_spans(self, model, input_ids, input_mask, output_ids, spans: list[list[int]], grad=True):
@@ -117,18 +158,18 @@ class DirectPreferenceOptimization:
             input_ids=new_query['input_ids'],
             input_mask=new_query['attention_mask'],
             output_ids=batch['output_a']['input_ids'], 
-            spans=[ batch['M_a_span'], 
-                batch['T_a_span'],
-                batch['A_a_span'] ]
+            spans=[ batch['Rq_a_span'], 
+                batch['Mt_a_span'],
+                batch['Ra_a_span'] ]
         )
         B_log_probs, [B_log_probs_M, B_log_probs_T, B_log_probs_A] = self.compute_log_prob_spans(
             self.policy_model, 
             input_ids=new_query['input_ids'],
             input_mask=new_query['attention_mask'],
             output_ids=batch['output_b']['input_ids'], 
-            spans=[ batch['M_b_span'], 
-                batch['T_b_span'],
-                batch['A_b_span'] ]
+            spans=[ batch['Rq_b_span'], 
+                batch['Mt_b_span'],
+                batch['Ra_b_span'] ]
         )
 
         A_log_probs_ref, [A_log_probs_M_ref, A_log_probs_T_ref, A_log_probs_A_ref] = self.compute_log_prob_spans(
@@ -136,9 +177,9 @@ class DirectPreferenceOptimization:
             input_ids=new_query['input_ids'],
             input_mask=new_query['attention_mask'],
             output_ids=batch['output_a']['input_ids'], 
-            spans=[ batch['M_a_span'], 
-                batch['T_a_span'],
-                batch['A_a_span'] ],
+            spans=[ batch['Rq_a_span'], 
+                batch['Mt_a_span'],
+                batch['Ra_a_span'] ],
             grad=False
         )
         B_log_probs_ref, [B_log_probs_M_ref, B_log_probs_T_ref, B_log_probs_A_ref] = self.compute_log_prob_spans(
@@ -146,9 +187,9 @@ class DirectPreferenceOptimization:
             input_ids=new_query['input_ids'],
             input_mask=new_query['attention_mask'],
             output_ids=batch['output_b']['input_ids'], 
-            spans=[ batch['M_b_span'], 
-                batch['T_b_span'],
-                batch['A_b_span'] ],
+            spans=[ batch['Rq_b_span'], 
+                batch['Mt_b_span'],
+                batch['Ra_b_span'] ],
             grad=False
         )
 
@@ -164,15 +205,12 @@ class DirectPreferenceOptimization:
         B_loss_T = B_log_probs_T - B_log_probs_T_ref
         B_loss_A = B_log_probs_A - B_log_probs_A_ref
 
-        batch_label = torch.as_tensor(batch['label'], device=self.device, dtype=torch.float32)
-        # sign: -1 if label > 0 else 1  (vectorized)
-        sign = torch.where(batch_label > 0, -1.0, 1.0)  # shape: [batch]
 
         # preferred - dispreferred
-        loss_M = (A_loss_M - B_loss_M)*sign
-        loss_T = (A_loss_T - B_loss_T)*sign
-        loss_A = (A_loss_A - B_loss_A)*sign
-        loss_MTAS = (A_loss - B_loss)*sign
+        loss_M = (A_loss_M - B_loss_M)
+        loss_T = (A_loss_T - B_loss_T)
+        loss_A = (A_loss_A - B_loss_A)
+        loss_MTAS = (A_loss - B_loss)
 
         # logger.info(f"A_loss_M: {A_loss_M}")
         # logger.info(f"B_loss_M: {B_loss_M}")
@@ -188,7 +226,7 @@ class DirectPreferenceOptimization:
         w_A = weights[2]
         w_MTAS = weights[3]
 
-        strength = torch.abs(batch_label) / 3.0  # Normalized to [0,1]
+        strength = 1.0
         loss_M = -strength * torch.nn.functional.logsigmoid(beta * loss_M + 0.01)
         loss_T = -strength * torch.nn.functional.logsigmoid(beta * loss_T + 0.01)
         loss_A = -strength * torch.nn.functional.logsigmoid(beta * loss_A + 0.01)
