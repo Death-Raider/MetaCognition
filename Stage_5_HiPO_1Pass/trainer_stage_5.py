@@ -77,7 +77,7 @@ for w in weights:
         total_loss = 0
         for batch in tqdm(loader, desc=f"Epoch {epoch + 1} Loss: {loss.item():.2f}"):
             DPO.policy_optimizer.zero_grad()
-            loss = DPO.dpo_loss(batch, Prompt_Instruction = gen_prompt_ids,beta = config_schema.beta, weights=weights)
+            loss = DPO.dpo_loss(batch, Prompt_Instruction = gen_prompt_ids,beta = config_schema.beta, weights=w)
             loss.backward()
             DPO.policy_optimizer.step()
             total_loss += loss.item()
