@@ -25,19 +25,24 @@ class DirectPreferenceOptimization:
     def collate_fn(self,batch):
         prompt_inputs = self.tokenizer([b['query'] for b in batch], return_tensors="pt", padding=True, truncation=True, max_length=self.max_len)
         # for span calculation
-        Rq_a = self.tokenizer([b['Rq_a'] for b in batch], return_tensors="pt")
-        Mt_a = self.tokenizer([b['Mt_a'] for b in batch], return_tensors="pt")
-        Ra_a = self.tokenizer([b['Ra_a'] for b in batch], return_tensors="pt")
+        Rq_a = self.tokenizer([b['Rq_a'] for b in batch], return_tensors="pt", padding=True)
+        Mt_a = self.tokenizer([b['Mt_a'] for b in batch], return_tensors="pt", padding=True)
+        Ra_a = self.tokenizer([b['Ra_a'] for b in batch], return_tensors="pt", padding=True)
+        y_a_lengths = [
+            Rq_a["attention_mask"].sum(dim=1).tolist(),
+            Mt_a["attention_mask"].sum(dim=1).tolist(),
+            Ra_a["attention_mask"].sum(dim=1).tolist()
+        ]
         Rq_a_span = [
-            (0, len(Rq_a['input_ids'][i]))
+            (0, y_a_lengths[0][i])
             for i in range(len(batch))
         ]
         Mt_a_span = [
-            (len(Rq_a['input_ids'][i]), len(Rq_a['input_ids'][i])+len(Mt_a['input_ids'][i]))
+            (y_a_lengths[0][i], y_a_lengths[0][i]+y_a_lengths[1][i])
             for i in range(len(batch))
         ]
         Ra_a_span = [
-            (len(Rq_a['input_ids'][i])+len(Mt_a['input_ids'][i]), len(Rq_a['input_ids'][i])+len(Mt_a['input_ids'][i]+len(Ra_a['input_ids'][i])))
+            ( y_a_lengths[0][i]+y_a_lengths[1][i],  y_a_lengths[0][i]+y_a_lengths[1][i]+y_a_lengths[2][i])
             for i in range(len(batch))
         ]
 
