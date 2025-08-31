@@ -75,12 +75,14 @@ for w in weights:
     logger.info(f"Training with weights: {w}")
     for epoch in range(config_schema.epochs):
         total_loss = 0
-        for batch in tqdm(loader, desc=f"Epoch {epoch + 1} Loss: {loss.item():.2f}"):
+        data_loader = tqdm(loader, desc=f"Epoch {epoch + 1} Loss: {loss.item():.2f}")
+        for batch in data_loader:
             DPO.policy_optimizer.zero_grad()
             loss = DPO.dpo_loss(batch, Prompt_Instruction = gen_prompt_ids,beta = config_schema.beta, weights=w)
             loss.backward()
             DPO.policy_optimizer.step()
             total_loss += loss.item()
+            data_loader.set_description(f"Epoch {epoch + 1} Loss: {loss.item():.4f}")
         print(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
         logger.info(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
     # benchmark after training with each weight configuration
