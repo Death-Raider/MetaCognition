@@ -92,6 +92,7 @@ class GPT_Bench:
 
     def bench(self, limit=50):
         for i,entry in enumerate(self.dataset):
+            print(f"Evaluating entry {i+1}/{len(self.dataset)}")
             if (limit is not None) and (i >= limit):
                 break
             message = self.build_messages(entry)
@@ -121,7 +122,7 @@ class GSM8K_Bench:
                 **inputs,
                 max_new_tokens=max_new_tokens,
                 do_sample=True,
-                temperature=0.1,
+                temperature=0.0,
                 pad_token_id=self.tokenizer.eos_token_id,
             )
         decoded = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
