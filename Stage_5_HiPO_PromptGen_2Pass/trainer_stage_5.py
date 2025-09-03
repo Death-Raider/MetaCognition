@@ -9,13 +9,7 @@ from logger import logger
 
 # ========== Config Loading ==============
 config_schema = ConfigSchema()
-with open("config.cfg", "r") as cfg:
-    config = {}
-    for line in cfg:
-        if line.strip() and not line.startswith("#"):
-            key, value = line.strip().split("=")
-            config[key.strip()] = value.strip()
-config_schema.from_dict(config)
+config_schema.from_file("config.cfg")
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 print("Config loaded:", config_schema)

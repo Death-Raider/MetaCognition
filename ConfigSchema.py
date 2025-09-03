@@ -31,6 +31,15 @@ class ConfigSchema:
         self.batch_size = int(dict.get("BATCH_SIZE", self.batch_size))
         self.epochs = int(dict.get("EPOCHS", self.epochs))
         self.beta = float(dict.get("BETA", self.beta))
+    
+    def from_file(self, config_path:str):
+        with open(config_path, "r") as cfg:
+            config = {}
+            for line in cfg:
+                if line.strip() and not line.startswith("#"):
+                    key, value = line.strip().split("=")
+                    config[key.strip()] = value.strip()
+        self.from_dict(config)
 
     def allowed_models(self):
         # https://huggingface.co/collections/ehristoforu/the-best-small-llm-instruct-models-669e89c6263d01888798cb7a
