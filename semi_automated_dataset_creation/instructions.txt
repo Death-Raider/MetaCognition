@@ -2,7 +2,7 @@ You are given a dataset of instructions, two model outputs (`output_a` and `outp
 
 Your task is to **rewrite both outputs** into the following cognitive structure:
 
-1. **Refined Query (\$R\_q\$)** — Rewrite the original query into an easily digestible, simplified form.
+1. **Refined Query (\$R\_q\$)** — Rewrite the original query into an elaborate one that contains more explanations or context for answering the original query.
 2. **Meta-Thinking (\$M\_t\$)** — Provide structured reasoning steps that logically lead to the answer.
 3. **Refined Answer (\$R\_a\$)** — Give the final, polished response that directly addresses the query, based on \$M\_t\$.
 
@@ -30,9 +30,8 @@ Return the result in the following JSON structure:
 
 ### Rules:
 
-* Do **not** provide explanations or token spans.
-* Each section (\$R\_q\$, \$M\_t\$, \$R\_a\$) must be a **direct rewritten version** of the model’s output, not a commentary.
-* Keep \$R\_q\$ as a short, clear restatement of the original query.
+* Each section (\$R\_q\$, \$M\_t\$, \$R\_a\$) must be a direct rewritten version of the model's output, not a commentary.
+* Keep \$R\_q\$ as a detailed, background that can help understand the query even better.
 * Keep \$M\_t\$ as step-by-step reasoning or structured thought.
 * Keep \$R\_a\$ as the concise final answer.
 
