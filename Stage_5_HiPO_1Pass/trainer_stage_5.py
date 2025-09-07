@@ -103,7 +103,7 @@ for w in weights:
     eval_metrics["bench_resullts"].append(bench_results)
     eval_metrics["loss_history"].append(loss_history_epoch)
 
-    training_history.append(eval_metrics)
+training_history.append(eval_metrics)
 
 with open('Stage_5_HiPO_1Pass/training_history.json', 'w') as f:
     json.dump(training_history, f, indent=4)
