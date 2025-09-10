@@ -56,23 +56,32 @@ loss = torch.tensor(0.0).to(DEVICE)
 # for training a model on all weight configurations one after another
 # w ∈ R^6 where w = [w_Rq, w_Mt, w_Ra, w_R, lr, epochs]
 weights = torch.tensor([
-    [1.00, 0.00, 0.00, 0.00, 1e-5, 5],  # Weights for Rq span only
-    [0.00, 1.00, 0.00, 0.00, 1e-5, 5],  # Weights for Mt span only
-    [0.00, 0.00, 1.00, 0.00, 1e-5, 5],  # Weights for Ra span only
-    [0.25, 0.25, 0.20, 0.30, 1e-5, 5]  # Weights for {Rq, Mt, Ra, R} spans
+    [0.50, 0.20, 0.20, 0.20, 1e-5, 5],
+    [0.20, 0.20, 0.20, 0.50, 1e-5, 5],
+    [0.30, 0.20, 0.30, 0.30, 5e-6, 5],
+    [0.25, 0.25, 0.20, 0.30, 5e-6, 5]
 ]).to(DEVICE)
 
-#benchmark reference model before training
-print("Benchmarking reference model before training...")
-bench.bench(model=DPO.ref_model, tokenizer=DPO.tokenizer, prompt_instruction=prompt_instruction)
-print("")
-print("Starting training...")
 eval_metrics = {
     "weights": [],
     "epoch": [],
     "bench_resullts": [],
     "loss_history": []
 }
+
+#benchmark reference model before training
+print("Benchmarking reference model before training...")
+bench_results = bench.bench(model=DPO.ref_model, tokenizer=DPO.tokenizer, prompt_instruction=prompt_instruction)
+bench_results = bench_results.to_dict()
+
+eval_metrics["weights"].append([0.0, 0.0, 0.0, 0.0])  # no weights for reference model
+eval_metrics["epoch"].append(0)
+eval_metrics["bench_resullts"].append(bench_results)
+eval_metrics["loss_history"].append([])  # no loss history for reference model
+
+print("")
+print("Starting training...")
+
 training_history:list[dict] = []
 
 for w in weights:
