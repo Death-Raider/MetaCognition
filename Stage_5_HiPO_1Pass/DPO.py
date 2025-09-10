@@ -10,6 +10,7 @@ class DirectPreferenceOptimization:
         self.max_len = MAX_LEN
 
     def set_models(self, MODEL_NAME):
+        # sets tokenizer, reference model, policy model, and optimizer
         self.tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
         self.tokenizer.pad_token = self.tokenizer.eos_token
         self.ref_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, dtype=torch.bfloat16).to(self.device)
