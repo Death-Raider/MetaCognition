@@ -184,7 +184,7 @@ class MATH500_Bench:
                 "Problem: {query}\nAnswer:"
             )
 
-        pbar = tqdm(self.dataset, desc=f"Evaluating MATH-500: acc - {correct}/{total}")
+        pbar = tqdm(self.dataset, desc=f"Evaluating MATH-500: acc - {correct}({0})/{total}")
         for i, ex in enumerate(pbar):
             if limit and i >= limit:
                 break
@@ -207,26 +207,29 @@ class MATH500_Bench:
             
             # compare using sympy when available (sympy objects) else string equality
             is_correct = self.sympy_checker(pred_norm_list[-1], gold_norm) if pred_norm_list else False
-            is_partially_correct = False
-
-            for pred_norm in pred_norm_list:
-                is_partially_correct = self.sympy_checker(pred_norm, gold_norm) or is_partially_correct
+            is_partially_correct = any(self.sympy_checker(pred, gold_norm) for pred in pred_norm_list)
 
             results.append({
                 "question": q,
                 "gold": gold_raw,
+                "gold_norm": str(gold_norm),
                 "pred_text": pred_text,
                 "pred_raw": pred_raw,
                 "extract_method": extract_method,
-                "pred_norm": str(pred_norm),
-                "gold_norm": str(gold_norm),
+                "pred_norm": str(pred_norm_list),
                 "correct": bool(is_correct),
+                "partial_correct": bool(is_partially_correct),
             })
 
             print(results[-1])
 
             acc = correct / total if total > 0 else 0.0
-            pbar.set_description(f"Evaluating MATH-500: acc - {correct}/{total} ({acc:.2%})")
+            total += 1
+            correct += int(is_correct)
+            partial += int(is_partially_correct)
+            pbar.set_description(f"Evaluating MATH-500: acc - {partial}({correct})/{total} ({acc:.2%})")
+
+
         pbar.close()
 
         return {"accuracy": acc, "total": total, "correct": correct, "details": results}
