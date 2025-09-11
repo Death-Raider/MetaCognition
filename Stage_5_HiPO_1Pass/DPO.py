@@ -249,3 +249,29 @@ class DirectPreferenceOptimization:
         loss = torch.mean(torch.clamp(loss, min=0.0))  # Ensure non-negative loss
         # logger.info(f"Loss: {loss.item():.4f}")
         return loss
+    
+    def sft_loss(self, batch, Prompt_Instruction):
+        batch_size = batch['output_a']['input_ids'].size(0)
+        new_query = {}
+        new_query['input_ids'] = torch.cat(
+            [batch['query']['input_ids'], Prompt_Instruction['input_ids'].repeat(batch_size,1)],
+            dim=1
+        )
+        new_query['attention_mask'] = torch.cat(
+            [batch['query']['attention_mask'], Prompt_Instruction['attention_mask'].repeat(batch_size,1)],
+            dim=1
+        )
+
+        # Just maximize likelihood of the "preferred" output (output_a)
+        inputs = torch.cat([new_query['input_ids'], batch['output_a']['input_ids'][:, :-1]], dim=1)
+        attention_mask = torch.cat([new_query['attention_mask'], torch.ones_like(batch['output_a']['input_ids'][:, :-1])], dim=1)
+
+        labels = inputs.clone()
+        labels[:, :new_query['input_ids'].size(1)] = -100  # ignore prompt part
+
+        outputs = self.policy_model(
+            input_ids=inputs,
+            attention_mask=attention_mask,
+            labels=labels
+        )
+        return outputs.loss
