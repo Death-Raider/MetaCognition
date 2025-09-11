@@ -1,7 +1,13 @@
 import re
 import torch
 from datasets import load_dataset
-import tqdm
+from tqdm import tqdm
+
+try:
+    import sympy as sp
+    HAVE_SYMPY = True
+except Exception:
+    HAVE_SYMPY = False
 
 class MATH500:
     """
@@ -40,7 +46,7 @@ class MATH500_Bench:
                 **inputs,
                 max_new_tokens=max_new_tokens,
                 do_sample=True,              # keep interface same as your GSM8K code
-                temperature=0.0,             # greedy
+                temperature=0.1,             # greedy
                 pad_token_id=self.tokenizer.eos_token_id,
             )
         decoded = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
@@ -51,38 +57,91 @@ class MATH500_Bench:
 
     @staticmethod
     def _extract_boxed(text: str):
-        """
-        Get the LAST \\boxed{...} occurrence (common convention in math evals).
-        """
-        matches = re.findall(r"\\boxed\\{(.+?)\\}", text, flags=re.DOTALL)
-        return matches[-1].strip() if matches else None
+            """
+            Prefer the last occurrence of \boxed{...}.
+            Accept optional surrounding $ ... $ or \( ... \).
+            """
+            if not text:
+                return None
+            # 1) match optional $ or \( around \boxed{...}
+            boxed_matches = re.findall(r'\\boxed\{((?:[^{}]|{[^{}]*})*)\}', text, flags=re.DOTALL)
+            if boxed_matches:
+                return boxed_matches
+        
+            return None
 
     @staticmethod
-    def _fallback_tail(text: str):
+    def _fallback_last_math_line(text: str):
         """
-        Fallback: use the last non-empty line as a crude final answer.
+        If no boxed answer, try to use the last non-empty line that looks like math.
+        We try a few heuristics: contains digits, parentheses, \frac, or typical math tokens.
         """
-        lines = [ln.strip() for ln in text.strip().splitlines() if ln.strip()]
-        return lines[-1] if lines else None
+        if not text:
+            return None
+        lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+        if not lines:
+            return None
+        # check last few lines for math-like content
+        for ln in reversed(lines[-3:]):  # examine up to last 3 non-empty lines
+            marked = re.findall(r"[0-9\\\(\)\[\]\{\}\+\-\*/=]|\\frac|\\pi|sqrt", ln)
+            if marked is not None and len(marked) >= 1:
+                return marked
+        # else just return the last non-empty line
+        return [lines[-1].strip()]
 
     @staticmethod
     def _latex_normalize(s: str):
         """
-        Light normalization for LaTeX-ish strings before exact compare.
-        (Removes whitespace, \\left/\\right, surrounding $...$, etc.)
+        Lightweight normalization of LaTeX-ish final answers to a canonical string.
+        - strips wrapping $...$ or \( ... \)
+        - removes \left/\right and thin spaces
+        - converts simple \frac{a}{b} -> (a)/(b)
+        - collapses whitespace
+        Returns normalized string (or None).
         """
         if s is None:
             return None
         s = s.strip()
-        # strip surrounding $...$
-        if s.startswith("$") and s.endswith("$"):
-            s = s[1:-1].strip()
-        # remove \left, \right and thin spaces
-        s = re.sub(r"\\left|\\right|\\,", "", s)
-        # collapse whitespace
+        # strip surrounding $ or \( \) or \( ... \) occurrences
+        s = re.sub(r"^\$+|\\begin\{.*?\}|\\end\{.*?\}|\$+$", "", s)
+        s = s.strip()
+        # remove surrounding \( \) or \[ \]
+        s = re.sub(r"^\\\(|\\\)$", "", s)
+        s = s.strip()
+        # remove \left and \right
+        s = re.sub(r"\\left|\\right", "", s)
+        # convert \pi to "pi" (so both sides are consistent)
+        s = s.replace(r"\pi", "pi")
+        # convert \frac{a}{b} to (a)/(b)
+        s = re.sub(r"\\frac\{\s*([^\{\}]+?)\s*\}\{\s*([^\{\}]+?)\s*\}", r"(\1)/(\2)", s)
+        # remove redundant whitespace
         s = re.sub(r"\s+", "", s)
         return s
-
+        
+    @staticmethod
+    def _canonicalize(s: str):
+        """
+        Try to create a canonical representation. If sympy is available, attempt symbolic simplification.
+        Otherwise return the normalized string.
+        """
+        if s is None:
+            return None
+        norm = MATH500_Bench._latex_normalize(s)
+        if norm is None:
+            return None
+    
+        if HAVE_SYMPY:
+            try:
+                # Replace caret with ** for pow if present
+                norm_for_sympy = norm.replace("^", "**")
+                expr = sp.sympify(norm_for_sympy)
+                simplified = sp.simplify(expr)
+                return simplified  # sympy object
+            except Exception:
+                # fallback to normalized string
+                return norm
+        else:
+            return norm
     def _extract_pred_answer(self, text: str):
         """
         Try \\boxed{...} first, then fallback to last line.
@@ -90,9 +149,20 @@ class MATH500_Bench:
         boxed = self._extract_boxed(text)
         if boxed:
             return boxed
-        return self._fallback_tail(text)
+        return self._fallback_last_math_line(text)
 
     # ---------- Evaluation ----------
+
+    def sympy_checker(self, expr1, expr2):
+        is_correct = False
+        if HAVE_SYMPY and isinstance(expr1, sp.Expr) and isinstance(expr2, sp.Expr):
+            try:
+                is_correct = (sp.simplify(expr1 - expr2) == 0) 
+            except Exception:
+                is_correct = (str(expr1) == str(expr2))
+        else:
+            is_correct = (str(expr1) == str(expr2))
+        return is_correct
 
     def evaluate(self, limit=None, prompt: str = None):
         """
@@ -110,7 +180,7 @@ class MATH500_Bench:
         if prompt is None:
             prompt = (
                 "Solve the following problem step by step. "
-                "Provide ONLY the final answer wrapped as \\boxed{...}.\n\n"
+                "Provide ONLY the final answer wrapped as \\boxed{{...}}.\n\n"
                 "Problem: {query}\nAnswer:"
             )
 
@@ -120,26 +190,40 @@ class MATH500_Bench:
                 break
 
             q, gold = ex["question"], ex["answer"]
-
             pred_text = self.generate(prompt.format(query=q), max_new_tokens=512)
-            pred_ans_raw = self._extract_pred_answer(pred_text)
 
-            gold_n = self._latex_normalize(gold)
-            pred_n = self._latex_normalize(pred_ans_raw)
+            # extraction:
+            pred_text_norm = self._latex_normalize(pred_text)
+            pred_raw = self._extract_boxed(pred_text_norm) # list of boxes
+            extract_method = "boxed"
+            if pred_raw is None or not pred_raw:
+                pred_raw = self._fallback_last_math_line(pred_text_norm) # list of lines or list of math like outputs
+                extract_method = "last_line"
+            
+            # canonicalize both gold and pred for comparison
+            gold_raw = ex["answer"]  # original from dataset
+            pred_norm_list = list(map(self._canonicalize,pred_raw))
+            gold_norm = self._canonicalize(gold_raw)
+            
+            # compare using sympy when available (sympy objects) else string equality
+            is_correct = self.sympy_checker(pred_norm_list[-1], gold_norm) if pred_norm_list else False
+            is_partially_correct = False
 
-            is_correct = (pred_n == gold_n)
-            total += 1
-            correct += int(is_correct)
+            for pred_norm in pred_norm_list:
+                is_partially_correct = self.sympy_checker(pred_norm, gold_norm) or is_partially_correct
 
             results.append({
-                "bench": 'MATH-500',
                 "question": q,
-                "gold": gold,                  # keep original gold for inspection
-                "pred_text": pred_text,        # full generation
-                "pred_num": pred_ans_raw,    # extracted final answer
-                # "match_norm": (pred_n, gold_n),
-                "correct": is_correct,
+                "gold": gold_raw,
+                "pred_text": pred_text,
+                "pred_raw": pred_raw,
+                "extract_method": extract_method,
+                "pred_norm": str(pred_norm),
+                "gold_norm": str(gold_norm),
+                "correct": bool(is_correct),
             })
+
+            print(results[-1])
 
             acc = correct / total if total > 0 else 0.0
             pbar.set_description(f"Evaluating MATH-500: acc - {correct}/{total} ({acc:.2%})")
