@@ -3,7 +3,7 @@ import os
 import time
 import json
 from logger import logger
-
+from tqdm import tqdm
 class GPT:
     def __init__(self, model):
         self.model_name = model
@@ -70,8 +70,8 @@ class GPT_Bench:
         return result
 
     def bench(self, limit=50):
-        for i,entry in enumerate(self.dataset):
-            print(f"Evaluating entry {i+1}/{len(self.dataset)}")
+        pbar = tqdm(self.dataset, desc=f"Evaluating GPT on {len(self.dataset)} entries")
+        for i,entry in enumerate(pbar):
             if (limit is not None) and (i >= limit):
                 break
             message = self.build_messages(entry)
@@ -85,4 +85,6 @@ class GPT_Bench:
             if int(rate_information.get('requests_left',0)) <=1 or int(rate_information.get('tokens_left',0)) <= 100:
                 logger.warning("Rate limit reached, waiting for reset...")
                 time.sleep(1)
+            pbar.set_description(f"Evaluating GPT on {len(self.dataset)} entries, processed {i+1}")
+        pbar.close()
         return self.dataset

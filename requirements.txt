@@ -3,3 +3,4 @@ transformers
 torch
 tqdm
 httpx
+huggingface_hub

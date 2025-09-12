@@ -60,8 +60,9 @@ def training(
             loss_history_epoch.append(total_loss / len(loader))
             print(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
             logger.info(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
+            # checkpoint after each epoch
+            DPO.policy_model.save_pretrained(f"Stage_5_HiPO_1Pass/models_saved/model_w{w}", from_pt=True)
         # benchmark after training with each weight configuration
-        DPO.policy_model.save_pretrained(f"Stage_5_HiPO_1Pass/model_w{w}", from_pt=True)
         bench_results = bench.bench(model=DPO.policy_model, tokenizer=DPO.tokenizer, prompt_instruction=prompt_instruction)
         bench_results = bench_results.to_dict()
 

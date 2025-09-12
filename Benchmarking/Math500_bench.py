@@ -176,7 +176,7 @@ class MATH500_Bench:
               "details": [ ... per-example dicts ... ]
             }
         """
-        total, correct = 0, 0
+        total, correct, partial = 0, 0, 0
         results = []
 
         if prompt is None:
@@ -230,7 +230,6 @@ class MATH500_Bench:
             correct += int(is_correct)
             partial += int(is_partially_correct)
             pbar.set_description(f"Evaluating MATH-500: acc - {partial}({correct})/{total} ({acc:.2%})")
-
 
         pbar.close()
 
