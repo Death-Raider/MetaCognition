@@ -45,9 +45,9 @@ def training(
     for w in weights:
         print(f"Training with weights: {w}")
         logger.info(f"Training with weights: {w}")
-        DPO.lr = w[-2]
+        DPO.lr = w[-2].item()
         loss_history_epoch = []
-        for epoch in range(w[-1]):
+        for epoch in range(int(w[-1].item())):
             total_loss = 0
             data_loader = tqdm(loader, desc=f"Epoch {epoch + 1} Loss: {loss.item():.2f}")
             for batch in data_loader:

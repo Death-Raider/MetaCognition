@@ -45,8 +45,8 @@ class MATH500_Bench:
             outputs = self.model.generate(
                 **inputs,
                 max_new_tokens=max_new_tokens,
-                do_sample=True,              # keep interface same as your GSM8K code
-                temperature=0.1,             # greedy
+                do_sample=False,              # keep interface same as your GSM8K code
+                # temperature=0.0,             # greedy
                 pad_token_id=self.tokenizer.eos_token_id,
             )
         decoded = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
@@ -102,6 +102,8 @@ class MATH500_Bench:
         if s is None:
             return None
         s = s.strip()
+        s = s.replace('\\\\', '\\')
+        s = s.replace('\\(', '(').replace('\\)', ')')
         # strip surrounding $ or \( \) or \( ... \) occurrences
         s = re.sub(r"^\$+|\\begin\{.*?\}|\\end\{.*?\}|\$+$", "", s)
         s = s.strip()
@@ -221,7 +223,7 @@ class MATH500_Bench:
                 "partial_correct": bool(is_partially_correct),
             })
 
-            print(results[-1])
+            # print(results[-1])
 
             acc = correct / total if total > 0 else 0.0
             total += 1
