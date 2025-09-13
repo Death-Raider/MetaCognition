@@ -6,9 +6,14 @@ Given:
 - pred_text: the raw text produced by the evaluated model
 - pred_num: the number extracted from pred_text
 - correct: a boolean flag (whether pred_num == gold)
+Optionally Given:
+- pred_raw: list of extracted answers
+- pred_norm: list of canonical form of extracted answers
+- partial_correct: a boolean flag (whether any in pred_norm == gold)
+- extract_method: 'boxed' or 'last line' to show where answers was extracted
 
 Your job:
-1. Evaluate if the model's prediction is correct, based only on gold and pred_num.
+1. Evaluate if the model's prediction is Correct. If The answer is correctly reached yet is marked with incorrect then override the pred_num and mention in final_comment as well as 'Final Answer Correctness'
 2. Rate the prediction on the following metrics:
   - Logical Flow: Each step should naturally follow from the previous one without abrupt jumps.
   - Structural Organization: Reasoning should be clearly structured (e.g., ordered steps, no circular loops).
