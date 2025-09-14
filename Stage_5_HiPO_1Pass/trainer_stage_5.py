@@ -74,7 +74,9 @@ def training(
                 total_loss += loss.item()
                 data_loader.set_description(f"Epoch {epoch + 1} Loss: {loss.item():.4f}")
             loss_history_epoch.append(total_loss / len(loader))
-            loss_component_history.append((total_loss_components / len(loader)).cpu().numpy().tolist())
+            loss_component_history.append(
+                (total_loss_components / len(loader)).to(torch.float32).cpu().numpy().tolist()
+            )
             print(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
             logger.info(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
             # checkpoint after each epoch
@@ -111,7 +113,7 @@ def init():
     prompt_instruction = open('Stage_5_HiPO_1Pass/instructions/instruction_few_shot.txt', 'r').read().strip()
 
     # ====== Initialize DPO and DataLoader ======
-    limit = 100
+    limit = 10000
     dataset = preference[:limit]
     for entry in dataset:
         entry["new_output_a"] = entry['Ra_a'] + "\n" + entry['Mt_a'] + "\n" + entry["Rq_a"]

@@ -201,7 +201,9 @@ class MATH500_Bench:
             if pred_raw is None or not pred_raw:
                 pred_raw = self._fallback_last_math_line(pred_text_norm) # list of lines or list of math like outputs
                 extract_method = "last_line"
-            
+            if pred_raw is None:
+                pred_raw = []
+                extract_method = 'No answers found'
             # canonicalize both gold and pred for comparison
             gold_raw = ex["answer"]  # original from dataset
             pred_norm_list = list(map(self._canonicalize,pred_raw))

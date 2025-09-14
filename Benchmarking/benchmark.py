@@ -42,5 +42,5 @@ def bench(model, tokenizer, prompt_instruction:str=None):
         "final_comment"
     ]
     print("Cognitive decomposition results:\n", results[imp_columns].describe())
-
+    print("overall accuracy: ", results["Final Answer Correctness"].mean())
     return results

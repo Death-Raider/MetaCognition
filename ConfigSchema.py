@@ -61,5 +61,6 @@ class ConfigSchema:
             'NeuralBeagle/NeuralBeagle-7B',
             'Qwen/Qwen1.5-7B', # it just a hater for no reason
             'Qwen/Qwen2-7B-Instruct',
+            'Qwen/Qwen2.5-7B-Instruct',
         ]
         return SMOL_MODELS + BIGG_MODELS

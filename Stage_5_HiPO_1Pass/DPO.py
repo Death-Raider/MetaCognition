@@ -226,15 +226,6 @@ class DirectPreferenceOptimization:
         loss_A = (A_loss_A - B_loss_A)
         loss_MTAS = (A_loss - B_loss)
 
-        # logger.info(f"A_loss_M: {A_loss_M}")
-        # logger.info(f"B_loss_M: {B_loss_M}")
-
-        # logger.info(f"A_loss_T: {A_loss_T}")
-        # logger.info(f"B_loss_T: {B_loss_T}")
-
-        # logger.info(f"A_loss_A: {A_loss_A}")
-        # logger.info(f"B_loss_A: {B_loss_A}")
-
         w_M = weights[0]
         w_T = weights[1]
         w_A = weights[2]
@@ -254,7 +245,7 @@ class DirectPreferenceOptimization:
         loss_A = -strength * torch.nn.functional.logsigmoid(x3)
         loss_MTAS = -strength * torch.nn.functional.logsigmoid(x4)
 
-        loss = loss_M*w_M + loss_T*w_T + loss_A*w_A + loss_MTAS*w_MTAS # Loss by M + Loss by T + Loss by A + Loss by complete Trace
+        loss = loss_M*w_M + loss_T*w_T + loss_A*w_A + loss_MTAS*w_MTAS # Loss by Rq + Loss by Mt + Loss by Ra + Loss by complete Trace
 
         loss = torch.mean(torch.clamp(loss, min=0.0))  # Ensure non-negative loss
         # logger.info(f"Loss: {loss.item():.4f}")
