@@ -53,7 +53,7 @@ def training(
         scaler = torch.amp.GradScaler(DPO.device)
         for epoch in range(int(w[-1].item())):
             total_loss = 0
-            total_loss_components = torch.tensor([0, 0, 0, 0], dtype=torch.float16).to(DPO.device)
+            total_loss_components = torch.tensor([0, 0, 0, 0], dtype=torch.bfloat16).to(DPO.device)
             data_loader = tqdm(loader, desc=f"Epoch {epoch + 1} Loss: {loss.item():.2f}")
             for batch in data_loader:
                 DPO.policy_optimizer.zero_grad(set_to_none=True)
@@ -69,14 +69,8 @@ def training(
                     loss_A.detach().mean(),
                     loss_MTAS.detach().mean()
                 ]).to(DPO.device)
-                # print(loss)
-                scaler.scale(loss).backward()
-                scaler.unscale_(DPO.policy_optimizer)
-                torch.nn.utils.clip_grad_norm_(DPO.policy_model.parameters(), 1.0)
-                scaler.step(DPO.policy_optimizer)
-                scaler.update()
-                # loss.backward()
-                # DPO.policy_optimizer.step()
+                loss.backward()
+                DPO.policy_optimizer.step()
                 total_loss += loss.item()
                 data_loader.set_description(f"Epoch {epoch + 1} Loss: {loss.item():.4f}")
             loss_history_epoch.append(total_loss / len(loader))

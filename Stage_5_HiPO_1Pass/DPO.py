@@ -14,12 +14,12 @@ class DirectPreferenceOptimization:
         # sets tokenizer, reference model, policy model, and optimizer
         self.tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
         self.tokenizer.pad_token = self.tokenizer.eos_token
-        self.ref_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, dtype=torch.float16).to(self.device)
+        self.ref_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, dtype=torch.bfloat16).to(self.device)
         self.ref_model.eval()  # Reference model should be in eval mode
         for param in self.ref_model.parameters():
             param.requires_grad = False  # Freeze reference model
 
-        self.policy_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME).to(self.device)
+        self.policy_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME,dtype=torch.bfloat16).to(self.device)
         self.policy_model.config.use_cache = False
         self.policy_model.gradient_checkpointing_enable()
         self.policy_model.train()  # Policy model should be in train mode
@@ -168,98 +168,95 @@ class DirectPreferenceOptimization:
         new_query['input_ids'] = torch.cat([batch['query']['input_ids'], Prompt_Instruction['input_ids'].repeat(batch_size,1)], dim=1)
         new_query['attention_mask'] = torch.cat([batch['query']['attention_mask'], Prompt_Instruction['attention_mask'].repeat(batch_size,1)], dim=1)
 
-        # prompt_text = self.tokenizer.decode(P_b['input_ids'][0], skip_special_tokens=True)
-        # logger.info(f"Generated prompt for B:{prompt_text}")
-        with torch.amp.autocast('cuda',dtype=torch.float32):
-            A_log_probs, [A_log_probs_M, A_log_probs_T, A_log_probs_A] = self.compute_log_prob_spans(
-                self.policy_model, 
-                input_ids=new_query['input_ids'],
-                input_mask=new_query['attention_mask'],
-                output_ids=batch['output_a']['input_ids'], 
-                spans=[ batch['Rq_a_span'], 
-                    batch['Mt_a_span'],
-                    batch['Ra_a_span'] ]
-            )
-            B_log_probs, [B_log_probs_M, B_log_probs_T, B_log_probs_A] = self.compute_log_prob_spans(
-                self.policy_model, 
-                input_ids=new_query['input_ids'],
-                input_mask=new_query['attention_mask'],
-                output_ids=batch['output_b']['input_ids'], 
-                spans=[ batch['Rq_b_span'], 
-                    batch['Mt_b_span'],
-                    batch['Ra_b_span'] ]
-            )
-        with torch.amp.autocast('cuda',dtype=torch.float16):
-            A_log_probs_ref, [A_log_probs_M_ref, A_log_probs_T_ref, A_log_probs_A_ref] = self.compute_log_prob_spans(
-                self.ref_model, 
-                input_ids=new_query['input_ids'],
-                input_mask=new_query['attention_mask'],
-                output_ids=batch['output_a']['input_ids'], 
-                spans=[ batch['Rq_a_span'], 
-                    batch['Mt_a_span'],
-                    batch['Ra_a_span'] ],
-                grad=False
-            )
-            B_log_probs_ref, [B_log_probs_M_ref, B_log_probs_T_ref, B_log_probs_A_ref] = self.compute_log_prob_spans(
-                self.ref_model, 
-                input_ids=new_query['input_ids'],
-                input_mask=new_query['attention_mask'],
-                output_ids=batch['output_b']['input_ids'], 
-                spans=[ batch['Rq_b_span'], 
-                    batch['Mt_b_span'],
-                    batch['Ra_b_span'] ],
-                grad=False
-            )
-            # Advantge calculation = Policy - Reference
-            A_loss = A_log_probs - A_log_probs_ref
-            B_loss = B_log_probs - B_log_probs_ref
+        A_log_probs, [A_log_probs_M, A_log_probs_T, A_log_probs_A] = self.compute_log_prob_spans(
+            self.policy_model, 
+            input_ids=new_query['input_ids'],
+            input_mask=new_query['attention_mask'],
+            output_ids=batch['output_a']['input_ids'], 
+            spans=[ batch['Rq_a_span'], 
+                batch['Mt_a_span'],
+                batch['Ra_a_span'] ]
+        )
+        B_log_probs, [B_log_probs_M, B_log_probs_T, B_log_probs_A] = self.compute_log_prob_spans(
+            self.policy_model, 
+            input_ids=new_query['input_ids'],
+            input_mask=new_query['attention_mask'],
+            output_ids=batch['output_b']['input_ids'], 
+            spans=[ batch['Rq_b_span'], 
+                batch['Mt_b_span'],
+                batch['Ra_b_span'] ]
+        )
     
-            A_loss_M = A_log_probs_M - A_log_probs_M_ref
-            A_loss_T = A_log_probs_T - A_log_probs_T_ref
-            A_loss_A = A_log_probs_A - A_log_probs_A_ref
-    
-            B_loss_M = B_log_probs_M - B_log_probs_M_ref
-            B_loss_T = B_log_probs_T - B_log_probs_T_ref
-            B_loss_A = B_log_probs_A - B_log_probs_A_ref
-    
-    
-            # preferred - dispreferred
-            loss_M = (A_loss_M - B_loss_M)
-            loss_T = (A_loss_T - B_loss_T)
-            loss_A = (A_loss_A - B_loss_A)
-            loss_MTAS = (A_loss - B_loss)
-    
-            # logger.info(f"A_loss_M: {A_loss_M}")
-            # logger.info(f"B_loss_M: {B_loss_M}")
-    
-            # logger.info(f"A_loss_T: {A_loss_T}")
-            # logger.info(f"B_loss_T: {B_loss_T}")
-    
-            # logger.info(f"A_loss_A: {A_loss_A}")
-            # logger.info(f"B_loss_A: {B_loss_A}")
-    
-            w_M = weights[0]
-            w_T = weights[1]
-            w_A = weights[2]
-            w_MTAS = weights[3]
-    
-            strength = 1.0
-            x1 = beta * loss_M +0.01
-            x1 = torch.clamp(x1, min=-20, max=20)  # avoid overflow
-            x2 = beta * loss_T +0.01
-            x2 = torch.clamp(x2, min=-20, max=20)  # avoid overflow
-            x3 = beta * loss_A +0.01
-            x3 = torch.clamp(x3, min=-20, max=20)  # avoid overflow
-            x4 = beta * loss_MTAS+0.01
-            x4 = torch.clamp(x4, min=-20, max=20)  # avoid overflow
-            loss_M = -strength * torch.nn.functional.logsigmoid(x1)
-            loss_T = -strength * torch.nn.functional.logsigmoid(x2)
-            loss_A = -strength * torch.nn.functional.logsigmoid(x3)
-            loss_MTAS = -strength * torch.nn.functional.logsigmoid(x4)
-    
-            loss = loss_M*w_M + loss_T*w_T + loss_A*w_A + loss_MTAS*w_MTAS # Loss by M + Loss by T + Loss by A + Loss by complete Trace
+        A_log_probs_ref, [A_log_probs_M_ref, A_log_probs_T_ref, A_log_probs_A_ref] = self.compute_log_prob_spans(
+            self.ref_model, 
+            input_ids=new_query['input_ids'],
+            input_mask=new_query['attention_mask'],
+            output_ids=batch['output_a']['input_ids'], 
+            spans=[ batch['Rq_a_span'], 
+                batch['Mt_a_span'],
+                batch['Ra_a_span'] ],
+            grad=False
+        )
+        B_log_probs_ref, [B_log_probs_M_ref, B_log_probs_T_ref, B_log_probs_A_ref] = self.compute_log_prob_spans(
+            self.ref_model, 
+            input_ids=new_query['input_ids'],
+            input_mask=new_query['attention_mask'],
+            output_ids=batch['output_b']['input_ids'], 
+            spans=[ batch['Rq_b_span'], 
+                batch['Mt_b_span'],
+                batch['Ra_b_span'] ],
+            grad=False
+        )
+        # Advantge calculation = Policy - Reference
+        A_loss = A_log_probs - A_log_probs_ref
+        B_loss = B_log_probs - B_log_probs_ref
 
-            loss = torch.mean(torch.clamp(loss, min=0.0))  # Ensure non-negative loss
+        A_loss_M = A_log_probs_M - A_log_probs_M_ref
+        A_loss_T = A_log_probs_T - A_log_probs_T_ref
+        A_loss_A = A_log_probs_A - A_log_probs_A_ref
+
+        B_loss_M = B_log_probs_M - B_log_probs_M_ref
+        B_loss_T = B_log_probs_T - B_log_probs_T_ref
+        B_loss_A = B_log_probs_A - B_log_probs_A_ref
+
+
+        # preferred - dispreferred
+        loss_M = (A_loss_M - B_loss_M)
+        loss_T = (A_loss_T - B_loss_T)
+        loss_A = (A_loss_A - B_loss_A)
+        loss_MTAS = (A_loss - B_loss)
+
+        # logger.info(f"A_loss_M: {A_loss_M}")
+        # logger.info(f"B_loss_M: {B_loss_M}")
+
+        # logger.info(f"A_loss_T: {A_loss_T}")
+        # logger.info(f"B_loss_T: {B_loss_T}")
+
+        # logger.info(f"A_loss_A: {A_loss_A}")
+        # logger.info(f"B_loss_A: {B_loss_A}")
+
+        w_M = weights[0]
+        w_T = weights[1]
+        w_A = weights[2]
+        w_MTAS = weights[3]
+
+        strength = 1.0
+        x1 = beta * loss_M +0.01
+        x1 = torch.clamp(x1, min=-20, max=20)  # avoid overflow
+        x2 = beta * loss_T +0.01
+        x2 = torch.clamp(x2, min=-20, max=20)  # avoid overflow
+        x3 = beta * loss_A +0.01
+        x3 = torch.clamp(x3, min=-20, max=20)  # avoid overflow
+        x4 = beta * loss_MTAS+0.01
+        x4 = torch.clamp(x4, min=-20, max=20)  # avoid overflow
+        loss_M = -strength * torch.nn.functional.logsigmoid(x1)
+        loss_T = -strength * torch.nn.functional.logsigmoid(x2)
+        loss_A = -strength * torch.nn.functional.logsigmoid(x3)
+        loss_MTAS = -strength * torch.nn.functional.logsigmoid(x4)
+
+        loss = loss_M*w_M + loss_T*w_T + loss_A*w_A + loss_MTAS*w_MTAS # Loss by M + Loss by T + Loss by A + Loss by complete Trace
+
+        loss = torch.mean(torch.clamp(loss, min=0.0))  # Ensure non-negative loss
         # logger.info(f"Loss: {loss.item():.4f}")
         return loss, (loss_M, loss_T, loss_A, loss_MTAS)
     
@@ -281,26 +278,12 @@ class DirectPreferenceOptimization:
 
         labels = inputs.clone()
         labels[:, :new_query['input_ids'].size(1)] = -100  # ignore prompt part
-        with torch.amp.autocast(self.device,dtype=torch.float16):
-            outputs = self.policy_model(
-                input_ids=inputs,
-                attention_mask=attention_mask,
-                labels=labels
-            )
-            loss = outputs.loss
-        # loss_fct = torch.nn.CrossEntropyLoss(reduction='none')
-        # shift_logits = outputs.logits[..., :-1, :].contiguous()
-        # shift_labels = labels[..., 1:].contiguous()
-        # losses = loss_fct(
-        #     shift_logits.view(-1, shift_logits.size(-1)), 
-        #     shift_labels.view(-1)
-        # ).view(shift_labels.shape)
-        
-        # # Create mask for valid positions
-        # valid_mask = (shift_labels != -100)
-        
-        # # Total log probability for full output
-        # total_log_probs = -(losses*valid_mask).sum(dim=1)
+        outputs = self.policy_model(
+            input_ids=inputs,
+            attention_mask=attention_mask,
+            labels=labels
+        )
+        loss = outputs.loss
         loss = torch.mean(torch.clamp(loss, min=0.0))
         # print(loss)
         return loss
