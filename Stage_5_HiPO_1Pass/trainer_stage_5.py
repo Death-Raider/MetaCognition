@@ -50,23 +50,33 @@ def training(
         DPO.lr = w[-2].item()
         loss_history_epoch = []
         loss_component_history = []
+        scaler = torch.amp.GradScaler(DPO.device)
         for epoch in range(int(w[-1].item())):
             total_loss = 0
             total_loss_components = torch.tensor([0, 0, 0, 0], dtype=torch.float16).to(DPO.device)
             data_loader = tqdm(loader, desc=f"Epoch {epoch + 1} Loss: {loss.item():.2f}")
             for batch in data_loader:
-                DPO.policy_optimizer.zero_grad()
+                DPO.policy_optimizer.zero_grad(set_to_none=True)
                 if method == 'sft':
                     loss = DPO.sft_loss(batch, Prompt_Instruction = gen_prompt_ids)
                     loss_components = (0,0,0,0)
                 else:
                     loss, loss_components = DPO.dpo_loss(batch, Prompt_Instruction = gen_prompt_ids,beta = config_schema.beta, weights=w[:-2])
-                
                 loss_M, loss_T, loss_A, loss_MTAS = loss_components
-                total_loss_components += torch.tensor([loss_M, loss_T, loss_A, loss_MTAS], dtype=torch.float16).to(DPO.device)
-
-                loss.backward()
-                DPO.policy_optimizer.step()
+                total_loss_components += torch.stack([
+                    loss_M.detach().mean(),
+                    loss_T.detach().mean(),
+                    loss_A.detach().mean(),
+                    loss_MTAS.detach().mean()
+                ]).to(DPO.device)
+                # print(loss)
+                scaler.scale(loss).backward()
+                scaler.unscale_(DPO.policy_optimizer)
+                torch.nn.utils.clip_grad_norm_(DPO.policy_model.parameters(), 1.0)
+                scaler.step(DPO.policy_optimizer)
+                scaler.update()
+                # loss.backward()
+                # DPO.policy_optimizer.step()
                 total_loss += loss.item()
                 data_loader.set_description(f"Epoch {epoch + 1} Loss: {loss.item():.4f}")
             loss_history_epoch.append(total_loss / len(loader))
