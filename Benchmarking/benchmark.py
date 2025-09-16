@@ -5,8 +5,9 @@ from Benchmarking.Math500_bench import MATH500, MATH500_Bench
 import torch
 from logger import logger
 import pandas as pd
+import json
 
-def bench(model, tokenizer, prompt_instruction:str=None):
+def bench(model, tokenizer, prompt_instruction:str=None, intrem_save_path=None):
     limits = 30
     gsm8k = GSM8K()
     bench_gsm = GSM8K_Bench(model, tokenizer, gsm8k, device="cuda" if torch.cuda.is_available() else "cpu")
@@ -21,7 +22,10 @@ def bench(model, tokenizer, prompt_instruction:str=None):
           f"({results_math['correct']}/{results_math['total']})")
     
     results = results_math['details'] + results_gsm['details']
-
+    if intrem_save_path is not None:
+        with open(f'{intrem_save_path}/base_results.jsonl', "a") as f:
+            f.write(json.dumps(results))
+            
     print("Running GPT on results for cognitive decomposition...")
     gpt = GPT(model="gpt-4.1")
     gpt_bench = GPT_Bench(gpt, results)
@@ -41,6 +45,9 @@ def bench(model, tokenizer, prompt_instruction:str=None):
         "verbosity",
         "final_comment"
     ]
+    if intrem_save_path is not None:
+        with open(f'{intrem_save_path}/GPT_results.jsonl', "a") as f:
+            f.write(json.dumps(results.to_dict(), indent=4))
     print("Cognitive decomposition results:\n", results[imp_columns].describe())
     print("overall accuracy: ", results["Final Answer Correctness"].mean())
     return results

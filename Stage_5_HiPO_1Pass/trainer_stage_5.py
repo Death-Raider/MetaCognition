@@ -17,8 +17,8 @@ def create_eval_metric():
     "component_history": []
 }
 
-def ref_model_eval(eval_metrics, DPO, prompt_instruction=None):
-    bench_results = bench.bench(model=DPO.ref_model, tokenizer=DPO.tokenizer, prompt_instruction=prompt_instruction)
+def ref_model_eval(eval_metrics, DPO, prompt_instruction=None, intrem_save_path=None):
+    bench_results = bench.bench(model=DPO.ref_model, tokenizer=DPO.tokenizer, prompt_instruction=prompt_instruction, intrem_save_path=intrem_save_path)
     bench_results = bench_results.to_dict()
 
     eval_metrics["weights"].append([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])  # no weights for reference model
@@ -78,11 +78,12 @@ def training(
                 (total_loss_components / len(loader)).to(torch.float32).cpu().numpy().tolist()
             )
             print(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
+            print(f"Loss Components [Ra, Mt, Rq, Y] : {loss_component_history[-1]}")
             logger.info(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
             # checkpoint after each epoch
             DPO.policy_model.save_pretrained(f"Stage_5_HiPO_1Pass/models_saved/model_w{w}", from_pt=True)
         # benchmark after training with each weight configuration
-        bench_results = bench.bench(model=DPO.policy_model, tokenizer=DPO.tokenizer, prompt_instruction=prompt_instruction)
+        bench_results = bench.bench(model=DPO.policy_model, tokenizer=DPO.tokenizer, prompt_instruction=prompt_instruction, intrem_save_path="Stage_5_HiPO_1Pass")
         bench_results = bench_results.to_dict()
 
         if method == 'individual':
@@ -113,7 +114,7 @@ def init():
     prompt_instruction = open('Stage_5_HiPO_1Pass/instructions/instruction_few_shot.txt', 'r').read().strip()
 
     # ====== Initialize DPO and DataLoader ======
-    limit = 10000
+    limit = 1000
     dataset = preference[:limit]
     for entry in dataset:
         entry["new_output_a"] = entry['Ra_a'] + "\n" + entry['Mt_a'] + "\n" + entry["Rq_a"]
