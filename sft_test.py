@@ -36,16 +36,12 @@ class ConversationDataset:
         
         if not query:
             return
-        
-        # Process both output_a and output_b if they exist
-        for output_key in ['output_a', 'output_b']:
-            if output_key in data and data[output_key]:
-                output = data[output_key].strip()
-                if output:
-                    # Format using Qwen2.5 chat template
-                    conversation = self._format_conversation(query, output)
-                    self.conversations.append({"text": conversation})
-    
+
+        # Process Rq_a + Mt_a + Ra_a together for SFT
+        output = data['Rq_a'] + ' ' + data['Mt_a'] + ' ' + data['Ra_a']
+        conversation = self._format_conversation(query, output)
+        self.conversations.append({"text": conversation})
+
     def _format_conversation(self, query, output):
         """Format conversation using Qwen2.5 chat template."""
         return f"<|im_start|>user\n{query}<|im_end|>\n<|im_start|>assistant\n{output}<|im_end|>"
