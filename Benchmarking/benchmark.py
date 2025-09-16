@@ -6,7 +6,6 @@ import torch
 from logger import logger
 import pandas as pd
 import json
-
 def bench(model, tokenizer, prompt_instruction:str=None, intrem_save_path=None):
     limits = 30
     gsm8k = GSM8K()
