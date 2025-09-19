@@ -52,7 +52,7 @@ class ConfigSchema:
         ]
         BIGG_MODELS = [
             'Qwen/Qwen1.5-7B', # it just a hater for no reason
-            'mistralai/Mistral-7B-Instruct-v0.3'
+            'mistralai/Mistral-7B-Instruct-v0.3',
             # 'mistralai/Mistral-7B-v0.1',
             'teknium/OpenHermes-2.5-Mistral-7B',
             'openchat/openchat-3.5-0106',

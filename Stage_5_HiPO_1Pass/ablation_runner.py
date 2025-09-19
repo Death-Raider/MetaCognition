@@ -5,9 +5,9 @@ config_schema, DEVICE,prompt_instruction, DPO, gen_prompt_ids, loader = init()
 
 print("Starting Ablation Study...")
 weights = torch.tensor([
-    # [0.00, 0.00, 0.00, 1.00, 1e-6, 5], # standard DPO
-    # [1.00, 0.00, 0.00, 0.00, 1e-6, 5], # Rq Only
-    # [0.00, 1.00, 0.00, 0.00, 1e-6, 5], # Mt Only
+    [0.00, 0.00, 0.00, 1.00, 1e-6, 5], # standard DPO
+    [1.00, 0.00, 0.00, 0.00, 1e-6, 5], # Rq Only
+    [0.00, 1.00, 0.00, 0.00, 1e-6, 5], # Mt Only
     [0.00, 0.00, 1.00, 0.00, 1e-6, 5], # Ra Only
     # [0.60, 0.15, 0.15, 0.10, 1e-6, 5], # Rq-bias -> stronger query alignment
     # [0.20, 0.50, 0.20, 0.10, 8e-6, 5], # Mt-bias -> more reasoning

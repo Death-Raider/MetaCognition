@@ -78,9 +78,9 @@ def training(
                 (total_loss_components / len(loader)).to(torch.float32).cpu().numpy().tolist()
             )
 
-            logger.info(f"Loss Components [Rq, Mt, Ra, Y] : {loss_component_history[-1]}")
+            logger.info(f"Loss Components [Ra, Mt, Rq, Y] : {loss_component_history[-1]}")
             logger.info(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
-            name = f"model_w{tuple(w[:-2].cpu().numpy().round(2).tolist())}"
+            name = f"model_w{tuple(map(lambda x: round(x,1), w[:-2].cpu().numpy().tolist()))}"
             logger.info(f"Saving Model: Stage_5_HiPO_1Pass/models_saved/{name}")
             
             DPO.policy_model.save_pretrained(f"Stage_5_HiPO_1Pass/models_saved/{name}", from_pt=True)

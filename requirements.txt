@@ -4,3 +4,7 @@ torch
 tqdm
 httpx
 huggingface_hub
+peft
+trl
+protobuf
+sentencepiece

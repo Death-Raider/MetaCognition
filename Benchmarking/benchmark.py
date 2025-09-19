@@ -6,17 +6,18 @@ import torch
 from logger import logger
 import pandas as pd
 import json
+
 def bench(model, tokenizer, prompt_instruction:str=None, intrem_save_path=None):
-    limits = 30
+    limits = 500
     gsm8k = GSM8K()
     bench_gsm = GSM8K_Bench(model, tokenizer, gsm8k, device="cuda" if torch.cuda.is_available() else "cpu")
-    results_gsm = bench_gsm.evaluate(limit=limits, prompt=prompt_instruction)  # limit for quicker test run
+    results_gsm = bench_gsm.evaluate(limit=limits, prompt=prompt_instruction, batch_size=20)  # limit for quicker test run
     print(f"GSM8K Accuracy: {results_gsm['accuracy']*100:.2f}% "
           f"({results_gsm['correct']}/{results_gsm['total']})")
     
     math_500 = MATH500()
     bench_math = MATH500_Bench(model, tokenizer, math_500, device="cuda" if torch.cuda.is_available() else "cpu")
-    results_math = bench_math.evaluate(limit=limits, prompt=prompt_instruction)  # limit for quicker test run
+    results_math = bench_math.evaluate(limit=limits, prompt=prompt_instruction, batch_size=20)  # limit for quicker test run
     print(f"MATH500 Accuracy: {results_math['accuracy']*100:.2f}% "
           f"({results_math['correct']}/{results_math['total']})")
     
