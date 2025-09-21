@@ -14,18 +14,18 @@
 # Evaluate the model by running the evaluate.py script
 import Benchmarking.benchmark as bench
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from huggingface_hub import snapshot_download, scan_cache_dir
+# from huggingface_hub import snapshot_download, scan_cache_dir
 import torch
 import json
-import shutil
+import os
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 MODELS = {
     'Mistral': [
-        # "Death-Raider/HiPO-Mistral-seq-0",
-        # "Death-Raider/HiPO-Mistral-seq-1",
-        # "Death-Raider/HiPO-Mistral-seq-2",
+        "Death-Raider/HiPO-Mistral-seq-0",
+        "Death-Raider/HiPO-Mistral-seq-1",
+        "Death-Raider/HiPO-Mistral-seq-2",
         "Death-Raider/HiPO-Mistral-seq-3",
         "Death-Raider/HiPO-Mistral-seq-4",
         "Death-Raider/HiPO-Mistral-Ra-only",
@@ -59,11 +59,8 @@ for model_type, model_list in MODELS.items():
     for model_name in model_list:
         print(f"Loading {model_name} ...")
 
-        # download model into cache
-        model_path = snapshot_download(model_name)
-
         # load model
-        model = AutoModelForCausalLM.from_pretrained(model_path, torch_dtype=torch.bfloat16).to(device)
+        model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.bfloat16).to(device)
 
         # run benchmark
         prompt_instruction = open('Stage_5_HiPO_1Pass/instructions/instruction_few_shot.txt', 'r').read().strip()
@@ -77,7 +74,7 @@ for model_type, model_list in MODELS.items():
         # cleanup
         del model
         torch.cuda.empty_cache()
-        shutil.rmtree(model_path, ignore_errors=True)
+        os.system(f"rm -rf {os.environ['HF_HOME']}/*")
         print(f"Deleted {model_name} from cache\n")
 
     

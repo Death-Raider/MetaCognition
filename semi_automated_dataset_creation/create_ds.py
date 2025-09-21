@@ -117,7 +117,7 @@ def process_entries(entries, already_done, output_file, max_workers=2):
 
 # Load dataset
 raw_data = load_dataset("prhegde/preference-data-math-stack-exchange")['train']
-limit = 1000
+limit = 2500
 entries = [
     {
         "query": x["question"],
@@ -139,13 +139,13 @@ print(f"Already processed {len(already_done)} entries.")
 
 # Run loop
 # Use either multi-threaded or single-threaded processing
-# process_entries(entries, already_done, output_file, max_workers=4)
+process_entries(entries, already_done, output_file, max_workers=4)
 
 # basic looping (single-threaded)
-with open(output_file, "a") as fout:
-    for entry in tqdm(entries):
-        if entry["query"] in already_done:
-            continue
-        result = create_ds(entry)
-        fout.write(json.dumps(result) + "\n")
-        fout.flush()  # ensure write is safe in case of crash
+# with open(output_file, "a") as fout:
+#     for entry in tqdm(entries):
+#         if entry["query"] in already_done:
+#             continue
+#         result = create_ds(entry)
+#         fout.write(json.dumps(result) + "\n")
+#         fout.flush()  # ensure write is safe in case of crash
