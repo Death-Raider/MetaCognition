@@ -37,7 +37,9 @@ def training(
     config_schema: ConfigSchema, 
     prompt_instruction: str|None = None,
     reset_model: bool = True,
-    method: str = 'sequential'
+    method: str = 'sequential',
+    save:bool = False,
+    callbacks: dict[str,function] = None,
 ):
     assert method in ['sequential', 'individual', 'sft'] , "method must be either 'sequential' or 'individual'"
     if reset_model:
@@ -63,28 +65,35 @@ def training(
                 else:
                     loss, loss_components = DPO.dpo_loss(batch, Prompt_Instruction = gen_prompt_ids,beta = config_schema.beta, weights=w[:-2])
                 loss_M, loss_T, loss_A, loss_MTAS = loss_components
-                total_loss_components += torch.stack([
+                loss_vec = torch.stack([
                     loss_M.detach().mean(),
                     loss_T.detach().mean(),
                     loss_A.detach().mean(),
                     loss_MTAS.detach().mean()
                 ]).to(DPO.device)
+                total_loss_components += loss_vec
                 loss.backward()
                 DPO.policy_optimizer.step()
                 total_loss += loss.item()
                 data_loader.set_description(f"Epoch {epoch + 1} Loss: {loss.item():.4f}")
+                if 'batch' in callbacks.keys():
+                    callbacks['batch'](DPO.policy_model, DPO.tokenizer, loss.item(), loss_vec.cpu().numpy())
             loss_history_epoch.append(total_loss / len(loader))
             loss_component_history.append(
                 (total_loss_components / len(loader)).to(torch.float32).cpu().numpy().tolist()
             )
-
+            if 'epoch' in callbacks.keys():
+                callbacks['epoch'](DPO.policy_model, DPO.tokenizer, loss_history_epoch[-1], loss_component_history[-1])
+                
             logger.info(f"Loss Components [Ra, Mt, Rq, Y] : {loss_component_history[-1]}")
             logger.info(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
             name = f"model_w{tuple(map(lambda x: round(x,1), w[:-2].cpu().numpy().tolist()))}"
-            logger.info(f"Saving Model: Stage_5_HiPO_1Pass/models_saved/{name}")
-            
-            DPO.policy_model.save_pretrained(f"Stage_5_HiPO_1Pass/models_saved/{name}", from_pt=True)
+            if save:
+                logger.info(f"Saving Model: Stage_5_HiPO_1Pass/models_saved/{name}")
+                DPO.policy_model.save_pretrained(f"Stage_5_HiPO_1Pass/models_saved/{name}", from_pt=True)
 
+        if 'set' in callbacks.keys():
+            callbacks['set'](DPO.policy_model, DPO.tokenizer)
         if method == 'individual':
             DPO.set_models(config_schema.model_name)  # reset to reference model before next weight config
 

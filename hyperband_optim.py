@@ -25,11 +25,25 @@ imp_columns = [
 # Define objective function
 def train_with_config(config):
     # turn config into weights tensor (Rq, Mt, Ra, Y, lr, epochs)
+    sum_conf  = config["rq"] + config["mt"] + config["ra"] + config["y"]
+    
     weights = torch.tensor([
-        [config["rq"], config["mt"], config["ra"], config["y"], config["lr"], config["epochs"]]
+        [config["rq"]/sum_conf, config["mt"]/sum_conf, config["ra"]/sum_conf, config["y"]/sum_conf, config["lr"], config["epochs"]]
     ]).to(DEVICE)
 
     eval_metrics = create_eval_metric()
+
+    def trial_bench(model, tokenizer, total_loss, component_loss):
+        results = bench.bench(model=model, tokenizer=tokenizer, prompt_instruction=prompt_instruction, intrem_save_path=None, limit=30)
+        results['bench'] = results['bench'].fillna("Math500")
+        accuracies = results.groupby('bench')['Final Answer Correctness'].mean() / 10.0
+        gsm8k = accuracies.get("GSM8K", 0.0)
+        math500 = accuracies.get("Math500", 0.0)
+        gpt = results[imp_columns].values().mean()
+
+        # Report back to Ray Tune
+        tune.report(gsm8k=gsm8k, math500=math500, gpt=gpt, mean_score=(gsm8k + math500) / 2.0)
+
     training(
         weights,
         eval_metrics,
@@ -40,16 +54,11 @@ def train_with_config(config):
         prompt_instruction,
         True,
         "individual",
+        save=False,
+        callbacks={
+            'epoch': trial_bench
+        }
     )
-    results = bench.bench(model=DPO.policy_model, tokenizer=DPO.tokenizer, prompt_instruction=prompt_instruction, intrem_save_path=None, limit=30)
-    results['bench'] = results['bench'].fillna("Math500")
-    accuracies = results.groupby('bench')['Final Answer Correctness'].mean() / 10.0
-    gsm8k = accuracies.get("GSM8K", 0.0)
-    math500 = accuracies.get("Math500", 0.0)
-    gpt = results[imp_columns].values().mean()
-
-    # Report back to Ray Tune
-    tune.report(gsm8k=gsm8k, math500=math500, gpt=gpt, mean_score=(gsm8k + math500) / 3.0)
 
 
 # Define search space
@@ -62,26 +71,28 @@ search_space = {
     "epochs": tune.choice([1,2,3,4,5])
 }
 
-# Normalize weights inside train_with_config if needed
-# (rq+mt+ra+y should sum to ~1.0)
-
 # Setup Hyperband scheduler
 scheduler = HyperBandScheduler(
     metric="mean_score",
     mode="max",
-    max_t=5,              # max epochs
-    reduction_factor=2
+    max_t=5,
+    reduction_factor=3
 )
 
+trainable_with_resources = tune.with_resources(
+    train_with_config,
+    resources={"cpu": 0, "gpu": 1} # Adjust as needed
+)
 # Launch search
 tuner = tune.Tuner(
-    train_with_config,
+    trainable_with_resources,
     tune_config=tune.TuneConfig(
         scheduler=scheduler,
         num_samples=20,  # try 20 configs
     ),
     param_space=search_space,
 )
+
 
 results = tuner.fit()
 

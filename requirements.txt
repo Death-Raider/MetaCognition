@@ -8,3 +8,4 @@ peft
 trl
 protobuf
 sentencepiece
+ray[tune]
