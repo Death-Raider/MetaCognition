@@ -5,7 +5,6 @@ import Benchmarking.benchmark as bench
 from Stage_5_HiPO_1Pass.trainer_stage_5 import *
 
 # Initialize
-config_schema, DEVICE, prompt_instruction, DPO, gen_prompt_ids, loader = init()
 imp_columns = [
     "Logical Flow",
     "Structural Organization",
@@ -24,6 +23,7 @@ imp_columns = [
 
 # Define objective function
 def train_with_config(config):
+    config_schema, DEVICE, prompt_instruction, DPO, gen_prompt_ids, loader = init()
     # turn config into weights tensor (Rq, Mt, Ra, Y, lr, epochs)
     sum_conf  = config["rq"] + config["mt"] + config["ra"] + config["y"]
     

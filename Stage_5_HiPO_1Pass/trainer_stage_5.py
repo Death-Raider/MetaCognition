@@ -39,7 +39,7 @@ def training(
     reset_model: bool = True,
     method: str = 'sequential',
     save:bool = False,
-    callbacks: dict[str,function] = None,
+    callbacks: dict[str,any] = None,
 ):
     assert method in ['sequential', 'individual', 'sft'] , "method must be either 'sequential' or 'individual'"
     if reset_model:
@@ -102,7 +102,7 @@ def training(
 def init():
     # ========== Config Loading ==============
     config_schema = ConfigSchema()
-    config_schema.from_file("config.cfg")
+    config_schema.from_file("/workspace/MetaCognition/config.cfg")
     DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
     print("Config loaded:", config_schema)
@@ -111,10 +111,10 @@ def init():
     logger.info(f"Device set as:{DEVICE}")
         
 
-    with open('semi_automated_dataset_creation/processed_decomposed_dataset.jsonl', 'r') as f:
+    with open('/workspace/MetaCognition/semi_automated_dataset_creation/processed_decomposed_dataset.jsonl', 'r') as f:
         preference = [json.loads(line) for line in f]
 
-    prompt_instruction = open('Stage_5_HiPO_1Pass/instructions/instruction_few_shot.txt', 'r').read().strip()
+    prompt_instruction = open('/workspace/MetaCognition/Stage_5_HiPO_1Pass/instructions/instruction_few_shot.txt', 'r').read().strip()
 
     # ====== Initialize DPO and DataLoader ======
     limit = 1000
