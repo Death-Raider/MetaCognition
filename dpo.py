@@ -38,8 +38,8 @@ class ConversationDataset:
 
         # For DPO, we need chosen and rejected responses
         # Assuming output_a is preferred over output_b (you can modify this logic)
-        chosen = data['Rq_a'] + ' ' + data['Mt_a'] + ' ' + data['Ra_a']
-        rejected = data['Rq_b'] + ' ' + data['Mt_b'] + ' ' + data['Ra_b']
+        chosen = data['output_a'] #data['Rq_a'] + ' ' + data['Mt_a'] + ' ' + data['Ra_a']
+        rejected = data['output_b'] #data['Rq_b'] + ' ' + data['Mt_b'] + ' ' + data['Ra_b']
         
         # Skip if either response is empty
         if not chosen or not rejected:

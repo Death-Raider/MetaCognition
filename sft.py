@@ -38,7 +38,7 @@ class ConversationDataset:
             return
 
         # Process Rq_a + Mt_a + Ra_a together for SFT
-        output = data['Rq_a'] + ' ' + data['Mt_a'] + ' ' + data['Ra_a']
+        output = data['output_a'] # data['Rq_a'] + ' ' + data['Mt_a'] + ' ' + data['Ra_a']
         conversation = self._format_conversation(query, output)
         self.conversations.append({"text": conversation})
 
