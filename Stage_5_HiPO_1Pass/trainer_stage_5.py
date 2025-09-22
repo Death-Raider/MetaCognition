@@ -8,6 +8,11 @@ from ConfigSchema import ConfigSchema
 from logger import logger
 import Benchmarking.benchmark as bench
 
+PATH_CONFIG='config.cfg'
+PATH_DATASET = 'semi_automated_dataset_creation/processed_decomposed_dataset.jsonl'
+PATH_PROMPT_INSTRUCTION = 'Stage_5_HiPO_1Pass/instructions/instruction_few_shot.txt'
+PATH_MODEL_SAVING = 'Stage_5_HiPO_1Pass/models_saved'
+
 def create_eval_metric():
     return {
     "weights": [],
@@ -89,8 +94,8 @@ def training(
             logger.info(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
             name = f"model_w{tuple(map(lambda x: round(x,1), w[:-2].cpu().numpy().tolist()))}"
             if save:
-                logger.info(f"Saving Model: Stage_5_HiPO_1Pass/models_saved/{name}")
-                DPO.policy_model.save_pretrained(f"Stage_5_HiPO_1Pass/models_saved/{name}", from_pt=True)
+                logger.info(f"Saving Model: {PATH_MODEL_SAVING}/{name}")
+                DPO.policy_model.save_pretrained(f"{PATH_MODEL_SAVING}/{name}", from_pt=True)
 
         if 'set' in callbacks.keys():
             callbacks['set'](DPO.policy_model, DPO.tokenizer)
@@ -102,7 +107,7 @@ def training(
 def init():
     # ========== Config Loading ==============
     config_schema = ConfigSchema()
-    config_schema.from_file("/workspace/MetaCognition/config.cfg")
+    config_schema.from_file(PATH_CONFIG)
     DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
     print("Config loaded:", config_schema)
@@ -111,10 +116,10 @@ def init():
     logger.info(f"Device set as:{DEVICE}")
         
 
-    with open('/workspace/MetaCognition/semi_automated_dataset_creation/processed_decomposed_dataset.jsonl', 'r') as f:
+    with open(PATH_DATASET, 'r') as f:
         preference = [json.loads(line) for line in f]
 
-    prompt_instruction = open('/workspace/MetaCognition/Stage_5_HiPO_1Pass/instructions/instruction_few_shot.txt', 'r').read().strip()
+    prompt_instruction = open(PATH_PROMPT_INSTRUCTION, 'r').read().strip()
 
     # ====== Initialize DPO and DataLoader ======
     limit = 1000

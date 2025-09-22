@@ -19,21 +19,11 @@ import torch
 import json
 import os
 
+PATH_PROMPT_INSTRUCTION = 'Stage_5_HiPO_1Pass/instructions/instruction_few_shot.txt'
+
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 MODELS = {
-    'Mistral': [
-        "Death-Raider/HiPO-Mistral-seq-0",
-        "Death-Raider/HiPO-Mistral-seq-1",
-        "Death-Raider/HiPO-Mistral-seq-2",
-        "Death-Raider/HiPO-Mistral-seq-3",
-        "Death-Raider/HiPO-Mistral-seq-4",
-        "Death-Raider/HiPO-Mistral-Ra-only",
-        "Death-Raider/HiPO-Mistral-Mt-only",
-        "Death-Raider/HiPO-Mistral-Rq-only",
-        "Death-Raider/SFT-Mistral",
-        "Death-Raider/DPO-Mistral",
-    ],
     'Qwen': [
         "Death-Raider/HiPO-Qwen2.5-Ra-only",
         "Death-Raider/HiPO-Qwen2.5-Mt-only",
@@ -45,6 +35,18 @@ MODELS = {
         "Death-Raider/HiPO-Qwen2.5-seq-4",
         'Death-Raider/DPO-Qwen',
         'Death-Raider/SFT-Qwen',
+    ],
+    'Mistral': [
+        "Death-Raider/HiPO-Mistral-seq-0",
+        "Death-Raider/HiPO-Mistral-seq-1",
+        "Death-Raider/HiPO-Mistral-seq-2",
+        "Death-Raider/HiPO-Mistral-seq-3",
+        "Death-Raider/HiPO-Mistral-seq-4",
+        "Death-Raider/HiPO-Mistral-Ra-only",
+        "Death-Raider/HiPO-Mistral-Mt-only",
+        "Death-Raider/HiPO-Mistral-Rq-only",
+        "Death-Raider/SFT-Mistral",
+        "Death-Raider/DPO-Mistral",
     ]
 }
 
@@ -63,7 +65,10 @@ for model_type, model_list in MODELS.items():
         model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.bfloat16).to(device)
 
         # run benchmark
-        prompt_instruction = open('Stage_5_HiPO_1Pass/instructions/instruction_few_shot.txt', 'r').read().strip()
+        if 'SFT' in model_name or 'DPO' in model_name:
+            prompt_instruction = None
+        else:
+            prompt_instruction = open(PATH_PROMPT_INSTRUCTION, 'r').read().strip()
         bench_results = bench.bench(model=model, tokenizer=tokenizer, prompt_instruction=prompt_instruction)
         bench_results = json.dumps(bench_results.to_dict())
 
@@ -76,10 +81,3 @@ for model_type, model_list in MODELS.items():
         torch.cuda.empty_cache()
         os.system(f"rm -rf {os.environ['HF_HOME']}/*")
         print(f"Deleted {model_name} from cache\n")
-
-    
-    # eval_metrics["weights"].append(w[:-2].cpu().numpy().tolist())
-    # eval_metrics["epoch"].append(w[-1].item())
-    # eval_metrics["bench_resullts"].append(bench_results)
-    # eval_metrics["loss_history"].append(loss_history_epoch)
-    # eval_metrics["component_history"].append(loss_component_history)
