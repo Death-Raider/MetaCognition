@@ -1,11 +1,18 @@
 from Benchmarking.GSM8K_bench import GSM8K, GSM8K_Bench
 from Benchmarking.GPT_bench import GPT, GPT_Bench
 from Benchmarking.Math500_bench import MATH500, MATH500_Bench
+from Benchmarking.additional_bench import AIME24, Gaokao2023En, MinervaMath 
 
 import torch
 from logger import logger
 import pandas as pd
 import json
+
+# HuggingFaceH4/MATH-500
+# gsm8k
+# math-ai/aime24
+# MARIO-Math-Reasoning/Gaokao2023-Math-En
+# math-ai/minervamath
 
 def bench(model, tokenizer, prompt_instruction:str=None, intrem_save_path=None, limits=None, batch_size=None):
     if (not limits) or (limits == 0):
@@ -16,16 +23,25 @@ def bench(model, tokenizer, prompt_instruction:str=None, intrem_save_path=None, 
     gsm8k = GSM8K()
     bench_gsm = GSM8K_Bench(model, tokenizer, gsm8k, device="cuda" if torch.cuda.is_available() else "cpu")
     results_gsm = bench_gsm.evaluate(limit=limits, prompt=prompt_instruction, batch_size=batch_size)  # limit for quicker test run
-    print(f"GSM8K Accuracy: {results_gsm['accuracy']*100:.2f}% "
-          f"({results_gsm['correct']}/{results_gsm['total']})")
     
     math_500 = MATH500()
     bench_math = MATH500_Bench(model, tokenizer, math_500, device="cuda" if torch.cuda.is_available() else "cpu")
     results_math = bench_math.evaluate(limit=limits, prompt=prompt_instruction, batch_size=batch_size)  # limit for quicker test run
-    print(f"MATH500 Accuracy: {results_math['accuracy']*100:.2f}% "
-          f"({results_math['correct']}/{results_math['total']})")
+
+    aime = AIME24()
+    bench_aime = MATH500_Bench(model, tokenizer, aime, 'cuda')
+    results_aime = bench_aime.evaluate(limit=limits, prompt=prompt_instruction, batch_size=batch_size)
+
+    gk = Gaokao2023En()
+    bench_gk = MATH500_Bench(model, tokenizer, gk, 'cuda')
+    results_gk = bench_gk.evaluate(limit=limits, prompt=prompt_instruction, batch_size=batch_size)
+
+    mm = MinervaMath() 
+    bench_mm = MATH500_Bench(model, tokenizer, mm, 'cuda')
+    results_mm = bench_mm.evaluate(limit=limits, prompt=prompt_instruction, batch_size=batch_size)
     
-    results = results_math['details'] + results_gsm['details']
+    
+    results = results_gsm['details'] + results_math['details'] + results_aime['details'] + results_gk['details'] + results_mm['details']
     if intrem_save_path is not None:
         with open(f'{intrem_save_path}/base_results.jsonl', "a") as f:
             f.write(json.dumps(results))
