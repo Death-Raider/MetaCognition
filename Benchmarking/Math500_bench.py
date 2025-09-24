@@ -58,7 +58,8 @@ class MATH500_Bench:
             prompts,
             return_tensors="pt",
             padding=True,
-            truncation=True
+            truncation=True,
+            padding_side='left'
         ).to(self.device)
 
         with torch.no_grad():
@@ -203,7 +204,7 @@ class MATH500_Bench:
         total_len = limit if limit else len(self.dataset)
 
         pbar = tqdm(range(0, total_len, batch_size),
-                    desc=f"Evaluating MATH-500: acc - {partial}({correct})/{total}")
+                    desc=f"Evaluating: acc - {partial}({correct})/{total}")
 
         for _ in pbar:
             batch = []
@@ -254,7 +255,7 @@ class MATH500_Bench:
                 partial += int(is_partially_correct)
 
             acc = correct / total if total > 0 else 0.0
-            pbar.set_description(f"Evaluating MATH-500: acc - {partial}({correct})/{total} ({acc:.2%})")
+            pbar.set_description(f"Evaluating: acc - {partial}({correct})/{total} ({acc:.2%})")
 
             if limit and total >= limit:
                 break

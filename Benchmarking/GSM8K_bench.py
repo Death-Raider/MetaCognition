@@ -32,7 +32,8 @@ class GSM8K_Bench:
             prompts,
             return_tensors="pt",
             padding=True,
-            truncation=True
+            truncation=True,
+            padding_side='left'
         ).to(self.device)
 
         outputs = self.model.generate(

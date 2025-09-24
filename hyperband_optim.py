@@ -1,9 +1,13 @@
 import torch
+import ray
 from ray import tune
 from ray.tune.schedulers import HyperBandScheduler
 import Benchmarking.benchmark as bench
 from Stage_5_HiPO_1Pass.trainer_stage_5 import *
 
+ray.init(_temp_dir="/path/to/your/custom_temp_dir")
+
+results = tuner.fit()
 # Initialize
 imp_columns = [
     "Logical Flow",

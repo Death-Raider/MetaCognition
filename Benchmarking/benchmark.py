@@ -32,7 +32,7 @@ def bench(model, tokenizer, prompt_instruction:str=None, intrem_save_path=None, 
     bench_aime = MATH500_Bench(model, tokenizer, aime, 'cuda')
     results_aime = bench_aime.evaluate(limit=limits, prompt=prompt_instruction, batch_size=batch_size)
 
-    gk = Gaokao2023En()
+    gk = Gaokao2023En('train')
     bench_gk = MATH500_Bench(model, tokenizer, gk, 'cuda')
     results_gk = bench_gk.evaluate(limit=limits, prompt=prompt_instruction, batch_size=batch_size)
 

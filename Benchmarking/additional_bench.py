@@ -15,7 +15,7 @@ class AIME24:
         for ex in self.ds:
             # unify schema to {question, answer}
             yield {"question": ex.get("problem", ex.get("question")), 
-                   "answer": ex["answer"]}
+                   "answer": ex["solution"]}
 
 
 class Gaokao2023En:
