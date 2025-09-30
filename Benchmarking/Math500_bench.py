@@ -45,13 +45,36 @@ class MATH500_Bench:
             outputs = self.model.generate(
                 **inputs,
                 max_new_tokens=max_new_tokens,
-                do_sample=False,              # keep interface same as your GSM8K code
-                # temperature=0.0,             # greedy
+                do_sample=True,              # keep interface same as your GSM8K code
+                temperature=0.1,             # greedy
                 pad_token_id=self.tokenizer.eos_token_id,
             )
         decoded = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
         # Return only the completion after the prompt
         return decoded[len(prompt):].strip()
+        
+    def generate_batch(self, prompts, max_new_tokens=512):
+        inputs = self.tokenizer(
+            prompts,
+            return_tensors="pt",
+            padding=True,
+            truncation=True,
+            padding_side='left'
+        ).to(self.device)
+
+        with torch.no_grad():
+            outputs = self.model.generate(
+                **inputs,
+                max_new_tokens=max_new_tokens,
+                do_sample=True,
+                temperature=0.1,
+                pad_token_id=self.tokenizer.eos_token_id,
+            )
+
+        decoded = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)
+
+        # Return completions after prompts
+        return [out[len(p):].strip() for p, out in zip(prompts, decoded)]
 
     # ---------- Answer parsing / normalization helpers ----------
 
@@ -166,16 +189,7 @@ class MATH500_Bench:
             is_correct = (str(expr1) == str(expr2))
         return is_correct
 
-    def evaluate(self, limit=None, prompt: str = None):
-        """
-        Returns:
-            {
-              "accuracy": float,
-              "total": int,
-              "correct": int,
-              "details": [ ... per-example dicts ... ]
-            }
-        """
+    def evaluate(self, limit=None, prompt: str = None, batch_size: int = 8):
         total, correct, partial = 0, 0, 0
         results = []
 
@@ -186,53 +200,65 @@ class MATH500_Bench:
                 "Problem: {query}\nAnswer:"
             )
 
-        pbar = tqdm(self.dataset, desc=f"Evaluating MATH-500: acc - {correct}({0})/{total}")
-        for i, ex in enumerate(pbar):
-            if limit and i >= limit:
+        iterator = iter(self.dataset)
+        total_len = limit if limit else len(self.dataset)
+
+        pbar = tqdm(range(0, total_len, batch_size),
+                    desc=f"Evaluating: acc - {partial}({correct})/{total}")
+
+        for _ in pbar:
+            batch = []
+            for _ in range(batch_size):
+                try:
+                    ex = next(iterator)
+                    batch.append(ex)
+                except StopIteration:
+                    break
+            if not batch:
                 break
 
-            q, gold = ex["question"], ex["answer"]
-            pred_text = self.generate(prompt.format(query=q), max_new_tokens=512)
+            prompts = [prompt.format(query=ex["question"]) for ex in batch]
+            preds_text = self.generate_batch(prompts, max_new_tokens=512)
 
-            # extraction:
-            pred_text_norm = self._latex_normalize(pred_text)
-            pred_raw = self._extract_boxed(pred_text_norm) # list of boxes
-            extract_method = "boxed"
-            if pred_raw is None or not pred_raw:
-                pred_raw = self._fallback_last_math_line(pred_text_norm) # list of lines or list of math like outputs
-                extract_method = "last_line"
-            if pred_raw is None:
-                pred_raw = []
-                extract_method = 'No answers found'
-            # canonicalize both gold and pred for comparison
-            gold_raw = ex["answer"]  # original from dataset
-            pred_norm_list = list(map(self._canonicalize,pred_raw))
-            gold_norm = self._canonicalize(gold_raw)
-            
-            # compare using sympy when available (sympy objects) else string equality
-            is_correct = self.sympy_checker(pred_norm_list[-1], gold_norm) if pred_norm_list else False
-            is_partially_correct = any(self.sympy_checker(pred, gold_norm) for pred in pred_norm_list)
+            for ex, pred_text in zip(batch, preds_text):
+                q, gold = ex["question"], ex["answer"]
 
-            results.append({
-                "question": q,
-                "gold": gold_raw,
-                "gold_norm": str(gold_norm),
-                "pred_text": pred_text,
-                "pred_raw": pred_raw,
-                "extract_method": extract_method,
-                "pred_norm": str(pred_norm_list),
-                "correct": bool(is_correct),
-                "partial_correct": bool(is_partially_correct),
-            })
+                pred_text_norm = self._latex_normalize(pred_text)
+                pred_raw = self._extract_boxed(pred_text_norm)
+                extract_method = "boxed"
+                if not pred_raw:
+                    pred_raw = self._fallback_last_math_line(pred_text_norm)
+                    extract_method = "last_line"
+                if pred_raw is None:
+                    pred_raw, extract_method = [], "No answers found"
 
-            # print(results[-1])
+                gold_norm = self._canonicalize(gold)
+                pred_norm_list = list(map(self._canonicalize, pred_raw))
+
+                is_correct = self.sympy_checker(pred_norm_list[-1], gold_norm) if pred_norm_list else False
+                is_partially_correct = any(self.sympy_checker(p, gold_norm) for p in pred_norm_list)
+
+                results.append({
+                    "question": q,
+                    "gold": gold,
+                    "gold_norm": str(gold_norm),
+                    "pred_text": pred_text,
+                    "pred_raw": pred_raw,
+                    "extract_method": extract_method,
+                    "pred_norm": str(pred_norm_list),
+                    "correct": bool(is_correct),
+                    "partial_correct": bool(is_partially_correct),
+                })
+
+                total += 1
+                correct += int(is_correct)
+                partial += int(is_partially_correct)
 
             acc = correct / total if total > 0 else 0.0
-            total += 1
-            correct += int(is_correct)
-            partial += int(is_partially_correct)
-            pbar.set_description(f"Evaluating MATH-500: acc - {partial}({correct})/{total} ({acc:.2%})")
+            pbar.set_description(f"Evaluating: acc - {partial}({correct})/{total} ({acc:.2%})")
+
+            if limit and total >= limit:
+                break
 
         pbar.close()
-
         return {"accuracy": acc, "total": total, "correct": correct, "details": results}

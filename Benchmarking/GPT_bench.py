@@ -4,6 +4,8 @@ import time
 import json
 from logger import logger
 from tqdm import tqdm
+import concurrent.futures
+
 class GPT:
     def __init__(self, model):
         self.model_name = model
@@ -27,8 +29,17 @@ class GPT:
         }
 
         response = self.client.post(url, json=payload)
-        data = response.json()
-
+        try:
+            data = response.json()
+        except:
+            print(f"Response issue: status={response.status_code}")
+            print("Headers:", response.headers)
+            print("Body:", response.text)
+            data = {
+                'choices':[{
+                    'message':{'content':""}
+                }]
+            }
         # Extract headers
         headers = response.headers
         rate_info = {
@@ -43,10 +54,10 @@ class GPT:
         return data["choices"][0]["message"]["content"], rate_info
 
 class GPT_Bench:
-    def __init__(self, gpt_model, dataset):
+    def __init__(self, gpt_model, dataset, batch_size=10):
         self.dataset: list[dict] = dataset
         self.gpt: GPT = gpt_model
-        # Load full instruction prompt
+        self.batch_size = batch_size
         with open("Benchmarking/instructions.txt", "r") as f:
             self.instruction_prompt = f.read()
     
@@ -56,35 +67,49 @@ class GPT_Bench:
             {"role": "user", "content": f"{self.instruction_prompt}\n\nHere is the input:\n{json.dumps(entry, indent=2)}"},
         ]
 
-    def parse_eval_output(self,output_text):
+    def parse_eval_output(self, output_text):
         try:
-            result = json.loads(output_text)
+            return json.loads(output_text)
         except json.JSONDecodeError:
-            # fallback: try to clean the text
             cleaned = output_text[output_text.find("{"):output_text.rfind("}")+1]
             try:
-                result = json.loads(cleaned)
+                return json.loads(cleaned)
             except:
                 print(f"Failed to decode JSON: {output_text}")
                 return None
-        return result
+
+    def process_entry(self, entry):
+        """Helper for concurrent execution"""
+        message = self.build_messages(entry)
+        output_text, rate_information = self.gpt.query_openai(
+            message, model="gpt-4.1", temperature=0.2
+        )
+        eval_result = self.parse_eval_output(output_text)
+        if eval_result is not None:
+            entry.update(eval_result)
+        return entry, rate_information
 
     def bench(self, limit=50):
-        pbar = tqdm(self.dataset, desc=f"Evaluating GPT on {len(self.dataset)} entries")
-        for i,entry in enumerate(pbar):
-            if (limit is not None) and (i >= limit):
-                break
-            message = self.build_messages(entry)
-            output_text, rate_information = self.gpt.query_openai(message, model="gpt-4.1", temperature=0.2)
-            eval_result = self.parse_eval_output(output_text)
-            if eval_result is not None:
-                entry.update(eval_result)
-                # logger.info(f"Eval result: {eval_result}")
-            else:
-                continue
-            if int(rate_information.get('requests_left',0)) <=1 or int(rate_information.get('tokens_left',0)) <= 100:
-                logger.warning("Rate limit reached, waiting for reset...")
-                time.sleep(1)
-            pbar.set_description(f"Evaluating GPT on {len(self.dataset)} entries, processed {i+1}")
+        results = []
+        pbar = tqdm(total=min(limit, len(self.dataset)), desc="Evaluating GPT")
+
+        for start in range(0, min(limit, len(self.dataset)), self.batch_size):
+            batch = self.dataset[start:start+self.batch_size]
+
+            # Run this batch concurrently
+            with concurrent.futures.ThreadPoolExecutor(max_workers=self.batch_size) as executor:
+                futures = [executor.submit(self.process_entry, entry) for entry in batch]
+                for f in concurrent.futures.as_completed(futures):
+                    try:
+                        entry, rate_info = f.result()
+                        results.append(entry)
+                        # crude safeguard: if nearly out of requests/tokens, pause briefly
+                        if (rate_info.get("requests_left") is not None 
+                            and int(rate_info["requests_left"]) <= 1):
+                            time.sleep(2)
+                    except Exception as e:
+                        print("Error in worker:", e)
+                    pbar.update(1)
+
         pbar.close()
-        return self.dataset
+        return results

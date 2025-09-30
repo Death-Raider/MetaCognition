@@ -117,7 +117,7 @@ def process_entries(entries, already_done, output_file, max_workers=2):
 
 # Load dataset
 raw_data = load_dataset("prhegde/preference-data-math-stack-exchange")['train']
-limit = 1000
+limit = 2500
 entries = [
     {
         "query": x["question"],

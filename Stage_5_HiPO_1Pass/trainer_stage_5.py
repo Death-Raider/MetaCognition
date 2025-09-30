@@ -8,6 +8,11 @@ from ConfigSchema import ConfigSchema
 from logger import logger
 import Benchmarking.benchmark as bench
 
+PATH_CONFIG='config.cfg'
+PATH_DATASET = 'semi_automated_dataset_creation/processed_decomposed_dataset.jsonl'
+PATH_PROMPT_INSTRUCTION = 'Stage_5_HiPO_1Pass/instructions/instruction_few_shot.txt'
+PATH_MODEL_SAVING = 'Stage_5_HiPO_1Pass/models_saved'
+
 def create_eval_metric():
     return {
     "weights": [],
@@ -37,7 +42,9 @@ def training(
     config_schema: ConfigSchema, 
     prompt_instruction: str|None = None,
     reset_model: bool = True,
-    method: str = 'sequential'
+    method: str = 'sequential',
+    save:bool = False,
+    callbacks: dict[str,any] = None,
 ):
     assert method in ['sequential', 'individual', 'sft'] , "method must be either 'sequential' or 'individual'"
     if reset_model:
@@ -63,42 +70,44 @@ def training(
                 else:
                     loss, loss_components = DPO.dpo_loss(batch, Prompt_Instruction = gen_prompt_ids,beta = config_schema.beta, weights=w[:-2])
                 loss_M, loss_T, loss_A, loss_MTAS = loss_components
-                total_loss_components += torch.stack([
+                loss_vec = torch.stack([
                     loss_M.detach().mean(),
                     loss_T.detach().mean(),
                     loss_A.detach().mean(),
                     loss_MTAS.detach().mean()
                 ]).to(DPO.device)
+                total_loss_components += loss_vec
                 loss.backward()
                 DPO.policy_optimizer.step()
                 total_loss += loss.item()
                 data_loader.set_description(f"Epoch {epoch + 1} Loss: {loss.item():.4f}")
+                if 'batch' in callbacks.keys():
+                    callbacks['batch'](DPO.policy_model, DPO.tokenizer, loss.item(), loss_vec.cpu().numpy())
             loss_history_epoch.append(total_loss / len(loader))
             loss_component_history.append(
                 (total_loss_components / len(loader)).to(torch.float32).cpu().numpy().tolist()
             )
-            print(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
+            if 'epoch' in callbacks.keys():
+                callbacks['epoch'](DPO.policy_model, DPO.tokenizer, loss_history_epoch[-1], loss_component_history[-1])
+                
+            logger.info(f"Loss Components [Ra, Mt, Rq, Y] : {loss_component_history[-1]}")
             logger.info(f"Epoch {epoch + 1} Loss: {total_loss / len(loader):.4f}")
-            # checkpoint after each epoch
-            DPO.policy_model.save_pretrained(f"Stage_5_HiPO_1Pass/models_saved/model_w{w}", from_pt=True)
-        # benchmark after training with each weight configuration
-        bench_results = bench.bench(model=DPO.policy_model, tokenizer=DPO.tokenizer, prompt_instruction=prompt_instruction)
-        bench_results = bench_results.to_dict()
+            name = f"model_w{tuple(map(lambda x: round(x,1), w[:-2].cpu().numpy().tolist()))}"
+            if save:
+                logger.info(f"Saving Model: {PATH_MODEL_SAVING}/{name}")
+                DPO.policy_model.save_pretrained(f"{PATH_MODEL_SAVING}/{name}", from_pt=True)
 
+        if 'set' in callbacks.keys():
+            callbacks['set'](DPO.policy_model, DPO.tokenizer)
         if method == 'individual':
             DPO.set_models(config_schema.model_name)  # reset to reference model before next weight config
 
-        eval_metrics["weights"].append(w[:-2].cpu().numpy().tolist())
-        eval_metrics["epoch"].append(w[-1].item())
-        eval_metrics["bench_resullts"].append(bench_results)
-        eval_metrics["loss_history"].append(loss_history_epoch)
-        eval_metrics["component_history"].append(loss_component_history)
-    return eval_metrics
+    return None
 
 def init():
     # ========== Config Loading ==============
     config_schema = ConfigSchema()
-    config_schema.from_file("config.cfg")
+    config_schema.from_file(PATH_CONFIG)
     DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
     print("Config loaded:", config_schema)
@@ -107,13 +116,13 @@ def init():
     logger.info(f"Device set as:{DEVICE}")
         
 
-    with open('semi_automated_dataset_creation/processed_decomposed_dataset.jsonl', 'r') as f:
+    with open(PATH_DATASET, 'r') as f:
         preference = [json.loads(line) for line in f]
 
-    prompt_instruction = open('Stage_5_HiPO_1Pass/instructions/instruction_few_shot.txt', 'r').read().strip()
+    prompt_instruction = open(PATH_PROMPT_INSTRUCTION, 'r').read().strip()
 
     # ====== Initialize DPO and DataLoader ======
-    limit = 10000
+    limit = 1000
     dataset = preference[:limit]
     for entry in dataset:
         entry["new_output_a"] = entry['Ra_a'] + "\n" + entry['Mt_a'] + "\n" + entry["Rq_a"]

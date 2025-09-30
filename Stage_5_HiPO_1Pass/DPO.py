@@ -16,6 +16,8 @@ class DirectPreferenceOptimization:
         self.tokenizer.pad_token = self.tokenizer.eos_token
         self.ref_model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, dtype=torch.bfloat16).to(self.device)
         self.ref_model.eval()  # Reference model should be in eval mode
+        self.ref_model.config.use_cache = False
+        self.ref_model.gradient_checkpointing_enable()
         for param in self.ref_model.parameters():
             param.requires_grad = False  # Freeze reference model
 
@@ -118,7 +120,7 @@ class DirectPreferenceOptimization:
             shift_logits = outputs.logits[..., :-1, :].contiguous()
             shift_labels = labels[..., 1:].contiguous()
             losses = F.cross_entropy(
-                shift_logits.float().view(-1, shift_logits.size(-1)),
+                shift_logits.view(-1, shift_logits.size(-1)),
                 shift_labels.view(-1),
                 reduction='none'
             ).view(shift_labels.shape)
@@ -156,7 +158,7 @@ class DirectPreferenceOptimization:
                 # span_log_probs.append(
                 #     -losses.masked_fill(~span_mask, 0).sum(dim=1)
                 # )
-                span_losses = losses * span_mask.float()
+                span_losses = losses * span_mask
                 span_log_probs.append(-span_losses.sum(dim=1))
 
             # print(f"Span {i} log probs: {span_log_probs[-1]}")

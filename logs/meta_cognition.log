@@ -41,3 +41,474 @@ Answer:
 2025-09-12 14:18:01,446 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
 2025-09-12 14:18:02,765 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-0.5B-Instruct", "max_len": 512, "lr": 5e-06, "batch_size": 1, "epochs": 10, "beta": 0.2}
 2025-09-12 14:18:02,765 - Meta-Cognition - INFO - Device set as:cpu
+2025-09-15 07:34:13,143 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-15 07:34:13,779 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-7B-Instruct", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.35}
+2025-09-15 07:34:13,779 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-15 07:34:34,850 - Meta-Cognition - INFO - Training with weights: tensor([0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e+00, 1.0000e-05, 5.0000e+00],
+       device='cuda:0')
+2025-09-15 07:49:22,009 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-15 07:49:22,637 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-7B-Instruct", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.35}
+2025-09-15 07:49:22,638 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-15 07:59:21,039 - Meta-Cognition - INFO - Training with weights: tensor([0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e+00, 1.0000e-05, 5.0000e+00],
+       device='cuda:0')
+2025-09-15 08:07:33,524 - Meta-Cognition - INFO - Epoch 1 Loss: 7.2067
+2025-09-15 08:16:14,351 - Meta-Cognition - INFO - Epoch 2 Loss: 6.2642
+2025-09-15 08:24:57,228 - Meta-Cognition - INFO - Epoch 3 Loss: 9.4398
+2025-09-15 08:33:36,766 - Meta-Cognition - INFO - Epoch 4 Loss: 9.4657
+2025-09-15 08:42:15,278 - Meta-Cognition - INFO - Epoch 5 Loss: 6.0433
+2025-09-15 09:08:24,332 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-15 09:08:24,982 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-7B-Instruct", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.35}
+2025-09-15 09:08:24,983 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-15 09:08:36,814 - Meta-Cognition - INFO - Training with weights: tensor([0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e+00, 1.0000e-05, 5.0000e+00],
+       device='cuda:0')
+2025-09-15 09:08:42,448 - Meta-Cognition - INFO - Epoch 1 Loss: 5.4144
+2025-09-15 09:09:19,149 - Meta-Cognition - INFO - Epoch 2 Loss: 8.8529
+2025-09-15 09:09:55,734 - Meta-Cognition - INFO - Epoch 3 Loss: 6.6668
+2025-09-15 09:10:31,720 - Meta-Cognition - INFO - Epoch 4 Loss: 3.3334
+2025-09-15 09:11:08,073 - Meta-Cognition - INFO - Epoch 5 Loss: 10.0000
+2025-09-15 09:16:02,107 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-15 09:16:02,719 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-7B-Instruct", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.35}
+2025-09-15 09:16:02,720 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-15 09:16:15,257 - Meta-Cognition - INFO - Training with weights: tensor([0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e+00, 1.0000e-05, 5.0000e+00],
+       device='cuda:0')
+2025-09-15 09:16:20,795 - Meta-Cognition - INFO - Epoch 1 Loss: 6.0130
+2025-09-15 09:16:50,407 - Meta-Cognition - INFO - Epoch 2 Loss: 6.6758
+2025-09-15 09:17:20,344 - Meta-Cognition - INFO - Epoch 3 Loss: 8.3333
+2025-09-15 09:17:49,662 - Meta-Cognition - INFO - Epoch 4 Loss: 6.7409
+2025-09-15 09:18:19,587 - Meta-Cognition - INFO - Epoch 5 Loss: 11.4339
+2025-09-15 09:22:54,575 - Meta-Cognition - INFO - Training with weights: tensor([1.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-05, 5.0000e+00],
+       device='cuda:0')
+2025-09-15 09:22:59,543 - Meta-Cognition - INFO - Epoch 1 Loss: 1.1340
+2025-09-15 09:23:28,293 - Meta-Cognition - INFO - Epoch 2 Loss: 0.0000
+2025-09-15 09:23:56,968 - Meta-Cognition - INFO - Epoch 3 Loss: 0.0000
+2025-09-15 09:24:27,688 - Meta-Cognition - INFO - Epoch 4 Loss: 0.0000
+2025-09-15 09:24:56,621 - Meta-Cognition - INFO - Epoch 5 Loss: 0.0000
+2025-09-15 09:31:28,512 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-15 09:31:29,230 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-7B-Instruct", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.35}
+2025-09-15 09:31:29,231 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-15 09:31:41,380 - Meta-Cognition - INFO - Training with weights: tensor([0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e+00, 1.0000e-05, 5.0000e+00],
+       device='cuda:0')
+2025-09-15 09:39:49,551 - Meta-Cognition - INFO - Epoch 1 Loss: 8.1205
+2025-09-15 09:48:19,269 - Meta-Cognition - INFO - Epoch 2 Loss: 6.3443
+2025-09-15 09:56:48,779 - Meta-Cognition - INFO - Epoch 3 Loss: 9.2777
+2025-09-15 10:05:20,744 - Meta-Cognition - INFO - Epoch 4 Loss: 9.0917
+2025-09-15 10:13:51,832 - Meta-Cognition - INFO - Epoch 5 Loss: 9.7307
+2025-09-15 10:39:47,463 - Meta-Cognition - INFO - Training with weights: tensor([1.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-05, 5.0000e+00],
+       device='cuda:0')
+2025-09-15 10:47:16,420 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-15 10:47:17,104 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-7B-Instruct", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.2}
+2025-09-15 10:47:17,105 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-15 10:47:29,620 - Meta-Cognition - INFO - Training with weights: tensor([0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-15 10:48:29,057 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-15 10:48:29,649 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-7B-Instruct", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.2}
+2025-09-15 10:48:29,650 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-15 10:48:43,271 - Meta-Cognition - INFO - Training with weights: tensor([0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-15 10:49:05,935 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-15 10:49:06,573 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-7B-Instruct", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.2}
+2025-09-15 10:49:06,574 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-15 10:49:18,732 - Meta-Cognition - INFO - Training with weights: tensor([0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-15 10:51:16,507 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-15 10:51:17,173 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-7B-Instruct", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.2}
+2025-09-15 10:51:17,173 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-15 10:51:29,089 - Meta-Cognition - INFO - Training with weights: tensor([0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-15 10:59:34,488 - Meta-Cognition - INFO - Epoch 1 Loss: 5.6605
+2025-09-15 11:08:05,865 - Meta-Cognition - INFO - Epoch 2 Loss: 3.0659
+2025-09-15 11:16:38,642 - Meta-Cognition - INFO - Epoch 3 Loss: 3.3221
+2025-09-15 11:25:13,081 - Meta-Cognition - INFO - Epoch 4 Loss: 3.1917
+2025-09-15 11:33:45,048 - Meta-Cognition - INFO - Epoch 5 Loss: 1.7737
+2025-09-16 05:09:29,740 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 05:09:38,167 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 05:09:39,165 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-7B-Instruct", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.2}
+2025-09-16 05:09:39,165 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-16 05:10:13,453 - Meta-Cognition - INFO - Training with weights: tensor([1.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 05:20:45,868 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.46484375, 0.62109375, 0.73046875, 0.82421875]
+2025-09-16 05:20:45,870 - Meta-Cognition - INFO - Epoch 1 Loss: 0.4699
+2025-09-16 05:20:45,872 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_wtensor([1.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 05:28:51,908 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 05:32:29,064 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.053466796875, 0.61328125, 0.73828125, 0.365234375]
+2025-09-16 05:32:29,068 - Meta-Cognition - INFO - Epoch 2 Loss: 0.0551
+2025-09-16 05:32:29,070 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_wtensor([1.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 05:33:51,218 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 05:36:48,591 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 05:45:36,634 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.036376953125, 0.6328125, 0.70703125, 0.435546875]
+2025-09-16 05:45:36,637 - Meta-Cognition - INFO - Epoch 3 Loss: 0.0361
+2025-09-16 05:45:36,639 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_wtensor([1.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 05:57:16,986 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.027099609375, 0.60546875, 0.71484375, 0.361328125]
+2025-09-16 05:57:16,987 - Meta-Cognition - INFO - Epoch 4 Loss: 0.0277
+2025-09-16 05:57:16,988 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_wtensor([1.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 06:09:18,368 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.0233154296875, 0.61328125, 0.69921875, 0.474609375]
+2025-09-16 06:09:18,370 - Meta-Cognition - INFO - Epoch 5 Loss: 0.0238
+2025-09-16 06:09:18,373 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_wtensor([1.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 06:10:29,477 - Meta-Cognition - INFO - Training with weights: tensor([0.0000e+00, 1.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 06:22:23,817 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.63671875, 0.59375, 0.6015625, 0.73046875]
+2025-09-16 06:22:23,820 - Meta-Cognition - INFO - Epoch 1 Loss: 0.6342
+2025-09-16 06:22:23,822 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_wtensor([0.0000e+00, 1.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 06:35:19,343 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.6015625, 0.5078125, 0.59375, 0.56640625]
+2025-09-16 06:35:19,345 - Meta-Cognition - INFO - Epoch 2 Loss: 0.5063
+2025-09-16 06:35:19,347 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_wtensor([0.0000e+00, 1.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 06:48:31,260 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.5859375, 0.462890625, 0.5703125, 0.498046875]
+2025-09-16 06:48:31,262 - Meta-Cognition - INFO - Epoch 3 Loss: 0.4362
+2025-09-16 06:48:31,264 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_wtensor([0.0000e+00, 1.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 07:01:39,345 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.57421875, 0.41015625, 0.5546875, 0.466796875]
+2025-09-16 07:01:39,348 - Meta-Cognition - INFO - Epoch 4 Loss: 0.3867
+2025-09-16 07:01:39,351 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_wtensor([0.0000e+00, 1.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 07:15:08,727 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.5859375, 0.36328125, 0.5625, 0.453125]
+2025-09-16 07:15:08,730 - Meta-Cognition - INFO - Epoch 5 Loss: 0.3516
+2025-09-16 07:15:08,733 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_wtensor([0.0000e+00, 1.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 07:16:27,706 - Meta-Cognition - INFO - Training with weights: tensor([0.0000e+00, 0.0000e+00, 1.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 07:28:18,136 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.65625, 0.6171875, 0.58203125, 0.70703125]
+2025-09-16 07:28:18,138 - Meta-Cognition - INFO - Epoch 1 Loss: 0.6349
+2025-09-16 07:28:18,141 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_wtensor([0.0000e+00, 0.0000e+00, 1.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 07:42:22,215 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 08:03:45,553 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 08:03:46,726 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-7B-Instruct", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.2}
+2025-09-16 08:03:46,727 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-16 08:04:11,786 - Meta-Cognition - INFO - Training with weights: tensor([0.0000e+00, 0.0000e+00, 1.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 08:16:26,130 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.96484375, 0.58984375, 0.384765625, 0.87109375]
+2025-09-16 08:16:26,132 - Meta-Cognition - INFO - Epoch 1 Loss: 0.3857
+2025-09-16 08:16:26,134 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(np.int64(0), np.int64(0), np.int64(1), np.int64(0))
+2025-09-16 08:29:34,962 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [1.25, 0.59765625, 0.060791015625, 0.87109375]
+2025-09-16 08:29:34,965 - Meta-Cognition - INFO - Epoch 2 Loss: 0.0615
+2025-09-16 08:29:34,966 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(np.int64(0), np.int64(0), np.int64(1), np.int64(0))
+2025-09-16 08:42:36,725 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [1.453125, 0.6875, 0.036865234375, 0.8125]
+2025-09-16 08:42:36,728 - Meta-Cognition - INFO - Epoch 3 Loss: 0.0371
+2025-09-16 08:42:36,729 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(np.int64(0), np.int64(0), np.int64(1), np.int64(0))
+2025-09-16 08:55:35,564 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [1.640625, 0.78515625, 0.0247802734375, 0.8046875]
+2025-09-16 08:55:35,567 - Meta-Cognition - INFO - Epoch 4 Loss: 0.0259
+2025-09-16 08:55:35,568 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(np.int64(0), np.int64(0), np.int64(1), np.int64(0))
+2025-09-16 09:08:37,372 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [1.7265625, 0.8125, 0.0198974609375, 0.8046875]
+2025-09-16 09:08:37,375 - Meta-Cognition - INFO - Epoch 5 Loss: 0.0202
+2025-09-16 09:08:37,377 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(np.int64(0), np.int64(0), np.int64(1), np.int64(0))
+2025-09-16 09:13:27,554 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 09:20:56,429 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 09:44:05,289 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 11:42:21,260 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 11:42:46,778 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 11:55:15,025 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 12:09:35,559 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 12:09:36,355 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-7B-Instruct", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.2}
+2025-09-16 12:09:36,355 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-16 12:09:48,922 - Meta-Cognition - INFO - Training with weights: tensor([6.0000e-01, 1.5000e-01, 1.5000e-01, 1.0000e-01, 1.0000e-05, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 12:18:00,762 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.458984375, 0.46875, 0.546875, 7.1875]
+2025-09-16 12:18:00,762 - Meta-Cognition - INFO - Epoch 1 Loss: 1.1539
+2025-09-16 12:18:00,763 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0, 0, 0, 0)
+2025-09-16 12:26:22,781 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 12:26:23,510 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-7B-Instruct", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.2}
+2025-09-16 12:26:23,510 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-16 12:26:35,860 - Meta-Cognition - INFO - Training with weights: tensor([6.0000e-01, 1.5000e-01, 1.5000e-01, 1.0000e-01, 1.0000e-05, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 12:34:47,759 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.462890625, 0.47265625, 0.546875, 8.625]
+2025-09-16 12:34:47,759 - Meta-Cognition - INFO - Epoch 1 Loss: 1.2828
+2025-09-16 12:34:47,760 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.6000000238418579, 0.15000000596046448, 0.15000000596046448, 0.10000000149011612)
+2025-09-16 12:43:31,147 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.049072265625, 0.1630859375, 0.341796875, 7.3125]
+2025-09-16 12:43:31,148 - Meta-Cognition - INFO - Epoch 2 Loss: 0.8236
+2025-09-16 12:43:31,148 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.6000000238418579, 0.15000000596046448, 0.15000000596046448, 0.10000000149011612)
+2025-09-16 12:52:30,179 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.03271484375, 0.11083984375, 0.2451171875, 4.03125]
+2025-09-16 12:52:30,179 - Meta-Cognition - INFO - Epoch 3 Loss: 0.4856
+2025-09-16 12:52:30,180 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.6000000238418579, 0.15000000596046448, 0.15000000596046448, 0.10000000149011612)
+2025-09-16 13:01:26,777 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.016357421875, 0.051025390625, 0.154296875, 1.453125]
+2025-09-16 13:01:26,778 - Meta-Cognition - INFO - Epoch 4 Loss: 0.1897
+2025-09-16 13:01:26,778 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.6000000238418579, 0.15000000596046448, 0.15000000596046448, 0.10000000149011612)
+2025-09-16 13:10:18,987 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.026123046875, 0.03564453125, 0.1142578125, 1.1953125]
+2025-09-16 13:10:18,987 - Meta-Cognition - INFO - Epoch 5 Loss: 0.1596
+2025-09-16 13:10:18,988 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.6000000238418579, 0.15000000596046448, 0.15000000596046448, 0.10000000149011612)
+2025-09-16 13:11:08,197 - Meta-Cognition - INFO - Training with weights: tensor([2.0000e-01, 5.0000e-01, 2.0000e-01, 1.0000e-01, 8.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 13:19:15,692 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.009765625, 0.0234375, 0.08544921875, 1.4296875]
+2025-09-16 13:19:15,692 - Meta-Cognition - INFO - Epoch 1 Loss: 0.1755
+2025-09-16 13:19:15,693 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.20000000298023224, 0.5, 0.20000000298023224, 0.10000000149011612)
+2025-09-16 13:28:12,975 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.01220703125, 0.0107421875, 0.0634765625, 1.0390625]
+2025-09-16 13:28:12,976 - Meta-Cognition - INFO - Epoch 2 Loss: 0.1256
+2025-09-16 13:28:12,976 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.20000000298023224, 0.5, 0.20000000298023224, 0.10000000149011612)
+2025-09-16 13:37:17,177 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.0137939453125, 0.01123046875, 0.045166015625, 0.9609375]
+2025-09-16 13:37:17,177 - Meta-Cognition - INFO - Epoch 3 Loss: 0.1146
+2025-09-16 13:37:17,178 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.20000000298023224, 0.5, 0.20000000298023224, 0.10000000149011612)
+2025-09-16 13:46:20,979 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.0106201171875, 0.005279541015625, 0.036865234375, 0.65234375]
+2025-09-16 13:46:20,980 - Meta-Cognition - INFO - Epoch 4 Loss: 0.0778
+2025-09-16 13:46:20,980 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.20000000298023224, 0.5, 0.20000000298023224, 0.10000000149011612)
+2025-09-16 13:55:16,516 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.0262451171875, 0.01336669921875, 0.025634765625, 0.58984375]
+2025-09-16 13:55:16,516 - Meta-Cognition - INFO - Epoch 5 Loss: 0.0760
+2025-09-16 13:55:16,517 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.20000000298023224, 0.5, 0.20000000298023224, 0.10000000149011612)
+2025-09-16 13:56:06,787 - Meta-Cognition - INFO - Training with weights: tensor([1.5000e-01, 2.0000e-01, 5.0000e-01, 1.5000e-01, 5.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 14:04:17,592 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.0184326171875, 0.0089111328125, 0.042724609375, 0.76171875]
+2025-09-16 14:04:17,593 - Meta-Cognition - INFO - Epoch 1 Loss: 0.1415
+2025-09-16 14:04:17,593 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.15000000596046448, 0.20000000298023224, 0.5, 0.15000000596046448)
+2025-09-16 14:13:14,359 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.0179443359375, 0.006072998046875, 0.0233154296875, 1.515625]
+2025-09-16 14:13:14,359 - Meta-Cognition - INFO - Epoch 2 Loss: 0.2453
+2025-09-16 14:13:14,360 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.15000000596046448, 0.20000000298023224, 0.5, 0.15000000596046448)
+2025-09-16 14:22:23,765 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.0140380859375, 0.00482177734375, 0.01165771484375, 0.5078125]
+2025-09-16 14:22:23,766 - Meta-Cognition - INFO - Epoch 3 Loss: 0.0853
+2025-09-16 14:22:23,766 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.15000000596046448, 0.20000000298023224, 0.5, 0.15000000596046448)
+2025-09-16 14:31:18,658 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.019287109375, 0.0120849609375, 0.0162353515625, 0.546875]
+2025-09-16 14:31:18,658 - Meta-Cognition - INFO - Epoch 4 Loss: 0.0953
+2025-09-16 14:31:18,659 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.15000000596046448, 0.20000000298023224, 0.5, 0.15000000596046448)
+2025-09-16 14:40:09,452 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.0255126953125, 0.0038909912109375, 0.01336669921875, 0.373046875]
+2025-09-16 14:40:09,453 - Meta-Cognition - INFO - Epoch 5 Loss: 0.0679
+2025-09-16 14:40:09,453 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.15000000596046448, 0.20000000298023224, 0.5, 0.15000000596046448)
+2025-09-16 14:40:59,427 - Meta-Cognition - INFO - Training with weights: tensor([1.0000e-01, 2.0000e-01, 2.0000e-01, 5.0000e-01, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 14:49:06,933 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.283203125, 0.12109375, 0.09033203125, 1.234375]
+2025-09-16 14:49:06,933 - Meta-Cognition - INFO - Epoch 1 Loss: 0.6891
+2025-09-16 14:49:06,933 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.10000000149011612, 0.20000000298023224, 0.20000000298023224, 0.5)
+2025-09-16 14:57:55,689 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.337890625, 0.1240234375, 0.07470703125, 0.61328125]
+2025-09-16 14:57:55,689 - Meta-Cognition - INFO - Epoch 2 Loss: 0.3824
+2025-09-16 14:57:55,690 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.10000000149011612, 0.20000000298023224, 0.20000000298023224, 0.5)
+2025-09-16 15:06:47,468 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.208984375, 0.0284423828125, 0.045166015625, 0.2412109375]
+2025-09-16 15:06:47,468 - Meta-Cognition - INFO - Epoch 3 Loss: 0.1559
+2025-09-16 15:06:47,469 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.10000000149011612, 0.20000000298023224, 0.20000000298023224, 0.5)
+2025-09-16 15:15:42,392 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.057861328125, 0.002166748046875, 0.0185546875, 0.2119140625]
+2025-09-16 15:15:42,393 - Meta-Cognition - INFO - Epoch 4 Loss: 0.1157
+2025-09-16 15:15:42,393 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.10000000149011612, 0.20000000298023224, 0.20000000298023224, 0.5)
+2025-09-16 15:25:06,234 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.036376953125, 0.003692626953125, 0.01483154296875, 0.08935546875]
+2025-09-16 15:25:06,236 - Meta-Cognition - INFO - Epoch 5 Loss: 0.0521
+2025-09-16 15:25:06,236 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.10000000149011612, 0.20000000298023224, 0.20000000298023224, 0.5)
+2025-09-16 15:25:45,830 - Meta-Cognition - INFO - Training with weights: tensor([3.5000e-01, 3.0000e-01, 1.5000e-01, 2.5000e-01, 5.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 15:33:48,750 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.01336669921875, 0.0015106201171875, 0.01263427734375, 0.1376953125]
+2025-09-16 15:33:48,751 - Meta-Cognition - INFO - Epoch 1 Loss: 0.0417
+2025-09-16 15:33:48,751 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.3499999940395355, 0.30000001192092896, 0.15000000596046448, 0.25)
+2025-09-16 15:43:09,980 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.0025482177734375, 0.00164794921875, 0.006988525390625, 0.05419921875]
+2025-09-16 15:43:09,981 - Meta-Cognition - INFO - Epoch 2 Loss: 0.0160
+2025-09-16 15:43:09,981 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.3499999940395355, 0.30000001192092896, 0.15000000596046448, 0.25)
+2025-09-16 15:51:58,471 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.006256103515625, 0.0004825592041015625, 0.007354736328125, 0.1376953125]
+2025-09-16 15:51:58,472 - Meta-Cognition - INFO - Epoch 3 Loss: 0.0377
+2025-09-16 15:51:58,472 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.3499999940395355, 0.30000001192092896, 0.15000000596046448, 0.25)
+2025-09-16 16:00:49,907 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.00738525390625, 0.0004673004150390625, 0.007537841796875, 0.1171875]
+2025-09-16 16:00:49,908 - Meta-Cognition - INFO - Epoch 4 Loss: 0.0333
+2025-09-16 16:00:49,908 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.3499999940395355, 0.30000001192092896, 0.15000000596046448, 0.25)
+2025-09-16 16:09:41,040 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.004425048828125, 0.0003299713134765625, 0.006561279296875, 0.06787109375]
+2025-09-16 16:09:41,040 - Meta-Cognition - INFO - Epoch 5 Loss: 0.0197
+2025-09-16 16:09:41,041 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.3499999940395355, 0.30000001192092896, 0.15000000596046448, 0.25)
+2025-09-16 16:21:24,344 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-16 16:21:25,124 - Meta-Cognition - INFO - Config loaded:{"model_name": "Qwen/Qwen2.5-7B-Instruct", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.2}
+2025-09-16 16:21:25,124 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-16 16:21:37,972 - Meta-Cognition - INFO - Training with weights: tensor([6.0000e-01, 1.5000e-01, 1.5000e-01, 1.0000e-01, 1.0000e-05, 5.0000e+00],
+       device='cuda:0')
+2025-09-16 16:22:17,126 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 05:09:18,606 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 05:09:40,116 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 05:09:40,772 - Meta-Cognition - INFO - Config loaded:{"model_name": "mistralai/Mistral-7B-Instruct-v0.3", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.2}
+2025-09-18 05:09:40,772 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-18 05:11:00,533 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 05:11:01,230 - Meta-Cognition - INFO - Config loaded:{"model_name": "mistralai/Mistral-7B-Instruct-v0.3", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.2}
+2025-09-18 05:11:01,231 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-18 05:11:39,868 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 05:11:40,507 - Meta-Cognition - INFO - Config loaded:{"model_name": "mistralai/Mistral-7B-Instruct-v0.3", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.2}
+2025-09-18 05:11:40,507 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-18 05:12:24,042 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 05:12:24,702 - Meta-Cognition - INFO - Config loaded:{"model_name": "mistralai/Mistral-7B-Instruct-v0.3", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.2}
+2025-09-18 05:12:24,704 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-18 05:12:43,127 - Meta-Cognition - INFO - Training with weights: tensor([0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-18 05:21:48,380 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [2.046875, 1.453125, 1.109375, 1.921875]
+2025-09-18 05:21:48,380 - Meta-Cognition - INFO - Epoch 1 Loss: 1.9777
+2025-09-18 05:21:48,381 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.0, 0.0, 0.0, 1.0)
+2025-09-18 05:31:30,832 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [1.984375, 1.390625, 0.78125, 0.66015625]
+2025-09-18 05:31:30,833 - Meta-Cognition - INFO - Epoch 2 Loss: 0.6606
+2025-09-18 05:31:30,833 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.0, 0.0, 0.0, 1.0)
+2025-09-18 05:41:11,360 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [1.9453125, 1.25, 0.9375, 0.388671875]
+2025-09-18 05:41:11,361 - Meta-Cognition - INFO - Epoch 3 Loss: 0.3932
+2025-09-18 05:41:11,361 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.0, 0.0, 0.0, 1.0)
+2025-09-18 05:50:55,820 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [3.90625, 4.5625, 2.75, 2.71875]
+2025-09-18 05:50:55,821 - Meta-Cognition - INFO - Epoch 4 Loss: 2.8517
+2025-09-18 05:50:55,821 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.0, 0.0, 0.0, 1.0)
+2025-09-18 06:00:45,256 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [4.15625, 4.59375, 3.125, 2.65625]
+2025-09-18 06:00:45,257 - Meta-Cognition - INFO - Epoch 5 Loss: 2.6949
+2025-09-18 06:00:45,257 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.0, 0.0, 0.0, 1.0)
+2025-09-18 06:01:37,109 - Meta-Cognition - INFO - Training with weights: tensor([1.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-18 06:10:45,955 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [1.3359375, 2.84375, 1.625, 4.46875]
+2025-09-18 06:10:45,956 - Meta-Cognition - INFO - Epoch 1 Loss: 1.4409
+2025-09-18 06:10:45,956 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(1.0, 0.0, 0.0, 0.0)
+2025-09-18 06:20:35,504 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.69140625, 2.65625, 1.5078125, 4.0625]
+2025-09-18 06:20:35,504 - Meta-Cognition - INFO - Epoch 2 Loss: 0.7308
+2025-09-18 06:20:35,505 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(1.0, 0.0, 0.0, 0.0)
+2025-09-18 06:30:24,682 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.43359375, 2.453125, 1.4765625, 3.5]
+2025-09-18 06:30:24,682 - Meta-Cognition - INFO - Epoch 3 Loss: 0.4307
+2025-09-18 06:30:24,683 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(1.0, 0.0, 0.0, 0.0)
+2025-09-18 06:40:14,207 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.369140625, 2.546875, 1.515625, 3.59375]
+2025-09-18 06:40:14,207 - Meta-Cognition - INFO - Epoch 4 Loss: 0.3883
+2025-09-18 06:40:14,207 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(1.0, 0.0, 0.0, 0.0)
+2025-09-18 06:50:01,634 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.333984375, 2.015625, 1.359375, 2.84375]
+2025-09-18 06:50:01,634 - Meta-Cognition - INFO - Epoch 5 Loss: 0.3416
+2025-09-18 06:50:01,634 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(1.0, 0.0, 0.0, 0.0)
+2025-09-18 06:50:46,443 - Meta-Cognition - INFO - Training with weights: tensor([0.0000e+00, 1.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-18 06:59:55,633 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [2.328125, 1.1953125, 0.9609375, 3.046875]
+2025-09-18 06:59:55,634 - Meta-Cognition - INFO - Epoch 1 Loss: 1.2385
+2025-09-18 06:59:55,634 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.0, 1.0, 0.0, 0.0)
+2025-09-18 07:09:42,772 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [2.15625, 0.625, 0.72265625, 2.1875]
+2025-09-18 07:09:42,772 - Meta-Cognition - INFO - Epoch 2 Loss: 0.6429
+2025-09-18 07:09:42,773 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.0, 1.0, 0.0, 0.0)
+2025-09-18 07:19:27,029 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [1.9296875, 0.310546875, 0.6328125, 1.5859375]
+2025-09-18 07:19:27,037 - Meta-Cognition - INFO - Epoch 3 Loss: 0.3247
+2025-09-18 07:19:27,037 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.0, 1.0, 0.0, 0.0)
+2025-09-18 07:29:14,607 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [1.8125, 0.31640625, 0.6328125, 1.484375]
+2025-09-18 07:29:14,607 - Meta-Cognition - INFO - Epoch 4 Loss: 0.3271
+2025-09-18 07:29:14,608 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.0, 1.0, 0.0, 0.0)
+2025-09-18 07:39:06,900 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [1.8984375, 0.255859375, 0.6015625, 1.265625]
+2025-09-18 07:39:06,905 - Meta-Cognition - INFO - Epoch 5 Loss: 0.2646
+2025-09-18 07:39:06,905 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.0, 1.0, 0.0, 0.0)
+2025-09-18 07:39:52,471 - Meta-Cognition - INFO - Training with weights: tensor([0.0000e+00, 0.0000e+00, 1.0000e+00, 0.0000e+00, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-18 07:48:59,251 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [6.0625, 4.5625, 1.578125, 6.0625]
+2025-09-18 07:48:59,251 - Meta-Cognition - INFO - Epoch 1 Loss: 1.8058
+2025-09-18 07:48:59,252 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.0, 0.0, 1.0, 0.0)
+2025-09-18 07:58:45,530 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [3.15625, 1.9609375, 0.5078125, 2.71875]
+2025-09-18 07:58:45,531 - Meta-Cognition - INFO - Epoch 2 Loss: 0.5018
+2025-09-18 07:58:45,531 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.0, 0.0, 1.0, 0.0)
+2025-09-18 08:08:39,781 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [2.96875, 1.4375, 0.357421875, 1.6640625]
+2025-09-18 08:08:39,782 - Meta-Cognition - INFO - Epoch 3 Loss: 0.3664
+2025-09-18 08:08:39,782 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.0, 0.0, 1.0, 0.0)
+2025-09-18 08:18:28,808 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [3.203125, 1.703125, 0.328125, 1.921875]
+2025-09-18 08:18:28,809 - Meta-Cognition - INFO - Epoch 4 Loss: 0.3289
+2025-09-18 08:18:28,809 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.0, 0.0, 1.0, 0.0)
+2025-09-18 08:28:16,818 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [3.671875, 1.8984375, 0.232421875, 2.015625]
+2025-09-18 08:28:16,819 - Meta-Cognition - INFO - Epoch 5 Loss: 0.2391
+2025-09-18 08:28:16,820 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.0, 0.0, 1.0, 0.0)
+2025-09-18 08:30:24,590 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 08:31:08,497 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 08:32:05,126 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 08:36:52,716 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 08:37:54,505 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 08:56:56,207 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 09:09:50,006 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 09:45:46,742 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 10:20:57,222 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 10:20:57,634 - Meta-Cognition - INFO - Config loaded:{"model_name": "mistralai/Mistral-7B-Instruct-v0.3", "max_len": 1024, "lr": 5e-06, "batch_size": 4, "epochs": 10, "beta": 0.2}
+2025-09-18 10:20:57,634 - Meta-Cognition - INFO - Device set as:cuda
+2025-09-18 10:21:10,054 - Meta-Cognition - INFO - Training with weights: tensor([6.0000e-01, 1.5000e-01, 1.5000e-01, 1.0000e-01, 1.0000e-05, 5.0000e+00],
+       device='cuda:0')
+2025-09-18 10:30:21,060 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [1.4375, 1.578125, 1.0859375, 2.34375]
+2025-09-18 10:30:21,060 - Meta-Cognition - INFO - Epoch 1 Loss: 1.5682
+2025-09-18 10:30:21,060 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.6, 0.2, 0.2, 0.1)
+2025-09-18 10:40:13,891 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.5234375, 0.39453125, 0.388671875, 0.298828125]
+2025-09-18 10:40:13,892 - Meta-Cognition - INFO - Epoch 2 Loss: 0.4652
+2025-09-18 10:40:13,892 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.6, 0.2, 0.2, 0.1)
+2025-09-18 10:50:06,092 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.5078125, 0.8046875, 0.80078125, 0.57421875]
+2025-09-18 10:50:06,092 - Meta-Cognition - INFO - Epoch 3 Loss: 0.6213
+2025-09-18 10:50:06,093 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.6, 0.2, 0.2, 0.1)
+2025-09-18 10:59:57,972 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.31640625, 0.31640625, 0.40625, 0.1435546875]
+2025-09-18 10:59:57,973 - Meta-Cognition - INFO - Epoch 4 Loss: 0.3195
+2025-09-18 10:59:57,973 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.6, 0.2, 0.2, 0.1)
+2025-09-18 11:09:47,932 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.279296875, 0.32421875, 0.33203125, 0.0859375]
+2025-09-18 11:09:47,932 - Meta-Cognition - INFO - Epoch 5 Loss: 0.2798
+2025-09-18 11:09:47,933 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.6, 0.2, 0.2, 0.1)
+2025-09-18 11:10:35,862 - Meta-Cognition - INFO - Training with weights: tensor([2.0000e-01, 5.0000e-01, 2.0000e-01, 1.0000e-01, 8.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-18 11:19:45,831 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.412109375, 0.451171875, 0.40234375, 0.2216796875]
+2025-09-18 11:19:45,831 - Meta-Cognition - INFO - Epoch 1 Loss: 0.4213
+2025-09-18 11:19:45,832 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.2, 0.5, 0.2, 0.1)
+2025-09-18 11:29:45,992 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.33203125, 0.09326171875, 0.2431640625, 0.00439453125]
+2025-09-18 11:29:45,993 - Meta-Cognition - INFO - Epoch 2 Loss: 0.1664
+2025-09-18 11:29:45,993 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.2, 0.5, 0.2, 0.1)
+2025-09-18 11:39:44,422 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.30859375, 0.05810546875, 0.1982421875, 0.0019989013671875]
+2025-09-18 11:39:44,422 - Meta-Cognition - INFO - Epoch 3 Loss: 0.1322
+2025-09-18 11:39:44,423 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.2, 0.5, 0.2, 0.1)
+2025-09-18 11:49:44,635 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.322265625, 0.07177734375, 0.125, 3.1888484954833984e-06]
+2025-09-18 11:49:44,636 - Meta-Cognition - INFO - Epoch 4 Loss: 0.1256
+2025-09-18 11:49:44,636 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.2, 0.5, 0.2, 0.1)
+2025-09-18 11:59:37,659 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.291015625, 0.07763671875, 0.126953125, 0.00079345703125]
+2025-09-18 11:59:37,660 - Meta-Cognition - INFO - Epoch 5 Loss: 0.1244
+2025-09-18 11:59:37,660 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.2, 0.5, 0.2, 0.1)
+2025-09-18 12:00:25,835 - Meta-Cognition - INFO - Training with weights: tensor([1.5000e-01, 2.0000e-01, 5.0000e-01, 1.5000e-01, 5.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-18 12:09:32,446 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.29296875, 0.047119140625, 0.08740234375, 1.3649463653564453e-05]
+2025-09-18 12:09:32,446 - Meta-Cognition - INFO - Epoch 1 Loss: 0.0987
+2025-09-18 12:09:32,446 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.2, 0.2, 0.5, 0.2)
+2025-09-18 12:19:22,734 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.2578125, 0.06982421875, 0.0986328125, 1.3113021850585938e-06]
+2025-09-18 12:19:22,734 - Meta-Cognition - INFO - Epoch 2 Loss: 0.1030
+2025-09-18 12:19:22,734 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.2, 0.2, 0.5, 0.2)
+2025-09-18 12:29:11,715 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.2470703125, 0.1064453125, 0.08935546875, 1.259148120880127e-06]
+2025-09-18 12:29:11,716 - Meta-Cognition - INFO - Epoch 3 Loss: 0.1038
+2025-09-18 12:29:11,716 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.2, 0.2, 0.5, 0.2)
+2025-09-18 12:38:57,320 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.2109375, 0.07763671875, 0.07373046875, 2.7939677238464355e-07]
+2025-09-18 12:38:57,320 - Meta-Cognition - INFO - Epoch 4 Loss: 0.0852
+2025-09-18 12:38:57,321 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.2, 0.2, 0.5, 0.2)
+2025-09-18 12:48:56,658 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.2158203125, 0.0830078125, 0.07373046875, 4.302710294723511e-07]
+2025-09-18 12:48:56,659 - Meta-Cognition - INFO - Epoch 5 Loss: 0.0873
+2025-09-18 12:48:56,659 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.2, 0.2, 0.5, 0.2)
+2025-09-18 12:49:47,380 - Meta-Cognition - INFO - Training with weights: tensor([1.0000e-01, 2.0000e-01, 2.0000e-01, 5.0000e-01, 1.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-18 12:58:53,608 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.1923828125, 0.061767578125, 0.06640625, 4.38690185546875e-05]
+2025-09-18 12:58:53,608 - Meta-Cognition - INFO - Epoch 1 Loss: 0.0454
+2025-09-18 12:58:53,608 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.1, 0.2, 0.2, 0.5)
+2025-09-18 13:08:46,468 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.201171875, 0.0625, 0.07666015625, 1.2516975402832031e-06]
+2025-09-18 13:08:46,468 - Meta-Cognition - INFO - Epoch 2 Loss: 0.0487
+2025-09-18 13:08:46,469 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.1, 0.2, 0.2, 0.5)
+2025-09-18 13:18:41,049 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.2109375, 0.06396484375, 0.06689453125, 2.3166649043560028e-08]
+2025-09-18 13:18:41,050 - Meta-Cognition - INFO - Epoch 3 Loss: 0.0479
+2025-09-18 13:18:41,050 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.1, 0.2, 0.2, 0.5)
+2025-09-18 13:28:38,137 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.2021484375, 0.0810546875, 0.08544921875, 1.3597309589385986e-07]
+2025-09-18 13:28:38,138 - Meta-Cognition - INFO - Epoch 4 Loss: 0.0541
+2025-09-18 13:28:38,138 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.1, 0.2, 0.2, 0.5)
+2025-09-18 13:39:01,665 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.193359375, 0.043701171875, 0.08642578125, 8.055940270423889e-08]
+2025-09-18 13:39:01,665 - Meta-Cognition - INFO - Epoch 5 Loss: 0.0464
+2025-09-18 13:39:01,665 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.1, 0.2, 0.2, 0.5)
+2025-09-18 13:41:08,807 - Meta-Cognition - INFO - Training with weights: tensor([3.5000e-01, 3.0000e-01, 1.5000e-01, 2.5000e-01, 5.0000e-06, 5.0000e+00],
+       device='cuda:0')
+2025-09-18 13:50:15,962 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.1923828125, 0.054931640625, 0.1240234375, 5.923211574554443e-07]
+2025-09-18 13:50:15,963 - Meta-Cognition - INFO - Epoch 1 Loss: 0.1033
+2025-09-18 13:50:15,963 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.3, 0.3, 0.2, 0.2)
+2025-09-18 14:00:07,006 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.1865234375, 0.048583984375, 0.0712890625, 2.7124769985675812e-08]
+2025-09-18 14:00:07,006 - Meta-Cognition - INFO - Epoch 2 Loss: 0.0903
+2025-09-18 14:00:07,007 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.3, 0.3, 0.2, 0.2)
+2025-09-18 14:09:59,429 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.1767578125, 0.0634765625, 0.07421875, 1.210719347000122e-08]
+2025-09-18 14:09:59,430 - Meta-Cognition - INFO - Epoch 3 Loss: 0.0929
+2025-09-18 14:09:59,430 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.3, 0.3, 0.2, 0.2)
+2025-09-18 14:20:24,053 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.1689453125, 0.054931640625, 0.07470703125, 2.738088369369507e-07]
+2025-09-18 14:20:24,054 - Meta-Cognition - INFO - Epoch 4 Loss: 0.0872
+2025-09-18 14:20:24,054 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.3, 0.3, 0.2, 0.2)
+2025-09-18 14:30:47,333 - Meta-Cognition - INFO - Loss Components [Ra, Mt, Rq, Y] : [0.1728515625, 0.1123046875, 0.07763671875, 4.2782630771398544e-09]
+2025-09-18 14:30:47,333 - Meta-Cognition - INFO - Epoch 5 Loss: 0.1062
+2025-09-18 14:30:47,333 - Meta-Cognition - INFO - Saving Model: Stage_5_HiPO_1Pass/models_saved/model_w(0.3, 0.3, 0.2, 0.2)
+2025-09-18 20:24:15,589 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 20:51:22,622 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 20:56:24,728 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 20:57:27,165 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 20:58:13,151 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 20:59:29,716 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-18 20:59:47,726 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 01:27:40,954 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 01:35:55,706 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 01:36:17,231 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 01:37:11,533 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 01:40:06,133 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 01:47:03,848 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 06:23:24,251 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 06:46:29,611 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 07:19:11,286 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 12:06:28,407 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 12:08:51,231 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 12:11:07,581 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 12:32:20,542 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 12:50:27,143 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 12:56:41,431 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 13:01:09,069 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 13:59:08,874 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 14:31:37,280 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 20:30:11,725 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 20:58:08,851 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-19 22:29:54,038 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.
+2025-09-20 22:14:07,209 - Meta-Cognition - INFO - Logger initialized for Meta-Cognition module.

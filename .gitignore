@@ -1,6 +1,8 @@
 *.pyc
+__pycache__/*
 *.pyo
 *.pyd
 *.ipynb
 venv
+final_model*
 
