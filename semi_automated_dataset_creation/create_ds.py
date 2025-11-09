@@ -8,18 +8,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from threading import Lock
 import re
 
-# Load client
-client = httpx.Client(
-    headers={
-        "Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}",
-        "Content-Type": "application/json"
-    },
-    timeout=30.0
-)
-
-# Load full instruction prompt
-with open("instructions.txt", "r") as f:
-    instruction_prompt = f.read()
+instruction_prompt = ""
+client = None
 
 def build_messages(entry):
     return [
@@ -115,37 +105,63 @@ def process_entries(entries, already_done, output_file, max_workers=2):
             with pbar_lock:
                 pbar.update(1)
 
-# Load dataset
-raw_data = load_dataset("prhegde/preference-data-math-stack-exchange")['train']
-limit = 2500
-entries = [
-    {
-        "query": x["question"],
-        "output_a": x["chosen"],
-        "output_b": x["rejected"],
-    }
-    for x in raw_data
-]
-entries = entries[:limit]
+def run(
+        dataset: str = "prhegde/preference-data-math-stack-exchange", 
+        section: str = "train", 
+        limit: int = 2500, 
+        instruction:str|None=None, 
+        max_workers: int = 4
+    ):
+    global client, instruction_prompt
 
-# Output file (resumable)
-output_file = "processed_decomposed_dataset.jsonl"
-already_done = set()
-if os.path.exists(output_file):
-    with open(output_file, "r") as f:
-        already_done = {json.loads(line)["query"] for line in f}
+    # Load client
+    client = httpx.Client(
+        headers={
+            "Authorization": f"Bearer {os.environ['OPENAI_API_KEY']}",
+            "Content-Type": "application/json"
+        },
+        timeout=30.0
+    )
 
-print(f"Already processed {len(already_done)} entries.")
+    # Load full instruction prompt
+    if instruction is not None:
+        instruction_prompt = instruction
+    else:
+        with open("instructions.txt", "r") as f:
+            instruction_prompt = f.read()
 
-# Run loop
-# Use either multi-threaded or single-threaded processing
-# process_entries(entries, already_done, output_file, max_workers=4)
 
-# basic looping (single-threaded)
-with open(output_file, "a") as fout:
-    for entry in tqdm(entries):
-        if entry["query"] in already_done:
-            continue
-        result = create_ds(entry)
-        fout.write(json.dumps(result) + "\n")
-        fout.flush()  # ensure write is safe in case of crash
+    # Load dataset
+    raw_data = load_dataset(dataset)[section]
+    entries = [
+        {
+            "query": x["question"],
+            "output_a": x["chosen"],
+            "output_b": x["rejected"],
+        }
+        for x in raw_data
+    ]
+    entries = entries[:limit]
+
+    # Output file (resumable)
+    output_file = "processed_decomposed_dataset.jsonl"
+    already_done = set()
+    if os.path.exists(output_file):
+        with open(output_file, "r") as f:
+            already_done = {json.loads(line)["query"] for line in f}
+
+    print(f"Already processed {len(already_done)} entries.")
+
+    # Run loop
+    # Use either multi-threaded or single-threaded processing
+    if max_workers > 1:
+        process_entries(entries, already_done, output_file, max_workers=4)
+    else:
+        # basic looping (single-threaded)
+        with open(output_file, "a") as fout:
+            for entry in tqdm(entries):
+                if entry["query"] in already_done:
+                    continue
+                result = create_ds(entry)
+                fout.write(json.dumps(result) + "\n")
+                fout.flush()  # ensure write is safe in case of crash
