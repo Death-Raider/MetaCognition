@@ -1,4 +1,4 @@
-from Stage_5_HiPO_1Pass.trainer_stage_5 import *
+from Stage_5_HiPO_1Pass.HiPO_trainer import *
 
 config_schema, DEVICE,prompt_instruction, DPO, gen_prompt_ids, loader = init()
 
@@ -13,5 +13,4 @@ weights = torch.tensor([
 ]).to(DEVICE)
 
 eval_metrics = create_eval_metric()
-# eval_metrics = ref_model_eval(eval_metrics, DPO, prompt_instruction)
 training(weights, eval_metrics, DPO, loader, gen_prompt_ids, config_schema, prompt_instruction,True, 'sequential')

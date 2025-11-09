@@ -3,11 +3,11 @@ import ray
 from ray import tune
 from ray.tune.schedulers import HyperBandScheduler
 import Benchmarking.benchmark as bench
-from Stage_5_HiPO_1Pass.trainer_stage_5 import *
+from Stage_5_HiPO_1Pass.HiPO_trainer import *
 
 ray.init(_temp_dir="/path/to/your/custom_temp_dir")
 
-results = tuner.fit()
+# results = tuner.fit()
 # Initialize
 imp_columns = [
     "Logical Flow",
@@ -45,7 +45,6 @@ def train_with_config(config):
         math500 = accuracies.get("Math500", 0.0)
         gpt = results[imp_columns].values().mean()
 
-        # Report back to Ray Tune
         tune.report(gsm8k=gsm8k, math500=math500, gpt=gpt, mean_score=(gsm8k + math500) / 2.0)
 
     training(
